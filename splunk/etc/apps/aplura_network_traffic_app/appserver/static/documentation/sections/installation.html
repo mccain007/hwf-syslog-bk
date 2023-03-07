@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Download &#8212; PAVO Network Traffic App for Splunk 1.2.4 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>Reminder: This app should be installed on a search head where the <a href="#id1"><span class="problematic" id="id2">|data_model|</span></a> data model has been accelerated. More information on installing or upgrading Splunk apps can be found <a class="reference external" href="http://docs.splunk.com/Documentation/Splunk/latest/Admin/Wheretogetmoreapps">here</a>.</p>
+<div class="section" id="download">
+<h1>Download<a class="headerlink" href="#download" title="Permalink to this headline">¶</a></h1>
+<p>Download <a href="#id3"><span class="problematic" id="id4">|long_name|</span></a> at <a href="#id5"><span class="problematic" id="id6">|splunkbase_url|</span></a>.</p>
+<div class="section" id="installation-process-overview">
+<h2>Installation Process Overview<a class="headerlink" href="#installation-process-overview" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Make sure the field extractions and tags on your network traffic events are correct.</p></li>
+<li><p>Install the Splunk Common Information Model Add-on (skip if you are installing on an ES search head).</p></li>
+<li><p>Install the <a href="#id7"><span class="problematic" id="id8">|long_name|</span></a> for Splunk.</p></li>
+<li><p>Enable accelerations on the <a href="#id9"><span class="problematic" id="id10">|data_model|</span></a> data model (skip if you are installing on an ES search head).</p></li>
+<li><p>Wait for the accelerations to start. After the acceleration searches have run, you should start seeing the dashboards populate.</p></li>
+<li><p>Restart Splunk.</p></li>
+<li><p>Continue with App Configuration.</p></li>
+</ul>
+</div>
+<div class="section" id="deploy-to-single-server-instance">
+<h2>Deploy to single server instance<a class="headerlink" href="#deploy-to-single-server-instance" title="Permalink to this headline">¶</a></h2>
+<p>Follow these steps to install the app in a single server instance of Splunk Enterprise:</p>
+<ol class="arabic simple">
+<li><p>Deploy as you would any App, and restart Splunk.</p></li>
+<li><p>Configure.</p></li>
+</ol>
+</div>
+<div class="section" id="deploy-to-splunk-cloud">
+<h2>Deploy to Splunk Cloud<a class="headerlink" href="#deploy-to-splunk-cloud" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Have your Splunk Cloud Support handle this installation.</p></li>
+</ol>
+</div>
+<div class="section" id="deploy-to-a-distributed-environment">
+<h2>Deploy to a Distributed Environment<a class="headerlink" href="#deploy-to-a-distributed-environment" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>For each Search Head in the environment, deploy a copy of the App.</p></li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">PAVO Network Traffic App for Splunk</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Aplura, LLC.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/sections/installation.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,31 @@
+<form id="vm-pairs-form" class="form-inline" role="form">
+    <a href="#vm-pairs-form" class="hide">Up</a>
+    <a class="back-to-koleso btn btn-small btn-primary" href="#" style="margin-right:15px;">
+        Back
+    </a>
+    <label class="control-label">Source (A): </label>
+    <input class="source-vm form-control input-medium"
+           type="text" value="<%= ( node.title ? node.title + ' (' + node.name + ')' : node.name ) %>" readonly="readonly"
+           placeholder="Source (A)"
+           title="<%= ( node.title ? node.title + ' (' + node.name + ')' : node.name ) %>"/>
+    <label class="control-label">Target (B): </label>
+    <select class="target-vm form-control input-medium" style="margin-right:15px;">
+        <% _.each(node.targets, function (t) { %>
+        <option value="<%= t %>"><%= ( map[t].title ? map[t].title + ' (' + t + ')' : t ) %></option>
+        <% }); %>
+    </select>
+    <label class="control-label">Direction: </label>
+    <label class="radio inline" style="padding-bottom: 5px;">
+        <input type="radio" name="direction" value="forward" checked="checked"/>
+        A <b style="font-size:large;">&#8594;</b> B
+    </label>
+    <label class="radio inline">
+        <input type="radio" name="direction" value="backward"/>
+        A <b style="font-size:large;">&#8592;</b> B
+    </label>
+    <label class="radio inline">
+        <input type="radio" name="direction" value="bi-directed"/>
+        A <b style="font-size:large;">&#8596;</b> B
+    </label>
+
+</form>

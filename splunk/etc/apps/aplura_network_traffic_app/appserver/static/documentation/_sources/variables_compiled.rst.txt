@@ -1,0 +1,9 @@
+.. |long_name| replace:: PAVO Network Traffic App for Splunk
+.. |version| replace:: 1.2.4
+.. |build| replace:: 6
+.. |splunk_versions| replace:: 8.0, 7.3, 7.2, 7.1, 7.0
+.. |splunkbase_url| replace:: https://splunkbase.splunk.com/app/4229
+.. |ta_name| replace:: TA-aplura_network_traffic_app
+.. |ia_name| replace:: IA-aplura_network_traffic_app
+.. |long_description| replace:: App for exporting and reporting on Network Traffic events.
+.. |data_model| replace:: Network Traffic

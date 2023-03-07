@@ -1,0 +1,4 @@
+Configure |long_name|
+---------------------
+
+- Install the App according to your environment (see steps above)

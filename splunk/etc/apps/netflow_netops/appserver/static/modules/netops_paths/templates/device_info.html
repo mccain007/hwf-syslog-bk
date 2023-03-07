@@ -1,0 +1,106 @@
+<!--<h2>
+    <strong><%= typeName + ' ' + node.name %></strong>
+</h2>-->
+<!--
+<tr>
+    <td>Health score: <strong class="pull-right"><%= health.latest_health_score %></strong></td>
+</tr>
+<tr>
+    <td>Failure risk score: <strong class="pull-right"><%= health.latest_health_risk %></strong></td>
+</tr>
+<tr>
+    <td>
+        Relative load / rate:
+        <strong class="pull-right"><%= health.latest_r_load %>% / <%= health.latest_r_rate %>%</strong>
+    </td>
+</tr>
+-->
+
+<%
+    for (var key in health.interfaces) {
+        if (node.if_in.indexOf(key) >= 0 || node.if_out.indexOf(key) >= 0) {
+%>
+<h2>
+    <%= typeName + ' ' + node.name %>
+    Interface
+    <strong>
+        <%= (health.interfaces[key].snmp_if_name ? health.interfaces[key].snmp_if_name : health.interfaces[key].snmp_index) %>
+    </strong>
+</h2>
+<table class="table table-bordered table-hover table-condensed">
+<tr>
+    <td class="health-score" colspan="3">
+        <div class="health-history-<%= health.interfaces[key].snmp_index %>">
+            <!-- -->
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <p class="text-center">
+            Min health score:
+            <br/>
+            <strong>
+                <!--<%= health.interfaces[key].latest_if_health_score %> /-->
+                <%= health.interfaces[key].min_if_health_score %>
+            </strong>
+        </p>
+    </td>
+    <td>
+        <p class="text-center">
+            Failure risk last / worst:
+            <br/>
+            <strong>
+                <%= health.interfaces[key].latest_if_failure_risk %> /
+                <%= health.interfaces[key].max_if_failure_risk %>
+            </strong>
+        </p>
+    </td>
+    <td>
+        <p class="text-center">
+            Role:
+            <br/>
+            <strong>
+                <%= (node.if_in.indexOf(key) >= 0 ? 'input' : '') %>
+                <%= (node.if_out.indexOf(key) >= 0 ? 'output' : '') %>
+            </strong>
+        </p>
+    </td>
+</tr>
+<tr>
+    <td>
+        <p class="text-center">
+            Rel load / rate:
+            <br/>
+            <strong>
+                <%= health.interfaces[key].latest_if_r_load %>% /
+                <%= health.interfaces[key].latest_if_r_rate %>%
+            </strong>
+        </p>
+    </td>
+    <td>
+        <p class="text-center">
+            Traffic in / out:
+            <br/>
+            <strong>
+                <%= health.interfaces[key].sum_bytes_in %> /
+                <%= health.interfaces[key].sum_bytes_out %>
+            </strong>
+        </p>
+    </td>
+    <td>
+        <p class="text-center">
+            Packets in / out:
+            <br/>
+            <strong>
+                <%= health.interfaces[key].sum_packets_in %> /
+                <%= health.interfaces[key].sum_packets_out %>
+            </strong>
+        </p>
+    </td>
+</tr>
+</table>
+<%
+        }
+    }
+%>

@@ -1,0 +1,82 @@
+<form  version="1.1" onunloadCancelJobs="True" script="table_formatting.js">
+    <label>Top VMs by Traffic</label>
+    <fieldset autoRun="True">
+        <input type="time" searchWhenChanged="False">
+            <label>Time Range</label>
+            <default>Last 60 minutes</default>
+        </input>
+    </fieldset>
+    <row>
+      <panel>
+        <chart>
+            <title>Top VMs by Traffic</title>
+            <search>
+                <query>
+                    `netflow_search_rule_20183` (src_type=vm OR dest_type=vm)
+                    | eval VM_IP=case(src_type=="vm" AND dest_type=="vm",src_ip+":"+dest_ip,src_type=="vm",src_ip,dest_type=="vm",dest_ip)
+                    | makemv delim=":" VM_IP
+                    | `per_second_chart(megabits, bytes*8/1000000, sum(megabits) by VM_IP)`
+                </query>
+                <earliest>$earliest$</earliest>
+                <latest>$latest$</latest>
+            </search>
+            <option name="charting.chart">area</option>
+            <option name="charting.chart.nullValueMode">zero</option>
+            <option name="charting.axisTitleX.text">Time</option>
+            <option name="charting.axisTitleY.text">Mbps</option>
+            <option name="charting.legend.placement">right</option>
+            <option name="charting.chart.stackMode">stacked</option>
+            <option name="charting.drilldown">none</option>
+            <option name="height">200</option>
+        </chart>
+        <table id="table_1_1">
+            <search>
+                <query>
+                    `netflow_search_rule_20183` src_type=vm
+                    | rename src_ip as "VM IP"
+                    | fillnull value="" src_vm_name
+                    | rename src_vm_name as "VM Name"
+                    | stats sum(bytes) as bytes_out 
+                            sum(packets) as packets_out 
+                            sum(flow_count) as connections 
+                                by "VM Name" "VM IP"
+                    | append [ search `netflow_search_rule_20183` dest_type=vm
+                      | rename dest_ip as "VM IP"
+                      | fillnull value="" dest_vm_name
+                      | rename dest_vm_name as "VM Name"
+                      | stats sum(bytes) as bytes_in 
+                              sum(packets) as packets_in 
+                              sum(flow_count) as connections 
+                                  by "VM Name" "VM IP" ]
+                    | stats sum(bytes_in) as Bytes_IN 
+                            sum(bytes_out) as Bytes_OUT  
+                            sum(packets_in) as Packets_IN 
+                            sum(packets_out) as Packets_OUT 
+                            sum(connections) as Total_Connections 
+                                by "VM Name" "VM IP"
+                    | eval total_bytes = Bytes_IN+Bytes_OUT
+                    | sort 0 - total_bytes
+                    | eval MB_IN = Bytes_IN/1024/1024
+                    | eval MB_OUT = Bytes_OUT/1024/1024
+                    | `commas_formatting(MB IN,MB_IN,2)`
+                    | `commas_formatting(MB OUT,MB_OUT,2)`
+                    | rename Packets_IN as "Packets IN"
+                    | rename Packets_OUT as "Packets OUT"
+                    | rename "Total_Connections" as "Total Connections"
+                    | table "VM IP" "VM Name" "MB IN" "MB OUT" "Packets IN" "Packets OUT" "Total Connections"
+                </query>
+                <earliest>$earliest$</earliest>
+                <latest>$latest$</latest>
+            </search>
+            <option name="count">10</option>
+            <option name="showPager">true</option>
+            <option name="drilldown">row</option>
+            <drilldown>
+                <link>
+                    <![CDATA[netops_paths?earliest=$earliest$&latest=$latest$&form.filter_name=$row.VM Name$&form.filter_ip=$row.VM IP$&form.vtep_ip=*&form.vxlan_id=*]]>
+                </link>
+            </drilldown>
+        </table>
+      </panel>
+    </row>
+</form>

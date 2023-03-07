@@ -1,0 +1,27 @@
+<form class="form-horizontal form-complex">
+<div class="control-group">
+	<label class="control-label" for="ioc_count_indicator_type">IoC Type</label>
+    <div class="controls">
+<select name="action.crowdstrike_ioc_count.param.indicator_type" id="ioc_count_indicator_type">
+        <option value="sha1">sha1</option>
+        <option value="md5">md5</option>
+        <option value="sha256">sha2</option>
+        <option value="ipv6">ipv6</option>
+        <option value="domain">domain</option>
+        <option value="ipv4">ipv4</option>
+</select>
+                <span class="help-block"> 
+                    Please select the indicator of compromise type from the dropdown list.
+                </span>
+    </div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="ioc_count_indicator_value">Indicator Value</label>
+    <div class="controls">
+	<input type="text" name="action.crowdstrike_ioc_count.param.indicator_value" id="ioc_count_indicator_value"/>
+                <span class="help-block"> 
+                    supports raw text or tokens: ex. $result.src_ip$ or "192.168.1.25"
+                </span>
+    </div>
+</div>
+</form>

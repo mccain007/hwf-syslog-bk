@@ -1,0 +1,169 @@
+[props/first_install-too_small]
+owner = nobody
+version = 9.0.4
+modtime = 1677116221.081278000
+
+[props/dfm_stderr-too_small]
+owner = nobody
+version = 9.0.4
+modtime = 1677116221.343822000
+
+[props/dfm_stdout-too_small]
+owner = nobody
+version = 9.0.4
+modtime = 1677116221.420128000
+
+[props/cloudgateway_untracked-too_small]
+owner = nobody
+version = 9.0.4
+modtime = 1677116221.659482000
+
+[props/splunk_secure_gateway_version_request_processor-too_small]
+owner = nobody
+version = 9.0.4
+modtime = 1677116221.766497000
+
+[props/ssg_config_modular_input-too_small]
+owner = nobody
+version = 9.0.4
+modtime = 1677116221.860921000
+
+[props/export_metrics-too_small]
+owner = nobody
+version = 9.0.4
+modtime = 1677116230.913073000
+
+[props/splunk_instrumentation-too_small]
+owner = nobody
+version = 9.0.4
+modtime = 1677116283.722022000
+
+[props/splunk_archiver-too_small]
+owner = nobody
+version = 9.0.4
+modtime = 1677118621.226596000
+
+[props/splunk_assist_supervisor_modular_input.log]
+owner = nobody
+version = 9.0.4
+modtime = 1677203322.641037000
+
+[sourcetypes/%2Fopt%2Fsplunk%2Fvar%2Flog%2Fsplunk%2Fsplunk_assist_supervisor_modular_input.log.1_Thu_Feb_23_20%3A48%3A42_2023_2123198292]
+owner = nobody
+version = 9.0.4
+modtime = 1677203322.716390000
+
+[props/splunk_secure_gateway_modular_input.log]
+owner = nobody
+version = 9.0.4
+modtime = 1677651209.089508000
+
+[sourcetypes/%2Fopt%2Fsplunk%2Fvar%2Flog%2Fsplunk%2Fsplunk_secure_gateway_modular_input.log.1_Wed_Mar__1_01%3A13%3A29_2023_839288652]
+owner = nobody
+version = 9.0.4
+modtime = 1677651209.206441000
+
+[props/splunk_archiver-2]
+owner = nobody
+version = 9.0.4
+modtime = 1677873505.914537000
+
+[sourcetypes/%2Fopt%2Fsplunk%2Fvar%2Flog%2Fsplunk%2Fsplunk_archiver.log_Fri_Mar__3_14%3A58%3A25_2023_993922806]
+owner = nobody
+version = 9.0.4
+modtime = 1677873506.015753000
+
+[props/network_behavior_analytics_dest_pull-too_small]
+owner = nobody
+version = 9.0.4
+modtime = 1677890546.811232000
+
+[props/network_behavior_analytics_sendlog_dhcp-too_small]
+owner = nobody
+version = 9.0.4
+modtime = 1677890546.880695000
+
+[props/network_behavior_analytics_sendlog_dns-too_small]
+owner = nobody
+version = 9.0.4
+modtime = 1677890546.925121000
+
+[props/network_behavior_analytics_sendlog_ip-too_small]
+owner = nobody
+version = 9.0.4
+modtime = 1677890546.968249000
+
+[props/network_behavior_analytics_sendlog_tls-too_small]
+owner = nobody
+version = 9.0.4
+modtime = 1677890547.011410000
+
+[props/network_behavior_analytics_sendlog_vpn-too_small]
+owner = nobody
+version = 9.0.4
+modtime = 1677890547.053710000
+
+[props/network_behavior_analytics_scorer-too_small]
+owner = nobody
+version = 9.0.4
+modtime = 1677890547.096014000
+
+[props/network_behavior_analytics_sendlog_http-too_small]
+owner = nobody
+version = 9.0.4
+modtime = 1677890547.141444000
+
+[props/forescout_ot_nsm_splunk_input_OTSM_REST_hosts-too_small]
+owner = nobody
+version = 9.0.4
+modtime = 1677890638.095569000
+
+[props/forescout_ot_nsm_splunk_input_OTSM_REST_links-too_small]
+owner = nobody
+version = 9.0.4
+modtime = 1677890638.248630000
+
+[props/network_behavior_analytics_dest_pull-2]
+owner = nobody
+version = 9.0.4
+modtime = 1677942499.288111000
+
+[sourcetypes/%2Fopt%2Fsplunk%2Fvar%2Flog%2Fsplunk%2Fnetwork_behavior_analytics_dest_pull.log_Sat_Mar__4_10%3A08%3A19_2023_1866042527]
+owner = nobody
+version = 9.0.4
+modtime = 1677942499.341427000
+
+[props/network_behavior_analytics_sendlog_dhcp-2]
+owner = nobody
+version = 9.0.4
+modtime = 1677942499.421936000
+
+[sourcetypes/%2Fopt%2Fsplunk%2Fvar%2Flog%2Fsplunk%2Fnetwork_behavior_analytics_sendlog_dhcp.log_Sat_Mar__4_10%3A08%3A19_2023_844613118]
+owner = nobody
+version = 9.0.4
+modtime = 1677942499.464659000
+
+[sourcetypes/%2Fopt%2Fsplunk%2Fvar%2Flog%2Fsplunk%2Fnetwork_behavior_analytics_sendlog_dhcp.log_Sat_Mar__4_10%3A08%3A19_2023_1361025464]
+owner = nobody
+version = 9.0.4
+modtime = 1677942499.506296000
+
+[props/forescout_ot_nsm_splunk_input_OTSM_REST_links-2]
+owner = nobody
+version = 9.0.4
+modtime = 1677942499.629429000
+
+[sourcetypes/%2Fopt%2Fsplunk%2Fvar%2Flog%2Fsplunk%2Fforescout_ot_nsm_splunk_input_OTSM_REST_links.log_Sat_Mar__4_10%3A08%3A19_2023_742340806]
+owner = nobody
+version = 9.0.4
+modtime = 1677942499.675349000
+
+[props/network_behavior_analytics_dest_pull-3]
+owner = nobody
+version = 9.0.4
+modtime = 1677943182.406417000
+
+[sourcetypes/%2Fopt%2Fsplunk%2Fvar%2Flog%2Fsplunk%2Fnetwork_behavior_analytics_dest_pull.log_Sat_Mar__4_10%3A19%3A42_2023_1504466389]
+owner = nobody
+version = 9.0.4
+modtime = 1677943182.530743000

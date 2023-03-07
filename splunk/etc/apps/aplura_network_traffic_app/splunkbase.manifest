@@ -1,0 +1,459 @@
+{
+  "version": "1.0",
+  "date": "2022-11-14T21:30:33.808444834Z",
+  "hashAlgorithm": "SHA-256",
+  "app": {
+    "id": 4229,
+    "version": "1.2.4",
+    "files": [
+      {
+        "path": "appserver/static/images/ui-bg_diagonals-thick_18_b81900_40x40.png",
+        "hash": "59a5a52d3e36503a6cf05d4980db45ab87fda2993fb27e6e3a9b4369b11667cb"
+      },
+      {
+        "path": "appserver/static/images/ui-bg_diagonals-thick_20_666666_40x40.png",
+        "hash": "dc5ed2f4df6e400a63e884f7d1c2ce9cfa51eb1cf80eb24d6c9214e86b05a15f"
+      },
+      {
+        "path": "appserver/static/images/ui-bg_glass_100_f6f6f6_1x400.png",
+        "hash": "e713826e113b6e1774729f99096ac98757c5a99eeb294dc6a40f7a442ed73a73"
+      },
+      {
+        "path": "appserver/static/images/ui-bg_glass_100_fdf5ce_1x400.png",
+        "hash": "1c510d370f469385f0bc50b432f3c10dda0d1eb9773d91db5e89d77ffe0c5330"
+      },
+      {
+        "path": "appserver/static/images/ui-bg_glass_65_ffffff_1x400.png",
+        "hash": "d0d593c5472a70c61b2ede71b6114186014ff2c01581324791ab76f874559c82"
+      },
+      {
+        "path": "appserver/static/images/ui-bg_gloss-wave_35_f6a828_500x100.png",
+        "hash": "2a6057238a4ab18535285b953a992378bad7b0f5847eb764d7e8449c22fbdcdd"
+      },
+      {
+        "path": "appserver/static/images/ui-bg_highlight-soft_100_eeeeee_1x100.png",
+        "hash": "5033f4eec9de6637412bf7234e6504d072c991241f5678a630668317adb48a9c"
+      },
+      {
+        "path": "appserver/static/images/ui-bg_highlight-soft_75_ffe45c_1x100.png",
+        "hash": "b09b17648e9179128b5301c3ba77445af7fd3781e0d83e00c25cd03e1ba898eb"
+      },
+      {
+        "path": "appserver/static/images/ui-icons_222222_256x240.png",
+        "hash": "37734f588590b7619d0d37de658dd1952555c395ac212232d2ae79014d976ac4"
+      },
+      {
+        "path": "appserver/static/images/ui-icons_228ef1_256x240.png",
+        "hash": "9a6c2f48447de614e4f27fd1048b8ac17cfbf5f18199832b355cb6821520c0d3"
+      },
+      {
+        "path": "appserver/static/images/ui-icons_ef8c08_256x240.png",
+        "hash": "13e77df581a6ecd3e9db0c706889493239a2b0ee70305002620438dd1e83fdcc"
+      },
+      {
+        "path": "appserver/static/images/ui-icons_ffd27a_256x240.png",
+        "hash": "3f7785c4179887ca34dc34775fd78a4028ab640530b6261fb642bdbe8cda56c5"
+      },
+      {
+        "path": "appserver/static/images/ui-icons_ffffff_256x240.png",
+        "hash": "56600cec6c07804a92f28fd3d377284829ddb5f416d5b906a4cbdfc534723d5a"
+      },
+      {
+        "path": "appserver/static/appIcon.png",
+        "hash": "a07bdfb445b7e473d873cb625cd94c1b9535b5372ed860e61c97917a182e9056"
+      },
+      {
+        "path": "appserver/static/appIconAlt.png",
+        "hash": "a07bdfb445b7e473d873cb625cd94c1b9535b5372ed860e61c97917a182e9056"
+      },
+      {
+        "path": "appserver/static/css/dashboard.css",
+        "hash": "f3b1a942fdf6502b288a84190f847c82bc70ee3873b5b45b526e74eaeaaf707c"
+      },
+      {
+        "path": "appserver/static/appIconAlt_2x.png",
+        "hash": "05a0846c6008b202372e1e2b9b19070ec73c6bb7539a1b5dcc39198d2d6cff1e"
+      },
+      {
+        "path": "appserver/static/dashboard.css",
+        "hash": "f3b1a942fdf6502b288a84190f847c82bc70ee3873b5b45b526e74eaeaaf707c"
+      },
+      {
+        "path": "appserver/static/appIcon_2x.png",
+        "hash": "05a0846c6008b202372e1e2b9b19070ec73c6bb7539a1b5dcc39198d2d6cff1e"
+      },
+      {
+        "path": "appserver/static/documentation/_sources/index.rst.txt",
+        "hash": "89373c6b92489dc810e546b9251dcb8d4fee1fc2f557e44f29c73ba2ecba2dfe"
+      },
+      {
+        "path": "appserver/static/documentation/_sources/sections/about.rst.txt",
+        "hash": "f6c4c1dbed47abad1cd05cfc32342882cb6c2c09aa1dec863d701f4a87a86eac"
+      },
+      {
+        "path": "appserver/static/documentation/_sources/sections/installation.rst.txt",
+        "hash": "10b234d31379def0b9003412691fb1b1591a23fee0e3c29735faeb6fe10a1d5e"
+      },
+      {
+        "path": "appserver/static/documentation/_sources/sections/known_issues.rst.txt",
+        "hash": "cc36200029a783767df471b2af1d775f7e9dda15795c9c31b7ec1b054b15a029"
+      },
+      {
+        "path": "appserver/static/documentation/_sources/sections/misc.rst.txt",
+        "hash": "140a9e1ef493abb07340150a706dad9556b99b17c77509d8d6feacbc3b7c8cd6"
+      },
+      {
+        "path": "appserver/static/documentation/_sources/sections/prerequisites.rst.txt",
+        "hash": "a843ae7db115d8a6eb8214232c2287a9f733542e88c83ed06b600315b70a7952"
+      },
+      {
+        "path": "appserver/static/documentation/_sources/sections/release_notes_v1.2.0.rst.txt",
+        "hash": "41a3598f2b187ccd1cc984086dbc6286746577ab0b318f9c5c5a63bd4ad9fcfe"
+      },
+      {
+        "path": "appserver/static/documentation/_sources/sections/release_notes_v1.2.1.rst.txt",
+        "hash": "9c050d7853b1cdcb2647b8f18b4f2b4384785a580f009b77076892fa89f0c4d7"
+      },
+      {
+        "path": "appserver/static/documentation/_sources/sections/release_notes_v1.2.2.rst.txt",
+        "hash": "8f9fa3fe8fe0e3c6f07522a7a81af82e34e4daf9a704b0aaab3e7f1d5262a311"
+      },
+      {
+        "path": "appserver/static/documentation/_sources/sections/release_notes_v1.2.3.rst.txt",
+        "hash": "4ddcc3cbcb5c961bd6a6e699cf01763dcf44ec17aa8e101a75e8605d0aef140b"
+      },
+      {
+        "path": "appserver/static/documentation/_sources/sections/scripts.rst.txt",
+        "hash": "a43a02daf93881c87b5269cedd83af2e6cd3cdfda7b47bfe41287391db3fa4b3"
+      },
+      {
+        "path": "appserver/static/documentation/_sources/sections/support.rst.txt",
+        "hash": "5dea5a1d9720572fe9de2134534e5fe36a2d5b45eb071c7971da363fb6997a6a"
+      },
+      {
+        "path": "appserver/static/documentation/_sources/sections/third_party.rst.txt",
+        "hash": "8ed6e7e4fb70355ed5f076ad45e73c25825e829c45a806dd69ba5cdeaf9dc5a5"
+      },
+      {
+        "path": "appserver/static/documentation/_sources/sections/user_guide.rst.txt",
+        "hash": "abd04a72eb6eda1bc0d976cf7fd7d1ef60085416c321aeec07e26429c3a07347"
+      },
+      {
+        "path": "appserver/static/documentation/_sources/variables.rst.txt",
+        "hash": "5245df6f93ed44b37c992274fae8be8ea9d23a70113844b467959c9d4cfd03ba"
+      },
+      {
+        "path": "appserver/static/documentation/_sources/variables_compiled.rst.txt",
+        "hash": "ac041e76bcf0c398303fd8f5a345b30c5c8e8af0d2888694f84c8fd51a0baee7"
+      },
+      {
+        "path": "appserver/static/documentation/_static/alabaster.css",
+        "hash": "67e598979516bfa32eae490cfc05ae76e54632b33ab722610ea0e51a8ae6fc6f"
+      },
+      {
+        "path": "appserver/static/documentation/_static/basic.css",
+        "hash": "de2b14ea7aebee462f430467dabc1ff8ea6adaad7fa34a2a037ea3ad874b8830"
+      },
+      {
+        "path": "appserver/static/documentation/_static/custom.css",
+        "hash": "39f23a6561786e3cb4e33e4a96562a1305a8b74c0d45dc215a64018692cd5d4c"
+      },
+      {
+        "path": "appserver/static/documentation/_static/doctools.js",
+        "hash": "8a1ebfbf9815a8ebd248a2679e450b3f414930eb0c3344b67deadc2b2b8d4a2f"
+      },
+      {
+        "path": "appserver/static/documentation/_static/documentation_options.js",
+        "hash": "923eb7195887f616a2d26b0308aa295998e6a8f32f47e467fc91e89ffa1ed92c"
+      },
+      {
+        "path": "appserver/static/documentation/_static/file.png",
+        "hash": "5c4bc9a16aebf38c4b950f59b8e501ca36495328cb9eb622218bce9064a35e3e"
+      },
+      {
+        "path": "appserver/static/documentation/_static/jquery-3.5.1.js",
+        "hash": "416a3b2c3bf16d64f6b5b6d0f7b079df2267614dd6847fc2f3271b4409233c37"
+      },
+      {
+        "path": "appserver/static/documentation/_static/jquery.js",
+        "hash": "f7f6a5894f1d19ddad6fa392b2ece2c5e578cbf7da4ea805b6885eb6985b6e3d"
+      },
+      {
+        "path": "appserver/static/documentation/_static/language_data.js",
+        "hash": "7b7a86c597ae4b68b34681ba872921f0265bd757d8a1f456ea2e376c23447962"
+      },
+      {
+        "path": "appserver/static/documentation/_static/minus.png",
+        "hash": "47e7fc50db3699f1ca41ce9a2ffa202c00c5d1d5180c55f62ba859b1bd6cc008"
+      },
+      {
+        "path": "appserver/static/documentation/_static/plus.png",
+        "hash": "54115199b96a130cba02147c47c0deb43dcc9b9f08b5162bba8642b34980ac63"
+      },
+      {
+        "path": "appserver/static/documentation/_static/pygments.css",
+        "hash": "c67b5260b50a0f434e9b26585479ce67ab2184adc7b31c26d665642d3512835f"
+      },
+      {
+        "path": "appserver/static/documentation/_static/searchtools.js",
+        "hash": "8b3aff69b96a22f63a6565c2440d5508797b33a1037ecef9c5c7755903663f2f"
+      },
+      {
+        "path": "appserver/static/documentation/_static/underscore-1.3.1.js",
+        "hash": "f808f0aa32fbe90fb9c9c846917faff3fdd4e236c284b76c02dd33753dc90177"
+      },
+      {
+        "path": "appserver/static/documentation/_static/underscore.js",
+        "hash": "42d8fad13bc28fc726775196ec9ab953febf9bde175c5845128361c953fa17f4"
+      },
+      {
+        "path": "appserver/static/documentation/genindex.html",
+        "hash": "6b0ff5d38f61b4c95ea24880103fc2f0c887118fc3dabd3c279e5bd6476de6b5"
+      },
+      {
+        "path": "appserver/static/documentation/index.html",
+        "hash": "8a3d7ea16d33b9178695f961dafa2b11c35a7c308c352205ec02856b4a2fd8b7"
+      },
+      {
+        "path": "appserver/static/documentation/objects.inv",
+        "hash": "7934beb1ae9cd4661eaa539e93e395508472b0701f7c41752e1570d79840109d"
+      },
+      {
+        "path": "appserver/static/documentation/search.html",
+        "hash": "1666cd165122534630a747b7f6ea6c59b9dc0ff43f1c060b7ea6431ed0a81ca1"
+      },
+      {
+        "path": "appserver/static/documentation/searchindex.js",
+        "hash": "4dd1295af9b7c80245cd44e21902bc890b86fb65daf3bbedb243d9883eab2ddb"
+      },
+      {
+        "path": "appserver/static/documentation/sections/about.html",
+        "hash": "d5419595b6188285fdccdfc5539cf7ae8238175638036da1539a49d5c314b3cb"
+      },
+      {
+        "path": "appserver/static/documentation/sections/installation.html",
+        "hash": "f5575f2d3ed7ff9411a7b526543267f48596d6652bd0277de6705dacfbb29c5e"
+      },
+      {
+        "path": "appserver/static/documentation/sections/known_issues.html",
+        "hash": "cc3190d86b47fc56c769b65488e70fa489e86a155560360f913d7c58a971af19"
+      },
+      {
+        "path": "appserver/static/documentation/sections/misc.html",
+        "hash": "7428534a00aae4c9f6fe6996fd92c8ed411c61164a41ebea7b45edf6f656712e"
+      },
+      {
+        "path": "appserver/static/documentation/sections/prerequisites.html",
+        "hash": "80de0f0f705f99809928a1be14531d678bb6f1c13f1c433e61c2d544a2ce5241"
+      },
+      {
+        "path": "appserver/static/documentation/sections/release_notes_v1.2.0.html",
+        "hash": "8332461ced649160b0abe773d2e2a66417d32dd9ce5a58ffc49e25faaa948af4"
+      },
+      {
+        "path": "appserver/static/documentation/sections/release_notes_v1.2.1.html",
+        "hash": "ca7f2a8495b51c68410963ef106cb74f69b1a025062df53d6e1330933605e3b5"
+      },
+      {
+        "path": "appserver/static/documentation/sections/release_notes_v1.2.2.html",
+        "hash": "228facd23cc119e569710079b75185a0eb4ef5eac22f023ea8d7c724834e1460"
+      },
+      {
+        "path": "appserver/static/documentation/sections/release_notes_v1.2.3.html",
+        "hash": "c855dbf7ab08835ffbdeecfa2f27271234d38c9635605658f29271e186fd9218"
+      },
+      {
+        "path": "appserver/static/documentation/sections/scripts.html",
+        "hash": "d0d3bd3fb5e1959cbe05ea838496a6e8cc2ff2a51bfc911d8bb1b49fd61e7fa8"
+      },
+      {
+        "path": "appserver/static/documentation/sections/support.html",
+        "hash": "c07cf5db27bc8480b6b20b7af631b176605a85014caadc6e31fe2e174b3ea434"
+      },
+      {
+        "path": "appserver/static/documentation/sections/third_party.html",
+        "hash": "588130a0717cfd027d56d90aa1974869ec31920816efd910b608bfa4c5d7b70b"
+      },
+      {
+        "path": "appserver/static/documentation/sections/user_guide.html",
+        "hash": "34b3bd8c649698c02808ff79758deb8fd30f7b5988b1be93e58cb0627ce08c52"
+      },
+      {
+        "path": "appserver/static/documentation/variables.html",
+        "hash": "bf62b0cf8042c8793dcc5ea041ad51b1e78706d0cb58f7402b54bc4dabe96407"
+      },
+      {
+        "path": "appserver/static/documentation/variables_compiled.html",
+        "hash": "5c844f3bd0031aff487c8e9465d16b3ec3be714a9cba96ab584db4f4a198bc60"
+      },
+      {
+        "path": "appserver/static/README.md",
+        "hash": "0e8fb9765b8e042fd15f05a5bc9855f9e2176a8cd9dbe0823b0c4617d91ed8bb"
+      },
+      {
+        "path": "default/app.conf",
+        "hash": "6bde6b45060dcfa03db93abade08c6981bbe5cd06080bbed238f16b7ea079006"
+      },
+      {
+        "path": "default/checklist.conf",
+        "hash": "a2c1b090059da7b1e87486d26d88e16aea5eb2915ec5fd4b68fde30b36f45d9b"
+      },
+      {
+        "path": "default/data/ui/nav/default.xml",
+        "hash": "feaa3da30eb47d569499e6d657277678b1f441f85a1ca0228ccddba8daf74813"
+      },
+      {
+        "path": "default/data/ui/views/apl_net_01_overview.xml",
+        "hash": "d3b32ba53b44502d6bb9a289f4222c8d688d79355325657bc08a1ac785cff3ec"
+      },
+      {
+        "path": "default/data/ui/views/apl_net_02_ip_profile.xml",
+        "hash": "aa5e75b7fc37b4098e0ba77e220bc81c92e881ee95b5bc5fdf6ef160fcae734d"
+      },
+      {
+        "path": "default/data/ui/views/apl_net_03_transport_information.xml",
+        "hash": "886e709e1192b851641fa5550fe3cf5f85c3b3a187a3007ea7366762151ab6b3"
+      },
+      {
+        "path": "default/data/ui/views/apl_net_04_port_information.xml",
+        "hash": "990019620bd006d5ee313d0be6c813e42abd659bb236b3b37ace6564efaae0b3"
+      },
+      {
+        "path": "default/data/ui/views/apl_net_05_internal_and_external_traffic.xml",
+        "hash": "8fe0f415e3b7148e684aa0e4fba7905bc78512e3c0d8eb0880b2884a748a612b"
+      },
+      {
+        "path": "default/data/ui/views/apl_net_06_scanning_activity.xml",
+        "hash": "22d1368574d9d4a85a10b753f878e6075ced81cbbbd6ac1e1e7f19145e73057e"
+      },
+      {
+        "path": "default/data/ui/views/apl_net_07_geographic_information.xml",
+        "hash": "ee4293aa097fa5d3db6e733b2889fa6d3d40756faf1df8f783476b3fc4913e9b"
+      },
+      {
+        "path": "default/data/ui/views/apl_net_08_network_traffic_search.xml",
+        "hash": "32dbe83726ffad7810bb132f3910d7160c0de0075470885a43d963abb9c01c1a"
+      },
+      {
+        "path": "default/data/ui/views/apl_net_09_sourcetype_information.xml",
+        "hash": "48091df1560b45a8044b3ef9bf139ff34aee411826401171a76fb4dc975f4dce"
+      },
+      {
+        "path": "default/data/ui/views/apl_net_10_vpn.xml",
+        "hash": "758eef127d229020870ec8ae3435183898343201eb1b8aa1bad72c29317b2e90"
+      },
+      {
+        "path": "default/data/ui/views/apl_net_11_data_transparency.xml",
+        "hash": "415a937c3fc9f83a25495c232ecac38e31b4e77426dbb08df1513ad7f37bdb38"
+      },
+      {
+        "path": "default/data/ui/views/About.xml",
+        "hash": "e30be0a8a7d679d465e292cc84187051d92213513e706ca948ef5439ddcd1755"
+      },
+      {
+        "path": "default/log.cfg",
+        "hash": "a7ffb868c175fd843fff718db8cb59fc2bf6f744b6c5289f0486c0c179b7efce"
+      },
+      {
+        "path": "default/macros.conf",
+        "hash": "956879c83d73b17bd82f2cd13719eba81ad2a6a3121f15dfc33e678ca8a147fc"
+      },
+      {
+        "path": "default/props.conf",
+        "hash": "a6f62c1cc8be960a666f68726f0a2d3d09c4a93d691a0c76389b79e6bc72229f"
+      },
+      {
+        "path": "default/savedsearches.conf",
+        "hash": "6601472bc68c38ed73ef94954b809787c033d968853c7035b57befcbb177b353"
+      },
+      {
+        "path": "default/transforms.conf",
+        "hash": "e4c38cae43c15374f8698e16c960c10477151213b327342a43b9816db39b1c44"
+      },
+      {
+        "path": "metadata/default.meta",
+        "hash": "f02fe2bc98816389d3c0b32850e976000c871f4c24d4c1ff59637614748ee97c"
+      },
+      {
+        "path": "static/appIcon.png",
+        "hash": "a07bdfb445b7e473d873cb625cd94c1b9535b5372ed860e61c97917a182e9056"
+      },
+      {
+        "path": "static/appIconAlt.png",
+        "hash": "a07bdfb445b7e473d873cb625cd94c1b9535b5372ed860e61c97917a182e9056"
+      },
+      {
+        "path": "static/appIconAlt_2x.png",
+        "hash": "05a0846c6008b202372e1e2b9b19070ec73c6bb7539a1b5dcc39198d2d6cff1e"
+      },
+      {
+        "path": "static/appIcon_2x.png",
+        "hash": "05a0846c6008b202372e1e2b9b19070ec73c6bb7539a1b5dcc39198d2d6cff1e"
+      },
+      {
+        "path": "bin/Diag.py",
+        "hash": "5cf65e251e6bd77a6af3e338f20dcf79d69a8efc3d0c56f7fa09833477dd6073"
+      },
+      {
+        "path": "bin/version.py",
+        "hash": "96c116aaf73a2b7e9755a9a8d2f71d7fce19f2ed1ae905f1c1abbfb9d3d3c12b"
+      },
+      {
+        "path": "AppCert_README.md",
+        "hash": "ebb862683e2bb7634d9b8c05a8a93201fd2332286871795f3c3d9e9877a82e3d"
+      },
+      {
+        "path": "README.md",
+        "hash": "0e8fb9765b8e042fd15f05a5bc9855f9e2176a8cd9dbe0823b0c4617d91ed8bb"
+      }
+    ]
+  },
+  "products": [
+    {
+      "platform": "splunk",
+      "product": "enterprise",
+      "versions": [
+        "7.2",
+        "7.3",
+        "8.0",
+        "8.1",
+        "8.2",
+        "9.0"
+      ],
+      "architectures": [
+        "x86_64"
+      ],
+      "operatingSystems": [
+        "windows",
+        "linux",
+        "macos",
+        "freebsd",
+        "solaris",
+        "aix"
+      ]
+    },
+    {
+      "platform": "splunk",
+      "product": "cloud",
+      "versions": [
+        "7.2",
+        "7.3",
+        "8.0",
+        "8.1",
+        "8.2",
+        "9.0"
+      ],
+      "architectures": [
+        "x86_64"
+      ],
+      "operatingSystems": [
+        "windows",
+        "linux",
+        "macos",
+        "freebsd",
+        "solaris",
+        "aix"
+      ]
+    }
+  ]
+}

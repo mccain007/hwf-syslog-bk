@@ -1,0 +1,304 @@
+<form script="js/db_tabs.js" version="1.1">
+  <label>VPN Traffic Overview</label>
+  <init>
+    <unset token="showEvents"></unset>
+  </init>
+  <fieldset submitButton="false">
+    <input type="time" token="time_restriction">
+      <label></label>
+      <default>
+        <earliest>-24h@h</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <html>
+        <div class="tab_root" data-id="overview_tabs" data-tabs="Default,Map,Users"/>
+      </html>
+    </panel>
+  </row>
+  <row id="tab_default_1">
+    <panel>
+      <title>Count of Users Logins Over Time</title>
+      <chart>
+        <search>
+          <query>| `apl_successful_vpn_logins_by_time`</query>
+          <earliest>$time_restriction.earliest$</earliest>
+          <latest>$time_restriction.latest$</latest>
+        </search>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">0</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">line</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">zero</option>
+        <option name="charting.chart.showDataLabels">none</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">none</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="refresh.display">progressbar</option>
+      </chart>
+    </panel>
+    <panel>
+      <title>Concurrent User Logons</title>
+      <chart>
+        <search>
+          <query>| `apl_successful_vpn_logins_by_user_signature` | rename All_Sessions.* as * | reverse |transaction user startswith=signature=login endswith=signature=logout  keeporphans=true | fillnull duration value=86400 | concurrency duration=duration start=_time | fields _time concurrency user | timechart max(concurrency) span=1h</query>
+          <earliest>$time_restriction.earliest$</earliest>
+          <latest>$time_restriction.latest$</latest>
+        </search>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">0</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">line</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">zero</option>
+        <option name="charting.chart.showDataLabels">none</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">none</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="refresh.display">progressbar</option>
+      </chart>
+    </panel>
+  </row>
+  <row id="tab_default_2">
+    <panel>
+      <title>Logons/Logoffs</title>
+      <chart>
+        <search>
+          <query>| `apl_vpn_logon_logoff_by_signature` | rename All_Sessions.* as *</query>
+          <earliest>$time_restriction.earliest$</earliest>
+          <latest>$time_restriction.latest$</latest>
+        </search>
+        <option name="charting.chart">pie</option>
+        <option name="refresh.display">progressbar</option>
+        <drilldown>
+          <set token="showEvents">yes</set>
+          <set token="selected_signature">$row.signature$</set>
+          <set token="search_string">| datamodel Network_Sessions search | search All_Sessions.signature="$selected_signature$"</set>
+        </drilldown>
+      </chart>
+    </panel>
+    <panel>
+      <title>Number of VPN Users On During Time Period - Successful Logons Only</title>
+      <single>
+        <search>
+          <query>| `apl_successful_vpn_logins`</query>
+          <earliest>$time_restriction.earliest$</earliest>
+          <latest>$time_restriction.latest$</latest>
+        </search>
+        <option name="refresh.display">progressbar</option>
+      </single>
+    </panel>
+  </row>
+  <row id="tab_default_3">
+    <panel>
+      <title>Most Active Users - # of Successful Logins</title>
+      <chart>
+        <search>
+          <query>| `apl_successful_vpn_logins_by_user` | rename All_Sessions.* as * | sort 0 - count | head 10</query>
+          <earliest>$time_restriction.earliest$</earliest>
+          <latest>$time_restriction.latest$</latest>
+        </search>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">collapsed</option>
+        <option name="charting.axisTitleY.visibility">collapsed</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">0</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">bar</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.showDataLabels">none</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">none</option>
+        <option name="refresh.display">progressbar</option>
+        <drilldown>
+          <set token="showEvents">yes</set>
+          <set token="selected_user">$row.user$</set>
+          <set token="search_string">| `apl_raw_vpn_events_by_selected_user($selected_user$)`</set>
+        </drilldown>
+      </chart>
+    </panel>
+    <panel>
+      <title>Failed VPN Logins</title>
+      <chart>
+        <search>
+          <query>| `apl_failed_vpn_logins_by_user` | rename All_Sessions.* as *</query>
+          <earliest>$time_restriction.earliest$</earliest>
+          <latest>$time_restriction.latest$</latest>
+        </search>
+        <option name="charting.chart">bar</option>
+        <option name="charting.drilldown">all</option>
+        <option name="refresh.display">progressbar</option>
+        <drilldown>
+          <set token="showEvents">yes</set>
+          <set token="selected_user">$row.user$</set>
+          <set token="search_string">| `apl_raw_failed_vpn_events_by_selected_user($selected_user$)`</set>
+        </drilldown>
+      </chart>
+    </panel>
+  </row>
+  <row id="tab_map">
+    <panel>
+      <input type="dropdown" token="MapBy" searchWhenChanged="true">
+        <label>Split Map By</label>
+        <choice value="Region">Region</choice>
+        <choice value="user">User</choice>
+        <choice value="City">City</choice>
+        <default>City</default>
+        <initialValue>City</initialValue>
+      </input>
+      <title>Geolocation of VPN Users</title>
+      <map>
+        <search>
+          <query>| `apl_successful_vpn_logins_by_user_src_ip` | rename All_Sessions.* as * | iplocation src_ip | geostats globallimit=0 latfield=lat longfield=lon sum(count) by $MapBy$</query>
+          <earliest>$time_restriction.earliest$</earliest>
+          <latest>$time_restriction.latest$</latest>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="mapping.map.center">(36.67,-52.43)</option>
+        <option name="mapping.map.zoom">3</option>
+        <option name="mapping.markerLayer.markerMaxSize">90</option>
+        <option name="mapping.markerLayer.markerMinSize">20</option>
+        <option name="refresh.display">progressbar</option>
+      </map>
+    </panel>
+  </row>
+  <row id="tab_map_counts">
+    <panel>
+      <title>Logins by Country</title>
+      <chart>
+        <search>
+          <query>| `apl_successful_vpn_logins_by_user_src_ip` | rename All_Sessions.* as * | iplocation src_ip | stats sum(count) by Country</query>
+          <earliest>$time_restriction.earliest$</earliest>
+          <latest>$time_restriction.latest$</latest>
+        </search>
+        <option name="charting.chart">pie</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="charting.drilldown">none</option>
+      </chart>
+    </panel>
+    <panel>
+      <title>Logins by Region</title>
+      <chart>
+        <search>
+          <query>| `apl_successful_vpn_logins_by_user_src_ip` | rename All_Sessions.* as * | iplocation src_ip | stats sum(count) by Region</query>
+          <earliest>$time_restriction.earliest$</earliest>
+          <latest>$time_restriction.latest$</latest>
+        </search>
+        <option name="charting.chart">pie</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="charting.drilldown">none</option>
+      </chart>
+    </panel>
+    <panel>
+      <title>Logins by City</title>
+      <chart>
+        <search>
+          <query>| `apl_successful_vpn_logins_by_user_src_ip` | rename All_Sessions.* as * | iplocation src_ip | stats sum(count) by City</query>
+          <earliest>$time_restriction.earliest$</earliest>
+          <latest>$time_restriction.latest$</latest>
+        </search>
+        <option name="charting.chart">pie</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="charting.drilldown">none</option>
+      </chart>
+    </panel>
+  </row>
+  <row id="tab_users">
+    <panel>
+      <title>User Search</title>
+      <input type="text" searchWhenChanged="true" token="selected_user_search">
+        <label>User</label>
+        <choice value="*">All</choice>
+        <fieldForLabel>All_Sessions.user</fieldForLabel>
+        <fieldForValue>All_Sessions.user</fieldForValue>
+        <initialValue>*</initialValue>
+        <default>*</default>
+      </input>
+      <table>
+        <search>
+          <query>| `apl_successful_vpn_logins_by_selected_user_signature($selected_user_search$)` | rename All_Sessions.* as * | iplocation src_ip | sort 0 - _time | fields - count, lat, lon</query>
+          <earliest>$time_restriction.earliest$</earliest>
+          <latest>$time_restriction.latest$</latest>
+        </search>
+        <option name="refresh.display">progressbar</option>
+        <option name="drilldown">none</option>
+      </table>
+    </panel>
+  </row>
+ <row depends="$neverShow$">
+    <html>
+      <style>
+        .input-link {
+          min-width: 90px !important;
+          width: 100px !important;
+          max-width:100px !important;
+          text-align: left !important;
+        }
+      </style>
+    </html>
+  </row>
+  <row depends="$showEvents$" id="row_show_all">
+    <panel>
+      <input type="link" token="tokenReset" searchWhenChanged="true">
+        <label></label>
+        <choice value="hidePanel">Hide Panel</choice>
+        <change>
+          <unset token="showEvents"></unset>
+          <unset token="form.tokenReset"></unset>
+          <unset token="search_string"></unset>
+          <unset token="selected_user"></unset>
+        </change>
+      </input>
+      <event>
+        <title>User Details</title>
+        <search>
+          <query>$search_string$</query>
+          <earliest>$time_restriction.earliest$</earliest>
+          <latest>$time_restriction.latest$</latest>
+        </search>
+      </event>
+    </panel>
+  </row>
+</form>

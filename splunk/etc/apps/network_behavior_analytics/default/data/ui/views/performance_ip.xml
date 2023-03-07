@@ -1,0 +1,122 @@
+<form version="1.1" script="performance.js" stylesheet="analytics.css,common.css">
+    <label>IP Performance</label>
+    <description>This view describes the IP network events seen within the environment, along with the destinations and sources used.</description>
+
+    <fieldset autoRun="true" submitButton="false">
+        <input type="time" searchWhenChanged="true" id="timerange">
+            <label>Time range:</label>
+            <default>Last 4 hours</default>
+        </input>
+    </fieldset>
+
+    <row>
+        <panel>
+            <title>Top clients</title>
+            <table>
+                <search><query>
+                    `nbalogsindexip` tag="network" tag="communicate"
+                    | eval Source=if(isnull(src), src_ip, src)
+                    | stats sparkline AS Activity, sum(bytes_in) AS bin, sum(bytes_out) AS bout by Source
+                    | eval bytes = bin + bout
+                    | sort -bytes
+                    | eval "Bytes in" = `human_bytes(bin)`
+                    | eval "Bytes out" = `human_bytes(bout)`
+                    | eval "Total" = `human_bytes(bytes)`
+                    | fields "Source", "Activity", "Bytes in", "Bytes out", "Total"
+                </query></search>
+                <format type="sparkline" field="Activity">
+                    <option name="lineColor">#5379af</option>
+                    <option name="lineWidth">1</option>
+                    <option name="height">16</option>
+                </format>
+                <option name="drilldown">row</option>
+                <drilldown target="_blank">
+                    <link><![CDATA[
+                        /app/network_behavior_analytics/search?earliest=$earliest$&latest=$latest$&q=%60nbalogsindexip%60+tag%3D%22network%22+tag%3D%22communicate%22+%28src%3D$row.Source$+OR+src_ip%3D$row.Source$%29+%7C+eval+dest%3Dif%28isnull%28dest%29%2C+dest_ip%2C+dest%29+%7C+stats+sum%28bytes_in%29+AS+bin%2C+sum%28bytes_out%29+AS+bout+by+dest+%7C+eval+bytes+%3D+bin+%2B+bout+%7C+sort+-bytes+%7C+eval+%22Bytes+in%22+%3D+%60human_bytes%28bin%29%60+%7C+eval+%22Bytes+out%22+%3D+%60human_bytes%28bout%29%60+%7C+eval+%22Total%22+%3D+%60human_bytes%28bytes%29%60+%7C+rename+dest+AS+%22Top+destinations%22+%7C+table+%22Top+destinations%22%2C+%22Bytes+in%22%2C+%22Bytes+out%22%2C+%22Total%22
+                    ]]></link>
+                </drilldown>
+            </table>
+        </panel>
+        <panel>
+            <title>Top destinations</title>
+            <table>
+                <search><query>
+                    `nbalogsindexip` tag="network" tag="communicate"
+                    | eval Destination=if(isnull(dest), dest_ip, dest)
+                    | stats sparkline AS Activity, sum(bytes_in) AS bin, sum(bytes_out) AS bout by Destination
+                    | eval bytes = bin + bout
+                    | sort -bytes
+                    | eval "Bytes in" = `human_bytes(bin)`
+                    | eval "Bytes out" = `human_bytes(bout)`
+                    | eval "Total" = `human_bytes(bytes)`
+                    | fields "Destination", "Activity", "Bytes in", "Bytes out", "Total"
+                </query></search>
+                <format type="sparkline" field="Activity">
+                    <option name="lineColor">#5379af</option>
+                    <option name="lineWidth">1</option>
+                    <option name="height">16</option>
+                </format>
+                <option name="drilldown">row</option>
+                <drilldown target="_blank">
+                    <link><![CDATA[
+                        /app/network_behavior_analytics/search?earliest=$earliest$&latest=$latest$&q=%60nbalogsindexip%60+tag%3D%22network%22+tag%3D%22communicate%22+%28dest%3D$row.Destination$+OR+dest_ip%3D$row.Destination$%29+%7C+eval+src%3Dif%28isnull%28src%29%2C+src_ip%2C+src%29+%7C+stats+sum%28bytes_in%29+AS+bin%2C+sum%28bytes_out%29+AS+bout+by+src+%7C+eval+bytes+%3D+bin+%2B+bout+%7C+sort+-bytes+%7C+eval+%22Bytes+in%22+%3D+%60human_bytes%28bin%29%60+%7C+eval+%22Bytes+out%22+%3D+%60human_bytes%28bout%29%60+%7C+eval+%22Total%22+%3D+%60human_bytes%28bytes%29%60+%7C+rename+src+AS+%22Top+sources%22+%7C+table+%22Top+sources%22%2C+%22Bytes+in%22%2C+%22Bytes+out%22%2C+%22Total%22
+                    ]]></link>
+                </drilldown>
+            </table>
+        </panel>
+    </row>
+    <row>
+        <panel>
+            <title>Bytes over time</title>
+            <chart>
+                <search><query>
+                    `nbalogsindexip` tag="network" tag="communicate"
+                    | timechart sum(bytes_in) AS "Bytes in", sum(bytes_out) AS "Bytes out"
+                </query></search>
+                <option name="charting.chart">line</option>
+                <option name="charting.axisTitleX.visibility">collapsed</option>
+                <option name="charting.chart.nullValueMode">zero</option>
+                <option name="charting.axisY.scale">log</option>
+            </chart>
+        </panel>
+        <panel>
+            <title>Bytes in/out ratio</title>
+            <chart>
+                <search><query>
+                    `nbalogsindexip` tag="network" tag="communicate"
+                    | stats sum(bytes_in) AS "Bytes in", sum(bytes_out) AS "Bytes out"
+                    | transpose
+                </query></search>
+                <option name="charting.chart">pie</option>
+                <drilldown>
+                    <link><![CDATA[
+                        /app/network_behavior_analytics/search?earliest=$earliest$&latest=$latest$&q=%60nbalogsindexip%60+tag%3D%22network%22+tag%3D%22communicate%22
+                    ]]></link>
+                </drilldown>
+            </chart>
+        </panel>
+    </row>
+    <row>
+        <panel>
+            <title>Sources</title>
+            <table>
+                <search><query>
+                    `nbalogsindexip` tag="network" tag="communicate"
+                    | stats sparkline AS Activity, count AS "Total count", sum(bytes_in) AS bin, sum(bytes_out) AS bout by host
+                    | eval bytes = bin + bout
+                    | sort -bytes
+                    | eval "Bytes in" = `human_bytes(bin)`
+                    | eval "Bytes out" = `human_bytes(bout)`
+                    | eval "Total" = `human_bytes(bytes)`
+                    | rename host AS "Host"
+                    | fields "Host", "Activity", "Bytes in", "Bytes out", "Total", "Total count"
+                </query></search>
+                <format type="sparkline" field="Activity">
+                    <option name="lineColor">#5379af</option>
+                    <option name="lineWidth">1</option>
+                    <option name="height">16</option>
+                </format>
+            </table>
+        </panel>
+    </row>
+</form>

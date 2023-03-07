@@ -1,0 +1,141 @@
+<form version="1.1" script="threats.js" stylesheet="analytics.css,common.css">
+    <label>Threat Hunter</label>
+    <description>
+        The events listed below are anomalies requiring investigation. They are flagged through behavioral analytics and cross-referencing with threat intelligence.
+    </description>
+
+    <fieldset autoRun="true" submitButton="false">
+        <input type="time" searchWhenChanged="true" id="timerange">
+            <label>Time range:</label>
+            <default>Last 24 hours</default>
+        </input>
+
+        <input type="dropdown" token="groupfilter" searchWhenChanged="true">
+            <label>Group:</label>
+            <prefix>groups="</prefix>
+            <suffix>"</suffix>
+            <default>*</default>
+            <choice value="*">All</choice>
+            <fieldForLabel>src_groups</fieldForLabel>
+            <fieldForValue>src_groups</fieldForValue>
+            <search id="groupfiltersearch">
+                <earliest>$earliest$</earliest>
+                <latest>$latest$</latest>
+                <query>
+                    `nbaeventsindex` type=alert | stats count by src_groups
+                </query>
+            </search>
+        </input>
+
+        <input type="dropdown" token="severityscore" searchWhenChanged="true">
+            <label>Minimum urgency:</label>
+            <default>1</default>
+            <choice value="1">Informational</choice>
+            <choice value="2">Low</choice>
+            <choice value="3">Medium</choice>
+            <choice value="4">High</choice>
+            <choice value="5">Critical</choice>
+        </input>
+
+        <input type="dropdown" token="sectionfilter" searchWhenChanged="true">
+            <label>Event source:</label>
+            <prefix>section="</prefix>
+            <suffix>"</suffix>
+            <default>All sources</default>
+            <choice value="*">All sources</choice>
+            <choice value="dns">DNS analytics</choice>
+            <choice value="ip">IP analytics</choice>
+            <choice value="http">HTTP analytics</choice>
+            <choice value="tls">TLS analytics</choice>
+        </input>
+
+        <input type="dropdown" token="actionfilter" searchWhenChanged="true">
+            <label>Event action:</label>
+            <default>Show all events</default>
+            <choice value="all">Show all events</choice>
+            <choice value="notblocked">Suppress blocked events</choice>
+        </input>
+    </fieldset>
+
+    <row>
+        <panel>
+            <title>Threat events</title>
+            <table id="alertevents">
+                <search><query>
+                    <![CDATA[
+                        `nbaeventsindex` type=alert threats=*
+                        | search $sectionfilter$
+                        | eval action_filter_matched=`match_filter_event_action("$actionfilter$")`
+                        | search action_filter_matched=1
+                        | mvexpand threats
+                        | eval groups=if(isnull(src_groups), "-", src_groups)
+                        | search $groupfilter$
+                        | eval group=mvjoin(mvsort(groups), ", ")
+                        | lookup asocnbathreats name AS threats OUTPUT title, severity, show, policy
+                        | eval show=if(isnull(show), 1, show)
+                        | eval policy=if(isnull(policy), 0, policy)
+                        | search title=* show=1 policy=0 severity>=$severityscore$
+                        | eval c_time=strftime(strptime(original_event, "%d-%b-%Y %H:%M:%S%z"), "%d-%b-%Y %H:%M:%S")
+                        | eval alert_source = if(isnull(src_disp) or src_disp == "", src_ip, src_disp)
+                        | sort 0 -severity
+                        | streamstats count by alert_source, group
+                        | stats sparkline AS "Trend", latest(c_time) AS "Time", dc(title) AS "Total threats", list(eval(if(count<=1,title,null()))) AS "Top threat", max(severity) AS "Urgency" by alert_source, group
+                        | rename alert_source AS "Source", group AS "Group"
+                        | sort by -"Urgency", -"Time"
+                        | fields "Time", "Source", "Group", "Top threat", "Trend", "Total threats", "Urgency"
+                    ]]>
+                </query></search>
+                <format type="sparkline" field="Trend">
+                    <option name="lineColor">#5379af</option>
+                    <option name="lineWidth">1</option>
+                    <option name="height">17</option>
+                </format>
+                <option name="count">10</option>
+                <option name="drilldown">row</option>
+                <drilldown>
+                    <set token="detailsource">$row.Source$</set>
+                    <set token="detailthreat">*</set>
+                    <set token="detaildescription">Individual alerts for</set>
+                </drilldown>
+            </table>
+        </panel>
+    </row>
+    <row depends="$detailsource$,$detailthreat$">
+        <panel>
+            <title>$detaildescription$ $detailsource$</title>
+            <table id="individualevents">
+                <search><query>
+                    <![CDATA[
+                        `nbaeventsindex` type=alert $sectionfilter$
+                        | eval alert_source = if(isnull(src_disp) or src_disp == "", src_ip, src_disp)
+                        | search alert_source="$detailsource$"
+                        | eval action_filter_matched=`match_filter_event_action("$actionfilter$")`
+                        | search action_filter_matched=1
+                        | eval groups=if(isnull(src_groups), "-", src_groups)
+                        | search $groupfilter$
+                        | lookup asocnbathreats name AS threats OUTPUT title, policy
+                        | eval policy=if(isnull(policy), 0, policy)
+                        | search title="$detailthreat$" policy=0 severity_id>=$severityscore$
+                        | eval Time=strftime(strptime(original_event, "%d-%b-%Y %H:%M:%S%z"), "%d-%b-%Y %H:%M:%S")
+                        | lookup asocnbaflags name AS flags OUTPUT name AS flags_name, title AS flags_title
+                        | eval flags_desc = mvzip(flags_name, flags_title, ";||")
+                        | eval flags_desc=mvjoin(if(isnull(flags_desc), "", flags_desc), ";&&")
+                        | eval flags=mvjoin(mvsort(if(isnull(flags), "", flags)), ",")
+                        | eval flags_labels=mvjoin(if(isnull('wisdom.labels{}'), "", 'wisdom.labels{}'), ";&&")
+                        | eval Flags=mvappend(flags, flags_desc, flags_labels)
+                        | eval dest_actions = if(isnotnull(dest_host), dest_host, if(isnotnull(dest_ip), dest_ip, "-"))
+                        | eval dest_is_ip = if(isnull(dest_ip), 0, 1)
+                        | eval Pivots=mvappend(strptime(original_event, "%d-%b-%Y %H:%M:%S%z"), section, src_ip, dest_actions, dest_is_ip)
+                        | eval fdest=`format_dest(section, dest, dest_port)`
+                        | eval Destination=if(isnull(fdest) or fdest == "", if(isnull(dest), "-", dest), fdest)
+                        | eval "Pipeline"=upper(section)
+                        | eval "Action"=if(isnull('details.action'), "-", 'details.action')
+                        | sort -Time
+                        | table "Time", "Pipeline", "Action", "Destination", "Flags", "Pivots"
+                    ]]>
+                </query></search>
+                <option name="drilldown">none</option>
+            </table>
+        </panel>
+    </row>
+</form>

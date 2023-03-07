@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Overview &#8212; PAVO Network Traffic App for Splunk 1.2.4 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="overview">
+<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
+<p>Very often, network traffic events can provide a lot of information about misconfigurations, potential attacks, and user activity. This app provides searches and dashboards based on the Splunk Common Information Model to help provide insight into your network traffic.</p>
+</div>
+<div class="section" id="a-note-on-splunk-data-model-acceleration-and-disk-space">
+<h1>A note on Splunk Data Model Acceleration and Disk Space<a class="headerlink" href="#a-note-on-splunk-data-model-acceleration-and-disk-space" title="Permalink to this headline">¶</a></h1>
+<p>This app requires data model acceleration, which will use additional disk space. If you are using the Splunk App for Enterprise Security, this is already enabled, and should have been factored into your retention policies. If not, you should review the documentation on <a class="reference external" href="http://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Acceleratedatamodels#Data_model_summary_size_on_disk">data model acceleration, how it uses disk space, and how to plan for it</a>.</p>
+</div>
+<div class="section" id="a-note-on-the-splunk-common-information-model">
+<h1>A note on the Splunk Common Information Model<a class="headerlink" href="#a-note-on-the-splunk-common-information-model" title="Permalink to this headline">¶</a></h1>
+<p>As mentioned above, the app uses the CIM for network traffic events. The CIM allows you to take events from a number of network traffic sources or products, and report on them in one cohesive manner, using a common set of names for fields and event types.</p>
+</div>
+<div class="section" id="a-note-on-the-network-traffic-data-model-src-dest-src-ip-and-dest-ip">
+<h1>A note on the Network Traffic Data Model, src, dest, src_ip, and dest_ip<a class="headerlink" href="#a-note-on-the-network-traffic-data-model-src-dest-src-ip-and-dest-ip" title="Permalink to this headline">¶</a></h1>
+<p>The Network Traffic data model includes both <code class="docutils literal notranslate"><span class="pre">src</span></code>, <code class="docutils literal notranslate"><span class="pre">dest</span></code> fields, and <code class="docutils literal notranslate"><span class="pre">src_ip</span></code>, <code class="docutils literal notranslate"><span class="pre">dest_ip</span></code> fields. For this app, we have opted to use the <code class="docutils literal notranslate"><span class="pre">*_ip</span></code> versions of these fields, in case hostnames are being used for the other fields. Make sure your field extractions are correctly populating these fields.</p>
+</div>
+<div class="section" id="available-dashboards">
+<h1>Available Dashboards<a class="headerlink" href="#available-dashboards" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="network-traffic-overview">
+<h2>Network Traffic Overview<a class="headerlink" href="#network-traffic-overview" title="Permalink to this headline">¶</a></h2>
+<p>Provides a general overview of the network traffic events.</p>
+</div>
+<div class="section" id="ip-profile">
+<h2>IP Profile<a class="headerlink" href="#ip-profile" title="Permalink to this headline">¶</a></h2>
+<p>Provides information around an IP address (both <code class="docutils literal notranslate"><span class="pre">dest_ip</span></code> and <code class="docutils literal notranslate"><span class="pre">src_ip</span></code>), including traffic from, to, and possible open ports.</p>
+</div>
+<div class="section" id="transport-information">
+<h2>Transport Information<a class="headerlink" href="#transport-information" title="Permalink to this headline">¶</a></h2>
+<p>Information around the transport field of events (TCP, UDP, ICMP, etc.).</p>
+</div>
+<div class="section" id="port-information">
+<h2>Port Information<a class="headerlink" href="#port-information" title="Permalink to this headline">¶</a></h2>
+<p>This form provides information based on the destination port (<code class="docutils literal notranslate"><span class="pre">dest_port</span></code>) field of events, such as the traffic over time, conversations, and sources.</p>
+</div>
+<div class="section" id="internal-and-external-traffic">
+<h2>Internal and External Traffic<a class="headerlink" href="#internal-and-external-traffic" title="Permalink to this headline">¶</a></h2>
+<p>Currently just top destinations (external and from external to internal). The determination on internal vs. external is configured by macros. See the App Configuration Macros section of this document.</p>
+</div>
+<div class="section" id="scanning-activity">
+<h2>Scanning Activity<a class="headerlink" href="#scanning-activity" title="Permalink to this headline">¶</a></h2>
+<p>This dashboard provides the top potential scanners (both host and port scanners) based on network traffic.</p>
+</div>
+<div class="section" id="geographic-information">
+<h2>Geographic Information<a class="headerlink" href="#geographic-information" title="Permalink to this headline">¶</a></h2>
+<p>This is based on the geo-ip information provided by the built-in IP location from Splunk. Internal traffic is excluded from this page. Note: The searches on this page may take a while to load.</p>
+</div>
+<div class="section" id="network-traffic-search">
+<h2>Network Traffic Search<a class="headerlink" href="#network-traffic-search" title="Permalink to this headline">¶</a></h2>
+<p>A form which allows for searching network traffic events based on a few different parameters.</p>
+</div>
+<div class="section" id="vpn-traffic-overview">
+<h2>VPN Traffic Overview<a class="headerlink" href="#vpn-traffic-overview" title="Permalink to this headline">¶</a></h2>
+<p>This dashboard provides an overview of VPN traffic that has been observed. This dashboard uses accelerated data models and macros. Please make sure you accelerate the <code class="docutils literal notranslate"><span class="pre">Network</span> <span class="pre">Traffic</span></code> and <code class="docutils literal notranslate"><span class="pre">Network</span> <span class="pre">Sessions</span></code> data models. It is possible that there are different values for <code class="docutils literal notranslate"><span class="pre">action</span></code> and <code class="docutils literal notranslate"><span class="pre">signature</span></code>. This app expects <code class="docutils literal notranslate"><span class="pre">signature=login</span></code>, <code class="docutils literal notranslate"><span class="pre">signature=logout</span></code>, <code class="docutils literal notranslate"><span class="pre">action=success</span></code> or <code class="docutils literal notranslate"><span class="pre">action=failure</span></code>.</p>
+</div>
+<div class="section" id="data-transparency-overview">
+<h2>Data Transparency Overview<a class="headerlink" href="#data-transparency-overview" title="Permalink to this headline">¶</a></h2>
+<p>This dashboard provides field information from the data models used to retrieve data for this application. Included information includes indexes and sourcetypes found in the data model. This dashboard also shows fields and constraints in the data models.</p>
+</div>
+<div class="section" id="sourcetype-information">
+<h2>Sourcetype Information<a class="headerlink" href="#sourcetype-information" title="Permalink to this headline">¶</a></h2>
+<p>Information about the sourcetypes which are present in the accelerated data.
+Note: This dashboard is not shown in the navigation bar. To view this dashboard, go to <code class="docutils literal notranslate"><span class="pre">Settings</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">User</span> <span class="pre">Interface</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">Views</span></code> -&gt; and select the Open option next to the sourcetype_information item in the list.</p>
+</div>
+<div class="section" id="about">
+<h2>About<a class="headerlink" href="#about" title="Permalink to this headline">¶</a></h2>
+<p>A simple HTML version of this document.
+Note: This dashboard is not shown in the navigation bar. To view this dashboard, go to <code class="docutils literal notranslate"><span class="pre">Settings</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">User</span> <span class="pre">Interface</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">Views</span></code> -&gt; and select the Open option next to the About item in the list.</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">PAVO Network Traffic App for Splunk</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Aplura, LLC.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/sections/about.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

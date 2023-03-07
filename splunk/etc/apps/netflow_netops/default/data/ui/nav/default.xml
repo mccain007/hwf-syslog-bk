@@ -1,0 +1,11 @@
+<nav>
+    <view name="netops_paths" default="true"/>
+    <view name="netops_top_tunnels"/>
+    <view name="netops_top_vms"/>
+    <view name="netops_health"/>
+    <collection label="Configuration">
+        <view name="setup_dashboard"/>
+        <a href="/app/TA-netflow">TA-netflow App Setup</a>
+    </collection>
+</nav>
+

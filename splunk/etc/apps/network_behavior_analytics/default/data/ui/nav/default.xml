@@ -1,0 +1,16 @@
+<nav color="#27a9e0">
+    <view name="threats" default="true"/>
+    <view name="violations"/>
+    <view name="explorer"/>
+    <collection label="Performance">
+        <a href="performance_dns">DNS data</a>
+        <a href="performance_ip">IP data</a>
+        <a href="performance_http">HTTP data</a>
+        <a href="performance_tls">TLS data</a>
+    </collection>
+    <view name="search" />
+    <view name="groups" />
+    <view name="data_location" />
+    <view name="settings" />
+    <view name="licensing" />
+</nav>

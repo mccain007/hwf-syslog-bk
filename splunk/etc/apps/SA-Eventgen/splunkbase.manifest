@@ -1,0 +1,78 @@
+{
+  "version": "1.0",
+  "date": "2022-11-13T16:20:54.802419784Z",
+  "hashAlgorithm": "SHA-256",
+  "app": {
+    "id": 1924,
+    "version": "8.0.1",
+    "files": [
+      {
+        "path": "README.md",
+        "hash": "d0087a021aaaef06080b0813582c6162ddcb545c158b2e3b7067c04f170d045e"
+      },
+      {
+        "path": "linux_x86_64/bin/modinput_eventgen",
+        "hash": "38286fa907e563686970d56387143f0edf37063c18ceb7968c0d33dbccc71f71"
+      },
+      {
+        "path": "metadata/default.meta",
+        "hash": "40c39439d223cfd82f43043746b232098ffc668cc509bdc939439a1df61c9510"
+      },
+      {
+        "path": "darwin_x86_64/bin/modinput_eventgen",
+        "hash": "96dbc63a6f19f146a6dce88f29463bee4f7c1a0d7ff18e6ac7bb9095a01bb76d"
+      },
+      {
+        "path": "LICENSE",
+        "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "README/inputs.conf.spec",
+        "hash": "15ab665025c2c60c27b7cd957bbe12644d00f08ab04c07d8f5be6c0f2a67ce7f"
+      },
+      {
+        "path": "README/eventgen.conf.spec",
+        "hash": "e8e1ad27d0cb1e31022421d87ac00c8f0fc9757fbdca2d97c1f437071cd2522d"
+      },
+      {
+        "path": "default/inputs.conf",
+        "hash": "94409437aa005a5ad70bad39b35fbc9cd8965233bf0d5a6539e714ed8f6463cb"
+      },
+      {
+        "path": "default/app.conf",
+        "hash": "8fd607b8b3aab1bd6edb3d5dd8c50da957b8af1d0ca2a2e1436dadcc59edd314"
+      },
+      {
+        "path": "default/data/ui/views/eventgen_status.xml",
+        "hash": "e00a8d201ce892ee91e965a70fe7fb13d2ed764f7b85a18f22a1ab9a87795da2"
+      },
+      {
+        "path": "default/data/ui/nav/default.xml",
+        "hash": "6a6d63e6af372beb526c166d832f08c4e4a47f9d94fa8a7b1cb8d7c739bcbcf7"
+      }
+    ]
+  },
+  "products": [
+    {
+      "platform": "splunk",
+      "product": "enterprise",
+      "versions": [
+        "8.0",
+        "8.1",
+        "8.2",
+        "9.0"
+      ],
+      "architectures": [
+        "x86_64"
+      ],
+      "operatingSystems": [
+        "windows",
+        "linux",
+        "macos",
+        "freebsd",
+        "solaris",
+        "aix"
+      ]
+    }
+  ]
+}

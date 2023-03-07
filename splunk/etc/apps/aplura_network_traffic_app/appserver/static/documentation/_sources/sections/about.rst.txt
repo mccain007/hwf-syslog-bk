@@ -1,0 +1,84 @@
+Overview
+--------
+
+Very often, network traffic events can provide a lot of information about misconfigurations, potential attacks, and user activity. This app provides searches and dashboards based on the Splunk Common Information Model to help provide insight into your network traffic.
+
+A note on Splunk Data Model Acceleration and Disk Space
+-------------------------------------------------------
+
+This app requires data model acceleration, which will use additional disk space. If you are using the Splunk App for Enterprise Security, this is already enabled, and should have been factored into your retention policies. If not, you should review the documentation on `data model acceleration, how it uses disk space, and how to plan for it <http://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Acceleratedatamodels#Data_model_summary_size_on_disk>`_.
+
+A note on the Splunk Common Information Model
+---------------------------------------------
+
+As mentioned above, the app uses the CIM for network traffic events. The CIM allows you to take events from a number of network traffic sources or products, and report on them in one cohesive manner, using a common set of names for fields and event types.
+
+A note on the Network Traffic Data Model, src, dest, src_ip, and dest_ip
+------------------------------------------------------------------------
+
+The Network Traffic data model includes both ``src``, ``dest`` fields, and ``src_ip``, ``dest_ip`` fields. For this app, we have opted to use the ``*_ip`` versions of these fields, in case hostnames are being used for the other fields. Make sure your field extractions are correctly populating these fields.
+
+Available Dashboards
+--------------------
+
+Network Traffic Overview
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Provides a general overview of the network traffic events.
+
+IP Profile
+~~~~~~~~~~~~~~~~~~~~~~
+
+Provides information around an IP address (both ``dest_ip`` and ``src_ip``), including traffic from, to, and possible open ports.
+
+Transport Information
+~~~~~~~~~~~~~~~~~~~~~~
+
+Information around the transport field of events (TCP, UDP, ICMP, etc.).
+
+Port Information
+~~~~~~~~~~~~~~~~~~~~~~
+
+This form provides information based on the destination port (``dest_port``) field of events, such as the traffic over time, conversations, and sources.
+
+Internal and External Traffic
+~~~~~~~~~~~~~~~~~~~~~~
+
+Currently just top destinations (external and from external to internal). The determination on internal vs. external is configured by macros. See the App Configuration Macros section of this document.
+
+Scanning Activity
+~~~~~~~~~~~~~~~~~~~~~~
+
+This dashboard provides the top potential scanners (both host and port scanners) based on network traffic.
+
+Geographic Information
+~~~~~~~~~~~~~~~~~~~~~~
+
+This is based on the geo-ip information provided by the built-in IP location from Splunk. Internal traffic is excluded from this page. Note: The searches on this page may take a while to load.
+
+Network Traffic Search
+~~~~~~~~~~~~~~~~~~~~~~
+
+A form which allows for searching network traffic events based on a few different parameters.
+
+VPN Traffic Overview
+~~~~~~~~~~~~~~~~~~~~~~
+
+This dashboard provides an overview of VPN traffic that has been observed. This dashboard uses accelerated data models and macros. Please make sure you accelerate the ``Network Traffic`` and ``Network Sessions`` data models. It is possible that there are different values for ``action`` and ``signature``. This app expects ``signature=login``, ``signature=logout``, ``action=success`` or ``action=failure``.
+
+Data Transparency Overview
+~~~~~~~~~~~~~~~~~~~~~~
+
+This dashboard provides field information from the data models used to retrieve data for this application. Included information includes indexes and sourcetypes found in the data model. This dashboard also shows fields and constraints in the data models.
+
+Sourcetype Information
+~~~~~~~~~~~~~~~~~~~~~~
+
+Information about the sourcetypes which are present in the accelerated data.
+Note: This dashboard is not shown in the navigation bar. To view this dashboard, go to ``Settings`` -> ``User Interface`` -> ``Views`` -> and select the Open option next to the sourcetype_information item in the list.
+
+About
+~~~~~~~~~~~~~~~~
+
+A simple HTML version of this document.
+Note: This dashboard is not shown in the navigation bar. To view this dashboard, go to ``Settings`` -> ``User Interface`` -> ``Views`` -> and select the Open option next to the About item in the list.

@@ -1,0 +1,137 @@
+<form  version="1.1" onunloadCancelJobs="True" script="table_formatting.js">
+    <label>Top Tunnels (VTEPs)</label>
+    <fieldset autoRun="True">
+        <input type="time" searchWhenChanged="False">
+            <label>Time Range</label>
+            <default>Last 60 minutes</default>
+        </input>
+    </fieldset>
+    <row>
+      <panel>
+        <chart>
+            <title>Top Tunnels (VTEPs)</title>
+            <search>
+                <query>
+                    `netflow_search_rule_20187` 
+                    | eval bytes = bytes_in+bytes_out
+                    | `per_second_chart(megabits, bytes*8/1000000, sum(megabits) by vtep_ip)`
+                </query>
+                <earliest>$earliest$</earliest>
+                <latest>$latest$</latest>
+            </search>
+            <option name="charting.chart">area</option>
+            <option name="charting.chart.nullValueMode">zero</option>
+            <option name="charting.axisTitleX.text">Time</option>
+            <option name="charting.axisTitleY.text">Mbps</option>
+            <option name="charting.legend.placement">right</option>
+            <option name="charting.chart.stackMode">stacked</option>
+            <option name="charting.drilldown">none</option>
+            <option name="height">200</option>
+        </chart>
+        <table id="table_1_1">
+            <search>
+                <query>
+                    `netflow_search_rule_20187` 
+                    | eval bytes = bytes_in+bytes_out 
+                    | eval packets = packets_in+packets_out 
+                    | eval flow_count=flows_in+flows_out
+                    | stats sum(bytes) as TrafficAmount 
+                            sum(packets) AS PacketsAmount 
+                            sum(flow_count) as Connections 
+                            min(_time) as min_time 
+                            max(_time) as max_time  
+                                by vtep_ip 
+                    | sort 0 - TrafficAmount 
+                    | head 10
+                    | rename vtep_ip as "VTEP IP" 
+                    | `average_speed(TrafficSpeed, TrafficAmount*8)`
+                    | eval TrafficAmount = TrafficAmount/1024/1024
+                    | eval TrafficSpeed = TrafficSpeed/1000000
+                    | rename TrafficAmount as "Traffic MB"
+                    | eval "Average Mbps"=round(TrafficSpeed,2)
+                    | `average_speed(PacketsSpeed, PacketsAmount)`
+                    | rename PacketsAmount as Packets
+                    | eval "Avg Packets/s"=round(PacketsSpeed,2)
+                    | rename Connections as "Total Connections"
+                    | table "VTEP IP" "Average Mbps" "Traffic MB" "Avg Packets/s" Packets "Total Connections"
+                </query>
+                <earliest>$earliest$</earliest>
+                <latest>$latest$</latest>
+            </search>
+            <option name="count">10</option>
+            <option name="showPager">true</option>
+            <option name="drilldown">row</option>
+            <drilldown>
+                <set token="VTEP IP">$row.VTEP IP$</set>
+            </drilldown>
+        </table>
+      </panel>
+    </row>
+    <row>
+      <panel>
+        <chart id="chart_2_1" depends="$VTEP IP$">
+            <title>Top Flows for VTEP $submitted:VTEP IP$</title>
+            <search>
+                <query>
+                    `netflow_search_rule_20183` (src_vtep_ip="$VTEP IP$" OR dest_vtep_ip="$VTEP IP$")
+                    | eval pair=src_ip+"-"+dest_ip
+                    | `per_second_chart(megabits, bytes*8/1000000, sum(megabits) by pair)`
+                </query>
+                <earliest>$earliest$</earliest>
+                <latest>$latest$</latest>
+            </search>
+            <option name="charting.chart">area</option>
+            <option name="charting.chart.nullValueMode">zero</option>
+            <option name="charting.axisTitleX.text">Time</option>
+            <option name="charting.axisTitleY.text">Mbps</option>
+            <option name="charting.legend.placement">right</option>
+            <option name="charting.chart.stackMode">stacked</option>
+            <option name="charting.drilldown">none</option>
+            <option name="height">200</option>
+        </chart>
+        <table id="table_2_1" depends="$VTEP IP$">
+            <search>
+                <query>
+                    `netflow_search_rule_20183` (src_vtep_ip="$VTEP IP$" OR dest_vtep_ip="$VTEP IP$")  
+                    | fillnull value="" src_vxlan_id dest_vxlan_id src_ip dest_ip src_vtep_ip dest_vtep_ip src_vm_name dest_vm_name
+                    | stats sum(bytes) as TrafficAmount 
+                            sum(packets) AS PacketsAmount 
+                            sum(flow_count) as Connections 
+                            min(_time) as min_time 
+                            max(_time) as max_time  
+                                by  src_vxlan_id dest_vxlan_id src_ip dest_ip src_vtep_ip dest_vtep_ip src_vm_name dest_vm_name
+                    | sort 0 - TrafficAmount 
+                    | `average_speed(TrafficSpeed, TrafficAmount*8)`
+                    | eval TrafficAmount = TrafficAmount/1024/1024
+                    | eval TrafficSpeed = TrafficSpeed/1000000
+                    | rename TrafficAmount as "Traffic MB"
+                    | eval "Average Mbps"=round(TrafficSpeed,2)
+                    | `average_speed(PacketsSpeed, PacketsAmount)`
+                    | rename PacketsAmount as Packets
+                    | eval "Avg Packets/s"=round(PacketsSpeed,2)
+                    | rename Connections as "Total Connections"
+                    | rename src_vxlan_id as "Source VXLAN ID"
+                    | rename src_ip as "Source VM IP"
+                    | rename src_vtep_ip as "Source VTEP"
+                    | rename src_vm_name as "Source VM Name"
+                    | rename dest_vxlan_id as "Destination VXLAN ID"
+                    | rename dest_ip as "Destination VM IP"
+                    | rename dest_vtep_ip as "Destination VTEP"
+                    | rename dest_vm_name as "Destination VM Name"
+                    | table "Source VXLAN ID" "Source VM IP" "Source VM Name" "Source VTEP" "Destination VXLAN ID" "Destination VM IP" "Destination VM Name" "Destination VTEP" "Average Mbps" "Traffic MB" "Avg Packets/s" Packets "Total Connections"
+                </query>
+                <earliest>$earliest$</earliest>
+                <latest>$latest$</latest>
+            </search>
+            <option name="count">10</option>
+            <option name="showPager">true</option>
+            <option name="drilldown">row</option>
+            <drilldown>
+                <link>
+                    <![CDATA[netops_paths?earliest=$earliest$&latest=$latest$&form.filter_name=$row.Source VM Name$&form.filter_ip=$row.Source VM IP$&form.vtep_ip=$row.Source VTEP$&form.vxlan_id=$row.Source VXLAN ID$]]>
+                </link>
+            </drilldown>
+        </table>
+      </panel>
+    </row>
+</form>

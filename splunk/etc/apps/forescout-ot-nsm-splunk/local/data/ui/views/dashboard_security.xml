@@ -1,0 +1,686 @@
+<form version="1.1" theme="dark">
+  <label>Security Dashboard</label>
+  <description>Informational awareness for analysts, to aid identification and correlation of alert trends with network activity.</description>
+  <fieldset submitButton="false" autoRun="true">
+    <input type="time" token="timePicker">
+      <label>Interval</label>
+      <default>
+        <earliest>-30d@d</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+    <input type="dropdown" token="command_center" searchWhenChanged="true">
+      <label>Command Center</label>
+      <choice value="*">All</choice>
+      <default>*</default>
+      <initialValue>*</initialValue>
+      <fieldForLabel>host</fieldForLabel>
+      <fieldForValue>host</fieldForValue>
+      <search>
+        <query>sourcetype="forescout:OTSM:logs:alert" | dedup host</query>
+        <earliest>0</earliest>
+        <latest></latest>
+      </search>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <chart>
+        <title>Alerts by Sensor</title>
+        <search>
+          <query>sourcetype="forescout:OTSM:logs:alert"
+| search host="$command_center$"
+| stats count by sensorName</query>
+          <earliest>$timePicker.earliest$</earliest>
+          <latest>$timePicker.latest$</latest>
+          <sampleRatio>1</sampleRatio>
+          <refresh>30s</refresh>
+          <refreshType>delay</refreshType>
+        </search>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">0</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">pie</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.showDataLabels">none</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="height">161</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+        <drilldown>
+          <link target="_blank">search?q=sourcetype="forescout:OTSM:logs:alert" sensorName="$click.value$"&amp;earliest=$timePicker.earliest$&amp;latest=$timePicker.latest$</link>
+        </drilldown>
+      </chart>
+    </panel>
+    <panel>
+      <chart>
+        <title>Alerts by L7 Protocol</title>
+        <search>
+          <query>sourcetype="forescout:OTSM:logs:alert" l7Proto !=""
+| search host="$command_center$"
+|chart count by l7Proto</query>
+          <earliest>$timePicker.earliest$</earliest>
+          <latest>$timePicker.latest$</latest>
+          <sampleRatio>1</sampleRatio>
+          <refresh>30s</refresh>
+          <refreshType>delay</refreshType>
+        </search>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">0</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">pie</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.showDataLabels">none</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="height">241</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+        <drilldown>
+          <link target="_blank">search?q=sourcetype="forescout:OTSM:logs:alert" l7Proto="$click.value$"&amp;earliest=$timePicker.earliest$&amp;latest=$timePicker.latest$</link>
+        </drilldown>
+      </chart>
+    </panel>
+    <panel>
+      <chart>
+        <title>ITL Alerts by Category</title>
+        <search>
+          <query>index="main" sourcetype="forescout:OTSM:logs:alert" engineName="Threat library" 
+| search host="$command_center$"
+| stats count(eval(match(typeId, "^itl_sec"))) AS "ITL Security Alerts", count(eval(match(typeId, "^itl_net"))) AS "ITL Networking Alerts", count(eval(match(typeId, "^itl_ops"))) AS "ITL Operations Alerts" | transpose</query>
+          <earliest>$timePicker.earliest$</earliest>
+          <latest>$timePicker.latest$</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="charting.chart">pie</option>
+        <option name="charting.drilldown">all</option>
+        <option name="refresh.display">progressbar</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>Alerts by Severity</title>
+        <search>
+          <query>sourcetype="forescout:OTSM:logs:alert"
+| search host="$command_center$"
+| chart sparkline count by severity
+| rename severity as Severity sparkline as Sparkline count as Count
+| eval sort_field = case(Severity == "Critical", 1, Severity == "High", 2, Severity == "Medium", 3, Severity == "Low", 4, Severity == "Informational", 5)
+| sort sort_field
+| fields Severity Count Sparkline</query>
+          <earliest>$timePicker.earliest$</earliest>
+          <latest>$timePicker.latest$</latest>
+          <refresh>30s</refresh>
+          <refreshType>delay</refreshType>
+        </search>
+        <option name="count">10</option>
+        <option name="drilldown">cell</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="wrap">false</option>
+        <format type="color" field="severity">
+          <colorPalette type="map">{"Informational":#3863A0,"Critical":#D93F3C,"High":#ED8440,"Medium":#F7BC38,"Low":#65A637}</colorPalette>
+        </format>
+        <format type="color" field="Severity">
+          <colorPalette type="map">{"Critical":#D93F3C,"High":#ED8440,"Medium":#F7BC38,"Low":#65A637,"Informational":#3863A0}</colorPalette>
+        </format>
+      </table>
+    </panel>
+    <panel>
+      <table>
+        <title>Alerts by Event Type</title>
+        <search>
+          <query>sourcetype="forescout:OTSM:logs:alert"
+| search host="$command_center$"
+| chart sparkline count by name
+| join name
+[
+    search sourcetype="forescout:OTSM:logs:alert" 
+    | rename severity as Severity 
+] 
+| rename name as Description sparkline as Sparkline count as Count
+| fields Description Severity Count Sparkline</query>
+          <earliest>$timePicker.earliest$</earliest>
+          <latest>$timePicker.latest$</latest>
+          <refresh>30s</refresh>
+          <refreshType>delay</refreshType>
+        </search>
+        <option name="count">10</option>
+        <option name="drilldown">cell</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="wrap">false</option>
+        <drilldown>
+          <link target="_blank">search?q=sourcetype="forescout:OTSM:logs:alert" name="$click.value$"&amp;earliest=$timePicker.earliest$&amp;latest=$timePicker.latest$</link>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>Alerts - Most Recent</title>
+        <search>
+          <query>sourcetype="forescout:OTSM:logs:alert"
+| search host="$command_center$"
+| dedup sensorName severity name srcIp dstIp dstPort l7Proto
+| rex field=time "(?&lt;time_short&gt;\d.:\d.:\d.)"
+| eval date_long = strftime(_time, "%A, %B %e, %Y")
+| streamstats count as sno by date_long
+| eventstats max(sno) as 'max' count as total
+| eval date_long=if(total&gt;max,date_long, if(sno=1,date_long, null()))
+| iplocation dstIp prefix=dstIp_
+| iplocation srcIp prefix=srcIp_
+| rename date_long as Date time_short as Time alertId as "Alert ID" severity as Severity host as CC name as Description srcIp as "Source IP" srcIp_Country as "Source Country" dstIp as "Destination IP" dstIp_Country as "Destination Country" dstPort as "Destination Port" l7Proto as Protocol sensorName as "Sensor"
+| table Date Time CC Sensor "Alert ID" Severity Description "Source IP" "Source Country" "Destination IP" "Destination Country" "Destination Port" Protocol
+| sort -time</query>
+          <earliest>$timePicker.earliest$</earliest>
+          <latest>$timePicker.latest$</latest>
+          <refresh>30s</refresh>
+          <refreshType>delay</refreshType>
+        </search>
+        <option name="count">10</option>
+        <option name="drilldown">cell</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="wrap">false</option>
+        <drilldown>
+          <link target="_blank">search?q=sourcetype="forescout:OTSM:logs:alert" | eval search_field=case("$click.name2$" == "Time", time, "$click.name2$" == "Sensor", sensorName, "$click.name2$" == "Severity", severity, "$click.name2$" == "Description", name, "$click.name2$" == "Source IP", srcIp, "$click.name2$" == "Destination IP", dstIp, "$click.name2$" == "Destination Port", dstPort, "$click.name2$" == "Protocol", l7Proto) | search search_field="$click.value2$"&amp;earliest=$timePicker.earliest$&amp;latest=$timePicker.latest$</link>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>Alert Types by Source IP</title>
+        <search>
+          <query>sourcetype="forescout:OTSM:logs:alert" srcIp!=""
+| search host="$command_center$"
+| fields srcIp name
+| rename srcIp as "Source IP"
+| chart count by "Source IP", name
+| head 15</query>
+          <earliest>$timePicker.earliest$</earliest>
+          <latest>$timePicker.latest$</latest>
+          <sampleRatio>1</sampleRatio>
+          <refresh>30s</refresh>
+          <refreshType>delay</refreshType>
+        </search>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">-90</option>
+        <option name="charting.axisTitleX.text">Sources</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">0</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">column</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.showDataLabels">none</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="height">249</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+        <drilldown>
+          <link target="_blank">search?q=index="main" sourcetype="forescout:OTSM:logs:alert" srcIp="$click.value$" name="$click.name2$"&amp;earliest=$timePicker.earliest$&amp;latest=$timePicker.latest$</link>
+        </drilldown>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>Alert Types by Host IP</title>
+        <search>
+          <query>sourcetype="forescout:OTSM:logs:alert" srcIp!=""
+| search host="$command_center$"
+| fields srcIp dstIp name
+| eval IPAddress = srcIp + ";" + dstIp
+| makemv delim=";" IPAddress
+| mvexpand IPAddress
+| chart count by IPAddress, name</query>
+          <earliest>$timePicker.earliest$</earliest>
+          <latest>$timePicker.latest$</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">-90</option>
+        <option name="charting.axisTitleX.text">Hosts</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.abbreviation">none</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.abbreviation">none</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.abbreviation">none</option>
+        <option name="charting.axisY2.enabled">0</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">column</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.showDataLabels">none</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.mode">standard</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="charting.lineWidth">2</option>
+        <option name="height">329</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+        <drilldown>
+          <link target="_blank">search?q=index="main" sourcetype="forescout:OTSM:logs:alert" (srcIp="$click.value$" OR dstIp="$click.value$") name="$click.name2$"&amp;earliest=$timePicker.earliest$&amp;latest=$timePicker.latest$</link>
+        </drilldown>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>Alerts by Sensor Name by Protocol</title>
+        <search>
+          <query>sourcetype="forescout:OTSM:logs:alert" NOT l7Proto=""
+| search host="$command_center$"
+| chart count by sensorName l7Proto
+| rename sensorName as SensorName l7Proto as Protocol</query>
+          <earliest>$timePicker.earliest$</earliest>
+          <latest>$timePicker.latest$</latest>
+          <sampleRatio>1</sampleRatio>
+          <refresh>30s</refresh>
+          <refreshType>delay</refreshType>
+        </search>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.text">Sensors</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.abbreviation">none</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">0</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">column</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.showDataLabels">none</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+        <drilldown>
+          <link target="_blank">search?q=sourcetype="forescout:OTSM:logs:alert" sensorName="$click.value$" l7Proto="$click.name2$"&amp;earliest=$timePicker.earliest$&amp;latest=$timePicker.latest$</link>
+        </drilldown>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <single>
+        <title>ITL Alerts (24h/1h)</title>
+        <search>
+          <query>sourcetype="forescout:OTSM:logs:alert" typeId="itl*"
+| search host="$command_center$"
+| eval Category=case(typeId like "itl_ops%", "Operational", typeId like "itl_net%", "Network", typeId like "itl_sec%", "Security")
+| timechart span=1h count by Category</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+          <refresh>30s</refresh>
+          <refreshType>delay</refreshType>
+        </search>
+        <option name="colorBy">trend</option>
+        <option name="colorMode">none</option>
+        <option name="drilldown">all</option>
+        <option name="numberPrecision">0</option>
+        <option name="rangeColors">["0x65a637","0x6db7c6","0xf7bc38","0xf58f39","0xd93f3c"]</option>
+        <option name="rangeValues">[0,30,70,100]</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="showSparkline">1</option>
+        <option name="showTrendIndicator">1</option>
+        <option name="trellis.enabled">1</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">large</option>
+        <option name="trendColorInterpretation">inverse</option>
+        <option name="trendDisplayMode">percent</option>
+        <option name="underLabel">Daily received count / Hourly trend</option>
+        <option name="unitPosition">after</option>
+        <option name="useColors">1</option>
+        <option name="useThousandSeparators">1</option>
+      </single>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>DNS Queries - Top 15</title>
+        <search>
+          <query>sourcetype="forescout:OTSM:logs:network"
+| search host="$command_center$"
+| search typeId=log_name_query
+| rename dstIp as "Destination IP" srcIp as "Source IP" path as "DNS Query"
+| chart count by "DNS Query"
+| sort 20 - count</query>
+          <earliest>$timePicker.earliest$</earliest>
+          <latest>$timePicker.latest$</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">-90</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">collapsed</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.abbreviation">none</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.abbreviation">auto</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.abbreviation">none</option>
+        <option name="charting.axisY2.enabled">0</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">column</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.showDataLabels">none</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.mode">standard</option>
+        <option name="charting.legend.placement">none</option>
+        <option name="charting.lineWidth">2</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+        <drilldown>
+          <link target="_blank">search?q=sourcetype="forescout:OTSM:logs:network" dns_query="$click.value$"&amp;earliest=$timePicker.earliest$&amp;latest=$timePicker.latest$</link>
+        </drilldown>
+      </chart>
+    </panel>
+    <panel>
+      <table>
+        <title>DNS Queries - Bottom 10</title>
+        <search>
+          <query>sourcetype="forescout:OTSM:logs:network"
+| search host="$command_center$"
+| search typeId=log_name_query
+| rename dstIp as "Destination IP" srcIp as "Source IP" path as "DNS Query"
+| chart count by "DNS Query"
+| sort 10 count</query>
+          <earliest>$timePicker.earliest$</earliest>
+          <latest>$timePicker.latest$</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+        <drilldown>
+          <link target="_blank">search?q=sourcetype="forescout:OTSM:logs:network" dns_query="$click.value$"&amp;earliest=$timePicker.earliest$&amp;latest=$timePicker.latest$</link>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>DNS Queries - Resolved - Top 10</title>
+        <search>
+          <query>sourcetype="forescout:OTSM:logs:network"
+| search host="$command_center$"
+| search typeId=log_name_resolved 
+| eval "Query and Response" = path." --&gt; ".valStr 
+| chart count by "Query and Response"
+| sort 10 - count</query>
+          <earliest>$timePicker.earliest$</earliest>
+          <latest>$timePicker.latest$</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+    <panel>
+      <table>
+        <title>DNS Queries - Resolved - Bottom 10</title>
+        <search>
+          <query>sourcetype="forescout:OTSM:logs:network"
+| search host="$command_center$"
+| search typeId=log_name_resolved 
+| eval "Query and Response" = path." --&gt; ".valStr 
+| chart count by "Query and Response"
+| sort 10 count</query>
+          <earliest>$timePicker.earliest$</earliest>
+          <latest>$timePicker.latest$</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>Authentication - Success</title>
+        <search>
+          <query>sourcetype="forescout:OTSM:logs:network"
+| search host="$command_center$"
+| search typeId=log_auth_success
+| eval full_count= user + ":" + l7Proto
+| timechart count(user) by full_count</query>
+          <earliest>$timePicker.earliest$</earliest>
+          <latest>$timePicker.latest$</latest>
+          <refresh>30s</refresh>
+          <refreshType>delay</refreshType>
+        </search>
+        <option name="charting.axisTitleX.text">Time</option>
+        <option name="charting.axisTitleY.text">Events</option>
+        <option name="charting.chart">column</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.drilldown">all</option>
+        <option name="height">652</option>
+        <option name="refresh.display">progressbar</option>
+        <drilldown>
+          <link target="_blank">search?q=sourcetype="forescout:OTSM:logs:network"| spath event_type_id | search event_type_id=authentication_success | eval full_count=User%2b":"%2bProtocol | search full_count="$click.name2$"&amp;earliest=$timePicker.earliest$&amp;latest=$timePicker.latest$</link>
+        </drilldown>
+      </chart>
+    </panel>
+    <panel>
+      <table>
+        <title>Authentication - Fail</title>
+        <search>
+          <query>sourcetype="forescout:OTSM:logs:network"
+| search host="$command_center$"
+| search typeId=log_auth_fail
+| eval full_count= user + ":" + l7Proto
+| iplocation dstIp prefix=dstIp_
+| iplocation srcIp prefix=srcIp_
+| rename srcIp as "Source IP" srcIp_Country as "Source Country" dstIp as "Destination IP" dstIp_Country as "Destination Country" user as User error as "Authentication Error" l7Proto as Protocol time as Time
+| table Time Protocol User "Authentication Error" "Source IP" "Source Country" "Destination IP" "Destination Country"</query>
+          <earliest>$timePicker.earliest$</earliest>
+          <latest>$timePicker.latest$</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="drilldown">cell</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="wrap">false</option>
+        <drilldown>
+          <link target="_blank">search?q=sourcetype="forescout:OTSM:logs:network"| spath event_type_id | search event_type_id=authentication_failure | eval full_count=User%2b":"%2bProtocol | search full_count="$click.name2$"&amp;earliest=$timePicker.earliest$&amp;latest=$timePicker.latest$</link>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>Authentication - Details</title>
+        <search>
+          <query>sourcetype="forescout:OTSM:logs:network"
+| search host="$command_center$"
+| search typeId=log_auth*
+| iplocation dstIp prefix=dstIp_
+| iplocation srcIp prefix=srcIp_
+| rename host as CC srcIp as "Source IP" srcIp_Country as "Source Country" dstIp as "Destination IP" dstIp_Country as "Destination Country" User as Username name as Event l7Proto as Protocol time as Time
+| table Time CC "Source IP" "Source Country" "Destination IP" "Destination Country" Username Protocol Event</query>
+          <earliest>$timePicker.earliest$</earliest>
+          <latest>$timePicker.latest$</latest>
+          <sampleRatio>1</sampleRatio>
+          <refresh>5m</refresh>
+          <refreshType>delay</refreshType>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+        <drilldown>
+          <link target="_blank">search?q=sourcetype="forescout:OTSM:logs:network" event_type_id="authentication*" | eval search_field=case("$click.name2$" == "Time", Time, "$click.name2$" == "Source IP", Source_IP, "$click.name2$" == "Destination IP", DST_IP, "$click.name2$" == "Username", User, "$click.name2$" == "Protocol", Protocol, "$click.name2$" == "Event", event_type_id)| search search_field="$click.value2$"&amp;earliest=$timePicker.earliest$&amp;latest=$timePicker.latest$</link>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>SSL Certificate Requests</title>
+        <search>
+          <query>sourcetype="forescout:OTSM:logs:network"
+| search host="$command_center$"
+| search typeId=log_ssl_certificate
+| iplocation dstIp prefix=dstIp_
+| iplocation srcIp prefix=srcIp_
+| rename cust1 as "Cipher Suite" cust2 as Validity srcIp as "Source IP" srcIp_Country as "Source Country" dstIp as "Destination IP" dstIp_Country as "Destination Country" id as Issuer
+| table Issuer Validity "Cipher Suite" "Source IP" "Source Country" "Destination IP" "Destination Country"</query>
+          <earliest>$timePicker.earliest$</earliest>
+          <latest>$timePicker.latest$</latest>
+        </search>
+        <option name="count">20</option>
+        <option name="drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>File Activity</title>
+        <search>
+          <query>sourcetype="forescout:OTSM:logs:network"
+| search host="$command_center$"
+| search typeId=log_file*
+| iplocation dstIp prefix=dstIp_
+| iplocation srcIp prefix=srcIp_
+| rename srcIp as "Source IP" srcIp_Country as "Source Country" dstIp as "Destination IP" dstIp_Country as "Destination Country" user as Username typeId as "Event" path as Filename name as "File Activity" time as Time
+| table Time "Source IP" "Source Country" "Destination IP" "Destination Country" Username "File Activity" Filename</query>
+          <earliest>$timePicker.earliest$</earliest>
+          <latest>$timePicker.latest$</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+</form>

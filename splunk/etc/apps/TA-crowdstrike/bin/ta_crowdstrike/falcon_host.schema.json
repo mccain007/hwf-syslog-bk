@@ -1,0 +1,34 @@
+{
+  "basic": {
+    "title": "CrowdStrike Falcon Host",
+    "description": "Splunk TA for CrowdStrike Falcon Host Streaming APIs",
+    "config_meta": {
+      "logging_setting": "global_settings > crowdstrike_loglevel > loglevel"
+    },
+    "monitor_file": [
+      "crowdstrike.conf",
+      "crowdstrike_falcon_host_accounts.conf",
+      "crowdstrike_falcon_host_inputs.conf"
+    ]
+  },
+  "config": {
+    "_product": "TA-crowdstrike",
+    "_rest_namespace": "ta_crowdstrike",
+    "_rest_prefix": "",
+    "_protocol_version": "",
+    "_version": "1.0.0.0",
+    "global_settings": {
+      "endpoint": "ta_crowdstrike_settings"
+    },
+    "accounts": {
+      "endpoint": "ta_crowdstrike_falcon_host_accounts"
+    },
+    "inputs": {
+      "endpoint": "ta_crowdstrike_falcon_host_inputs"
+    }
+  },
+  "division": {
+    "inputs": {
+    }
+  }
+}

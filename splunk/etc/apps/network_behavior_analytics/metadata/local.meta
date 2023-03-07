@@ -1,0 +1,60 @@
+[app/install/install_source_checksum]
+version = 9.0.4
+modtime = 1677890542.147156000
+
+[nba/destinations]
+version = 9.0.4
+modtime = 1678206273.669534000
+
+[nba/dhcp]
+version = 9.0.4
+modtime = 1678206337.262734000
+
+[nba/main]
+version = 9.0.4
+modtime = 1678206273.790904000
+
+[nba/dns]
+version = 9.0.4
+modtime = 1678206339.168067000
+
+[nba/ip]
+version = 9.0.4
+modtime = 1678206339.823214000
+
+[nba/alerts]
+version = 9.0.4
+modtime = 1678206274.794602000
+
+[nba/tls]
+version = 9.0.4
+modtime = 1678206342.004454000
+
+[nba/http]
+version = 9.0.4
+modtime = 1678206339.058834000
+
+[nba/vpn]
+version = 9.0.4
+modtime = 1678206340.660507000
+
+[passwords/credential%3A%3Aasoc_nba_api_key%3A]
+owner = admin
+version = 9.0.4
+modtime = 1677940574.605031000
+
+[nba/migration]
+version = 9.0.4
+modtime = 1677940604.393914000
+
+[views/threats]
+version = 9.0.4
+modtime = 1677941313.604236000
+
+[views/performance_ip]
+version = 9.0.4
+modtime = 1677941346.650068000
+
+[savedsearches/Threat%20-%20AlphaSOC%20NBA%20-%20Threat%20Hunter%20-%20Rule]
+version = 9.0.4
+modtime = 1677941457.973576000

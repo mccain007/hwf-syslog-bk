@@ -1,0 +1,18 @@
+<nav search_view="search" color="#CC0012">
+  <view name="apl_net_01_overview" default='true' />
+  <view name="apl_net_02_ip_profile" />
+  <view name="apl_net_03_transport_information" />
+  <view name="apl_net_04_port_information" />
+  <view name="apl_net_05_internal_and_external_traffic" />
+  <view name="apl_net_06_scanning_activity" />
+  <view name="apl_net_07_geographic_information" />
+  <view name="apl_net_08_network_traffic_search" />
+  <view name="apl_net_10_vpn" />
+  <view name="About"/>
+  <collection label="Advanced">
+    <view name="apl_net_09_sourcetype_information" />
+    <view name="apl_net_11_data_transparency" />
+    <view name="search" />
+    <view name="dashboards" />
+  </collection>
+</nav>

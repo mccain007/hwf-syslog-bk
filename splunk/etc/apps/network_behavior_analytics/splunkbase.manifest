@@ -1,0 +1,739 @@
+{
+  "version": "1.0",
+  "date": "2023-02-10T09:47:56.046999727Z",
+  "hashAlgorithm": "SHA-256",
+  "app": {
+    "id": 4052,
+    "version": "1.8.2",
+    "files": [
+      {
+        "path": "README.txt",
+        "hash": "47721350a87a98c303f6f494212941632cdc0c74dd2f64862b5b96559ec6e84f"
+      },
+      {
+        "path": "app.manifest",
+        "hash": "006c0a4a0a1ab84f4e54c74341856c0efd1a78912eb1aa0879d5b2fc24c87947"
+      },
+      {
+        "path": "appserver/static/analytics.css",
+        "hash": "9f19d4c0854ad77154102ee9f4daf847787fb777b7e6be7190f963e33108a27b"
+      },
+      {
+        "path": "appserver/static/common.css",
+        "hash": "2d1e4818dcb976cdeb53471bf24c8aa8d1ab24692337becd290c222e84da5386"
+      },
+      {
+        "path": "appserver/static/components/api/evaluationrequestdialog.js",
+        "hash": "3281b9766380d507cce090c5d622c7b2adb349616b88b925132542f50653af7c"
+      },
+      {
+        "path": "appserver/static/components/api/keyactivationdialog.js",
+        "hash": "37885e04bdb7d22b29124e5fc42f13055cbe3daaf424c663110d947234f1eedc"
+      },
+      {
+        "path": "appserver/static/components/api/keyactivationform.js",
+        "hash": "3c406f10af275e48b950c039b7fca85bd059fcbd092be98c9b293993b47e2364"
+      },
+      {
+        "path": "appserver/static/components/api/keyinput.js",
+        "hash": "e25af4f89e5c707da117249a0c547fe6b4f8d296fd0d363d5e5eb7df8c8b2645"
+      },
+      {
+        "path": "appserver/static/components/api/keyreset.js",
+        "hash": "a17a9efec640a38c3bdc0a6560e35effbbe590dcb76da70a471e266c170c465d"
+      },
+      {
+        "path": "appserver/static/components/api/keyresetdialog.js",
+        "hash": "d650100ecc0efa877d33decb0b5896d732099630649a99088f0f6771f685e897"
+      },
+      {
+        "path": "appserver/static/components/api/messages.js",
+        "hash": "cc95c9cce438a4f6ce677867ec7741c2ed1df36d6428fc8fd54bab2426cf3593"
+      },
+      {
+        "path": "appserver/static/components/api/onpremiseradio.js",
+        "hash": "8ddef7568cb93a2952dd1d4e21ae7a18ca90358211de06a01705dba4d6a5a1a3"
+      },
+      {
+        "path": "appserver/static/components/api/urlinput.js",
+        "hash": "62e505fe4909fbf4cbd6ea4a1ffb4435f8311191d22f73805cf394fea36ca0cf"
+      },
+      {
+        "path": "appserver/static/components/common/dropdownmenu.js",
+        "hash": "f85720493bddbf308b44131b139499acbdc433d315d99a80bea148d70a1e2a83"
+      },
+      {
+        "path": "appserver/static/components/common/handleresterror.js",
+        "hash": "34d193d4b699d096768338e06f87ae38437a288fad91eb7f7527079eb3572259"
+      },
+      {
+        "path": "appserver/static/components/common/modal.js",
+        "hash": "0d5f89ef94e731259d6043fbfef108534c0c4276be44f8752edbac3ee2f23357"
+      },
+      {
+        "path": "appserver/static/components/common/msgdialog.js",
+        "hash": "97ec03a6d9fe56067b6882eb38a97f39892b01bbcd2dc7cb40e47df40e4bea74"
+      },
+      {
+        "path": "appserver/static/components/common/postinstalldialog.js",
+        "hash": "ebc2a12c7ec115a35804757c06492f41a667cea34efb61dfdc94aa6a47456f6e"
+      },
+      {
+        "path": "appserver/static/components/common/tabs.js",
+        "hash": "fae97dc1d8aebfd0835ddde5c1fd11e30e8aeb898a623a771853a921d6adabfc"
+      },
+      {
+        "path": "appserver/static/components/common/urgencynames.js",
+        "hash": "da02b95d66db0472eabafb98d335a0e8bf9a908d89552627f62d7a9a17462408"
+      },
+      {
+        "path": "appserver/static/components/data/alerts.js",
+        "hash": "b03139fb34a47984b1b8a2bdd8968f0365f84cdc0e809db4fe81ea9128418bfd"
+      },
+      {
+        "path": "appserver/static/components/data/destsummary.js",
+        "hash": "7b41e0ab5c1427c2c25d7508d4d0f21c5781d45dd9b7f7642930e4fe4ebb0097"
+      },
+      {
+        "path": "appserver/static/components/data/logsexport.js",
+        "hash": "6ea3627ce8beab2d0061d19d984d34aefa2d76b659355e38b35e24fffcd52baf"
+      },
+      {
+        "path": "appserver/static/components/data/logsindex.js",
+        "hash": "cb1009fabc4b6746bf711d34402cd573c8d301263fac94317d17ca7c9cc435a8"
+      },
+      {
+        "path": "appserver/static/components/data/providerstats.js",
+        "hash": "f543f098671b091fb8471e9720d81c13b6d7278f17c6eef4e3884f99edeaa7c6"
+      },
+      {
+        "path": "appserver/static/components/data/status.js",
+        "hash": "50fc1c3d125723e2c8b03352260e976b9bc2167f9ae79db88fc7150c4681b8bf"
+      },
+      {
+        "path": "appserver/static/components/data/tabcontent.js",
+        "hash": "4956c3c2d3771008b25a924d76d88cbd6e9b7499cfd149d45e9a33c3ded57b26"
+      },
+      {
+        "path": "appserver/static/components/detection/detection.js",
+        "hash": "5ba911a3267a466bfe5a40e035827e7a6e757c36f18a4b9dedbb636e77b260e0"
+      },
+      {
+        "path": "appserver/static/components/detection/dhcp.js",
+        "hash": "2d9f59e578cc2498c139888f97974629bf7f4fb60f52e01c7630c65371cc8722"
+      },
+      {
+        "path": "appserver/static/components/detection/dns.js",
+        "hash": "aab0b93a4a2b0418a6966172c3e0583a3f443b00dd1d72139f7ce6329ab49c20"
+      },
+      {
+        "path": "appserver/static/components/detection/http.js",
+        "hash": "89bf4a542036d9cacbb59c3e164e5eaae2b912b5b7b03dfbae50ad20cdb55def"
+      },
+      {
+        "path": "appserver/static/components/detection/ip.js",
+        "hash": "fb17e0fa77aa1b2de9d92c7d1c4e123ffd12f526d32bd0efbd12051ac01808b3"
+      },
+      {
+        "path": "appserver/static/components/detection/tls.js",
+        "hash": "a06db6c3df28708b4de78acb1fae520716e43a1930ba82de3fd0b081396334c2"
+      },
+      {
+        "path": "appserver/static/components/detection/vpn.js",
+        "hash": "493e865eb16f5d4986d1a0b7095c43a9733fda7ab847e14aa79de9c597315497"
+      },
+      {
+        "path": "appserver/static/components/escalations/incident.js",
+        "hash": "48d700526ec6599be833d553d2e4761c3d23163001b4d57ddc260d8b73e1e374"
+      },
+      {
+        "path": "appserver/static/components/escalations/notable.js",
+        "hash": "a5a69dd57b261179f2e6364026812c90379f84cbc129b296e3fb2189baeedf44"
+      },
+      {
+        "path": "appserver/static/components/escalations/settings.js",
+        "hash": "c709d4798d51e500486700be49bb3ad5980a485c3d0aa380ac55847cffc00041"
+      },
+      {
+        "path": "appserver/static/components/groups/anomalydetection.js",
+        "hash": "e7e8a4198c4edd721c1e56694f57b77d5a68d3464c22d0017186f87193498184"
+      },
+      {
+        "path": "appserver/static/components/groups/contentview.js",
+        "hash": "1dd460bf0bfe6daef7f0b05bee4c9354f557dc49d8756b75b0b0856a7fda24e8"
+      },
+      {
+        "path": "appserver/static/components/groups/csvimportdialog.js",
+        "hash": "52dc5d4adc55e5a3f3d3efbc75407733ccb1ee4572143542d6f6b6a005186d93"
+      },
+      {
+        "path": "appserver/static/components/groups/grouplist.js",
+        "hash": "23095467f819ce43239c62cdbc26ba3d18b94685c9f06dc41ee238549b0b9b5e"
+      },
+      {
+        "path": "appserver/static/components/groups/tabcontent.js",
+        "hash": "69345a6ddc56e2eaa1cf4e6e699d5b6dc1e59a80834159b1f02eb055d9cb5f27"
+      },
+      {
+        "path": "appserver/static/components/groups/yamlimportdialog.js",
+        "hash": "f8018c2d3c2d8c35cf6a6041dd4b7e6c175f9b9b4e478cd2e833149bbf2b28d0"
+      },
+      {
+        "path": "appserver/static/components/settings/configcheckbox.js",
+        "hash": "3ebd875a8d2242bb4a630af5eaeca974894699f7a772a4beda5fa2c924e37b79"
+      },
+      {
+        "path": "appserver/static/components/settings/configindex.js",
+        "hash": "f4a4dfee8149e00d87013c45b944af5d082f0a3ff2a465d23dc4f96ccb37bc93"
+      },
+      {
+        "path": "appserver/static/components/settings/configproxy.js",
+        "hash": "9c4578f7f9fc891fee26477d6fe75ada00251b087da90ba751cb500201d92a81"
+      },
+      {
+        "path": "appserver/static/components/settings/policycheckboxes.js",
+        "hash": "0eef6fe49f5017c6db5a5bebb988c79f5e43910db41f13da2d379b3de9e91368"
+      },
+      {
+        "path": "appserver/static/components/settings/sourcedisplay.js",
+        "hash": "3119dfb292178a295f3fed113b0b4a35ea63965389388df32fe570b46cd04591"
+      },
+      {
+        "path": "appserver/static/components/tables/alertactions.js",
+        "hash": "7a2292bbc4c1cd621cff78799fd4875b822f57f0a030dcfae1145d40d9a7d258"
+      },
+      {
+        "path": "appserver/static/components/tables/flagsrenderer.js",
+        "hash": "bb17d752511e324181f0a4fb5a00280ab3c28dc4f065992507f7996ce36a4bd2"
+      },
+      {
+        "path": "appserver/static/components/tables/riskcellrenderer.js",
+        "hash": "2415fb38d58547b5af872cd70c060bdbf5f3ce58ffb6332fcd584c2699f5d289"
+      },
+      {
+        "path": "appserver/static/components/tables/threatsrowexpansion.js",
+        "hash": "d671aa716cb650c2a6db5ca564410081636932851b98f85a755c9bc097a12d61"
+      },
+      {
+        "path": "appserver/static/datalocation.js",
+        "hash": "920aac5f76ad4fdb1d1ca4fc6778e87a25890038cd493b74419460218ce7d836"
+      },
+      {
+        "path": "appserver/static/explorer.js",
+        "hash": "8baf5f91d67a2289782e3d28d4a190e4e365bfef7e463c63eecc4b18577629fd"
+      },
+      {
+        "path": "appserver/static/groups.css",
+        "hash": "cc6db14b5139244c1553155899c9ed340bba5015f4ca0bdaeb595cca82b721c8"
+      },
+      {
+        "path": "appserver/static/groups.js",
+        "hash": "f04a3c4b3da1e44d029d78d7316fa3e8e42e92eb0792d806e69bff16a4e3d349"
+      },
+      {
+        "path": "appserver/static/licensing.js",
+        "hash": "854570390ed0ee802bb24f4e27e3eed25587467bf0f801002b3555a44cbd30d8"
+      },
+      {
+        "path": "appserver/static/performance.js",
+        "hash": "d5cb3fff7d725b0bdf215c8656329c570d8fc5fe66249cf38f1fc99d67e4f8a8"
+      },
+      {
+        "path": "appserver/static/settings.css",
+        "hash": "0be790bfe69f8679f542df5f938e94c7f7dd2b837806d9e92cf41aade1fed5b0"
+      },
+      {
+        "path": "appserver/static/settings.js",
+        "hash": "a22a75ea4dd306e6e7ec925d1440b862a60ea324d6c0966582aca3de98f5ad50"
+      },
+      {
+        "path": "appserver/static/threats.js",
+        "hash": "667e924d9357fb9728cf58504c494c55d7482ed441344953113d57cdb7dd2094"
+      },
+      {
+        "path": "appserver/static/violations.js",
+        "hash": "3d868fa0b3000a9b17acd2200ab3c24e416e99d81d5a6cf7d72b509303bdffe2"
+      },
+      {
+        "path": "bin/nba_dest_pull.py",
+        "hash": "e5684014cd42cbce0f0d519a2aecb76699067c8f7b77c96c2771d77807905b19"
+      },
+      {
+        "path": "bin/nba_rest_api.py",
+        "hash": "cf288e418f9dd9b2549034ade8592371fe928aaed42653e6905c218b31f51c9d"
+      },
+      {
+        "path": "bin/nba_rest_scopes.py",
+        "hash": "1bab2dbddd457d938b24303590d7ffdaa0b65a8a5eeb17252b79863f90ae9e3a"
+      },
+      {
+        "path": "bin/nba_rest_settings.py",
+        "hash": "3c908a90de3fc13284bd9a0ab0a8630a50f718d4eae882d91c1399c44d099417"
+      },
+      {
+        "path": "bin/nba_scorer.py",
+        "hash": "407e010ab4c7b4251fe782332438ae592484b51dcdaf03a4ccb2636909228704"
+      },
+      {
+        "path": "bin/nba_sendlog_dhcp.py",
+        "hash": "8125d2d2a4f5dba34e9f3c3cdb4a0470e111e7868ac82052453b2867e7bcac9a"
+      },
+      {
+        "path": "bin/nba_sendlog_dns.py",
+        "hash": "07c6d505212c9950e1df523d13c990af718175e47bca9dd6bf558fda0d8fa2cb"
+      },
+      {
+        "path": "bin/nba_sendlog_http.py",
+        "hash": "779eafef3dc369e51370b5d33521a2d9c339627a794d5beb3b98e37b0e766f01"
+      },
+      {
+        "path": "bin/nba_sendlog_ip.py",
+        "hash": "421f60b963ef6ab3a2a3ea1811156a1bcd31720b9b11b749240119c80e02d400"
+      },
+      {
+        "path": "bin/nba_sendlog_tls.py",
+        "hash": "74eebeeca6775c348e66c38a7ae7760588f8c693f18355d3c0b85aa5744bb5dc"
+      },
+      {
+        "path": "bin/nba_sendlog_vpn.py",
+        "hash": "b0a360641d206033a7fd5bbb0edb3d353553f38d946d44a94771aecc9f9002c1"
+      },
+      {
+        "path": "bin/nbalib/__init__.py",
+        "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "bin/nbalib/alerts.py",
+        "hash": "bcd6b99b7880c3dfcf1a586db4251d89767473d091f5b33b0b2fc97fb25d2cdb"
+      },
+      {
+        "path": "bin/nbalib/anomaly.py",
+        "hash": "dbbfea6a6f2a72e7092b0a8199ffdcb905feff142ab84ad3f6f4e8b6269bb03b"
+      },
+      {
+        "path": "bin/nbalib/api.py",
+        "hash": "b88801ffb8b5b7ce3a932ccd389cf53809c64a7d0ad84dd2b59599e178be88f6"
+      },
+      {
+        "path": "bin/nbalib/asoc3/LICENSE",
+        "hash": "1893d2071c9b55f5d9b445bafa473667c5b23940f9145ee9f30898520b5cba27"
+      },
+      {
+        "path": "bin/nbalib/asoc3/__init__.py",
+        "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "bin/nbalib/asoc3/six.py",
+        "hash": "a37581b4d665777bf0a4505e71ae47475477936f6df0916cebf05c63766639d9"
+      },
+      {
+        "path": "bin/nbalib/batches.py",
+        "hash": "eff85cfc04e686d81d4b6bfd781cd9fd81070bb023f86e334f3f97f82432d380"
+      },
+      {
+        "path": "bin/nbalib/confs.py",
+        "hash": "cdb6b5675abc9fe556aa1650938c0b3b031f0bab404c9bfd5c39c100bd920acb"
+      },
+      {
+        "path": "bin/nbalib/datatypes.py",
+        "hash": "3dd6ea70d7c7be4e202125053e07746b9bc4250da884d9cd78202a5f42b9edd5"
+      },
+      {
+        "path": "bin/nbalib/dateasoc.py",
+        "hash": "3966966605862f9a3398c84462b3365e965075c96005b0e87c1f018d093a2c3a"
+      },
+      {
+        "path": "bin/nbalib/destinations.py",
+        "hash": "3fa71a2e64872e16861651eb3a5d7eff0c8d8135d6a83bae783b4fc660133a85"
+      },
+      {
+        "path": "bin/nbalib/iptools/__init__.py",
+        "hash": "c9884c6379db47f44779a4fd7d081ee57e7ad96c3906857ffdc34724a68790d8"
+      },
+      {
+        "path": "bin/nbalib/iptools/ipv4.py",
+        "hash": "68ddce6c1e29546ba656256f94f1bce87da09bcc25b7ff87a0f8a6c5bc3555f6"
+      },
+      {
+        "path": "bin/nbalib/iptools/ipv6.py",
+        "hash": "697b5d7e4cf4a063125f2b938f3ff0bf670feec4fec67f976c8e501fc21b0798"
+      },
+      {
+        "path": "bin/nbalib/iso8601/LICENSE",
+        "hash": "116d368d14a8cf0061027c944c60ee20b476ce42814818a7d627396906761f16"
+      },
+      {
+        "path": "bin/nbalib/iso8601/__init__.py",
+        "hash": "d9fc40f179f2d55e4f4c9478f67038df063aac7acc2acc2fa9b95f1b29e0b769"
+      },
+      {
+        "path": "bin/nbalib/iso8601/iso8601.py",
+        "hash": "1675f88f1f096a4d28190dd5229428ade143331a72d42cfea460b1a2a319b70d"
+      },
+      {
+        "path": "bin/nbalib/logger.py",
+        "hash": "f3eb51b679a528d6ea21e4fcb06d3b89694a71a951fe57f93b35210914f48b4d"
+      },
+      {
+        "path": "bin/nbalib/period.py",
+        "hash": "63b36362a764dcd87763717388e600dbcb2ce01ff07380af6a2ec5bf937e7171"
+      },
+      {
+        "path": "bin/nbalib/pyyaml/LICENSE",
+        "hash": "a2adb9c959b797494a0ef80bdf60e22db2749ee3e0c0908556e3eb548f967c56"
+      },
+      {
+        "path": "bin/nbalib/pyyaml/__init__.py",
+        "hash": "e8a087209ba950cea8c57d93eab1b3aea2db5a46a2d6f583386936adcf4acdc2"
+      },
+      {
+        "path": "bin/nbalib/pyyaml/yaml2/__init__.py",
+        "hash": "4b4aed2feec3539b68fd41fab683f109744c69147f84a4d185f2eba8559738c6"
+      },
+      {
+        "path": "bin/nbalib/pyyaml/yaml2/composer.py",
+        "hash": "4edbd624269f7dd547847c7f9ae2e0ba5a035308353546e8f86949d267bac6e0"
+      },
+      {
+        "path": "bin/nbalib/pyyaml/yaml2/constructor.py",
+        "hash": "15bbf401a31a36fbe0478c0e9ed450bc881bac6796e23ddcafff58d536ad3917"
+      },
+      {
+        "path": "bin/nbalib/pyyaml/yaml2/cyaml.py",
+        "hash": "e8c64a4891d35b0a1cb79bab2bda9b197021335c73fc1a1ac257f9495302f39a"
+      },
+      {
+        "path": "bin/nbalib/pyyaml/yaml2/dumper.py",
+        "hash": "c8c1709688ce63e33810c513f05891398d900b61801903bb222932d310652457"
+      },
+      {
+        "path": "bin/nbalib/pyyaml/yaml2/emitter.py",
+        "hash": "07fb9589657937328c961e8d41edf31e70d8c421bbee3362c905f2da890a1e46"
+      },
+      {
+        "path": "bin/nbalib/pyyaml/yaml2/error.py",
+        "hash": "ecaf8d748bf4a8d28f29b9d7c448342ff6fd2bb9d80ce46bdebce6f3f6fe8816"
+      },
+      {
+        "path": "bin/nbalib/pyyaml/yaml2/events.py",
+        "hash": "e74fd392c810884e2ea7e94aa3f57e9c1cbeb402319083d0c58e6a0e1282787c"
+      },
+      {
+        "path": "bin/nbalib/pyyaml/yaml2/loader.py",
+        "hash": "b3221e991475dd1a1d5755121f691985b1c503098980ba1527d986fc530901a6"
+      },
+      {
+        "path": "bin/nbalib/pyyaml/yaml2/nodes.py",
+        "hash": "80f28d8fca4a09d87677882bde021820d9cf39a3b11a12405226211919cf13ce"
+      },
+      {
+        "path": "bin/nbalib/pyyaml/yaml2/parser.py",
+        "hash": "b205da8590370e4c92627682e03ff3725de5db2e18e51e3489c5ad770905fcd1"
+      },
+      {
+        "path": "bin/nbalib/pyyaml/yaml2/reader.py",
+        "hash": "466afa6d6aefa04a6f41565b121e996349318bdf0e8bb6cd32dcb3fa61eef719"
+      },
+      {
+        "path": "bin/nbalib/pyyaml/yaml2/representer.py",
+        "hash": "8444b7d3c4f2ea2d006c5252d6dd73ef58fa67d98e0eb8c8116af892a4b6e9f2"
+      },
+      {
+        "path": "bin/nbalib/pyyaml/yaml2/resolver.py",
+        "hash": "e59ddba2232290be90b7a7d2e4cb7c7c7ca6d06c5b5bb08c4f67f67e70f564f4"
+      },
+      {
+        "path": "bin/nbalib/pyyaml/yaml2/scanner.py",
+        "hash": "cae187b1506bf49f735e37c149f9842711a6f9bc01fe49b64fe86df705a0b689"
+      },
+      {
+        "path": "bin/nbalib/pyyaml/yaml2/serializer.py",
+        "hash": "b51b11c1fbb913d7e92d4ecb637bc141fda9aedefb8709d894cb797670492e28"
+      },
+      {
+        "path": "bin/nbalib/pyyaml/yaml2/tokens.py",
+        "hash": "953408cd2570f0c83dc2fe39f7e4e388e41eeb05738aa69196a5f6ffcf6ba79e"
+      },
+      {
+        "path": "bin/nbalib/pyyaml/yaml3/__init__.py",
+        "hash": "776f284f42dcfd74eb330768c86fdf9e5eca2df6733c701b7b09842c3c159326"
+      },
+      {
+        "path": "bin/nbalib/pyyaml/yaml3/composer.py",
+        "hash": "fcaa37d16afa783594794a5ab94193dcb720f503c19ce3d59539c8311189f453"
+      },
+      {
+        "path": "bin/nbalib/pyyaml/yaml3/constructor.py",
+        "hash": "e0f776a6cb202943062dd4bf916e80e12c02eead13d77fac06b013bcd419099d"
+      },
+      {
+        "path": "bin/nbalib/pyyaml/yaml3/cyaml.py",
+        "hash": "2e2324bdc84da277e8cb517a79cf4bd81894cf7af46f01788729a9012257d487"
+      },
+      {
+        "path": "bin/nbalib/pyyaml/yaml3/dumper.py",
+        "hash": "3cb72d66563064ba7b5e679477046ebf89d8399d940670c8532f3e94a7cb17ea"
+      },
+      {
+        "path": "bin/nbalib/pyyaml/yaml3/emitter.py",
+        "hash": "8e086d694ede170837d5b1b407b45979aff6f40762f422a65eafd08e04290a44"
+      },
+      {
+        "path": "bin/nbalib/pyyaml/yaml3/error.py",
+        "hash": "021f73fada072546c4f63f8cf18a7181244ce4280b09cc15cc980b2d1176171a"
+      },
+      {
+        "path": "bin/nbalib/pyyaml/yaml3/events.py",
+        "hash": "e74fd392c810884e2ea7e94aa3f57e9c1cbeb402319083d0c58e6a0e1282787c"
+      },
+      {
+        "path": "bin/nbalib/pyyaml/yaml3/loader.py",
+        "hash": "5156becc8aa6905482218abf3e04869b835226db4763645fff3438fdbd5f1cdd"
+      },
+      {
+        "path": "bin/nbalib/pyyaml/yaml3/nodes.py",
+        "hash": "80f28d8fca4a09d87677882bde021820d9cf39a3b11a12405226211919cf13ce"
+      },
+      {
+        "path": "bin/nbalib/pyyaml/yaml3/parser.py",
+        "hash": "8a55a9e6fbe0a07146cef3990c8b45a068c3e83e369e1959ad9ca30306b4a09a"
+      },
+      {
+        "path": "bin/nbalib/pyyaml/yaml3/reader.py",
+        "hash": "d1d9b38ab3a20c6e17a38d519ee412ecaf6b918df18c78956ac7c330d4ea08dc"
+      },
+      {
+        "path": "bin/nbalib/pyyaml/yaml3/representer.py",
+        "hash": "f3650cdd9c5440aaac28017896d58ec424ba8c63c816d5e91acee6beacafe17b"
+      },
+      {
+        "path": "bin/nbalib/pyyaml/yaml3/resolver.py",
+        "hash": "0c90a3a50afc6100846188ca118a939741abb198a5d87e1a14e23d6f439ef94e"
+      },
+      {
+        "path": "bin/nbalib/pyyaml/yaml3/scanner.py",
+        "hash": "29e4082863654b23c4f100f08a89c7c72f4281ba84e6d789133d39151f7e9c08"
+      },
+      {
+        "path": "bin/nbalib/pyyaml/yaml3/serializer.py",
+        "hash": "0a1b85826854d35863e31808f0668abfabdf33606e8f06bd8bb7761401e3edc0"
+      },
+      {
+        "path": "bin/nbalib/pyyaml/yaml3/tokens.py",
+        "hash": "953408cd2570f0c83dc2fe39f7e4e388e41eeb05738aa69196a5f6ffcf6ba79e"
+      },
+      {
+        "path": "bin/nbalib/request.py",
+        "hash": "883416a60e5aa8a468b99f998f7292f9824f8607ec4bed32a1d87db542402255"
+      },
+      {
+        "path": "bin/nbalib/rest.py",
+        "hash": "0b324c41b577a2b031c0fd587aa867af35638ea7cb6c051354ccfacf1a8a0ec5"
+      },
+      {
+        "path": "bin/nbalib/scopes.py",
+        "hash": "534fc8705114540b8b110ae50bcd3ebb7a7bb28dd906a275afb80a3599cc2981"
+      },
+      {
+        "path": "bin/nbalib/search.py",
+        "hash": "daf83f44c3935cd3fb03153748a403373b8f706eae9eacf92fcf99c3faa1f392"
+      },
+      {
+        "path": "bin/nbalib/sections.py",
+        "hash": "7add22bc019f72f2c1072ccb2c6a467f39e9340204938838103446f48c1091fb"
+      },
+      {
+        "path": "bin/nbalib/sendlog.py",
+        "hash": "832ea7883bfd7718153d7012547fcd01418c5341189edec81351c6d2e2a6df7a"
+      },
+      {
+        "path": "bin/nbalib/stores/__init__.py",
+        "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "bin/nbalib/stores/base.py",
+        "hash": "bed4e2e01b99794332254e3cb78a7431d9fc6a11f1eaa0ae19f790e3d4a7818b"
+      },
+      {
+        "path": "bin/nbalib/stores/flagstore.py",
+        "hash": "63b8a219f2529631957d43aa4acd3f1bc7094e7e024753b28bdbd9077b75dafd"
+      },
+      {
+        "path": "bin/nbalib/stores/threatstore.py",
+        "hash": "1350a6f17698f2a69c1847956b2154ea9d1c6f6412fc375f7ab14fb9adf11607"
+      },
+      {
+        "path": "bin/nbalib/validators.py",
+        "hash": "ae543908864554b27cd1a2f185aaad69a496df1224085748a0a4a490ad56f968"
+      },
+      {
+        "path": "default/app.conf",
+        "hash": "8ea198cabb75d9b569209aec628b0d5181fed48225fb76ffc823016c36741f72"
+      },
+      {
+        "path": "default/collections.conf",
+        "hash": "2300b1be38ebe00f73946bc53cb4c45b57a14aeab7be51db14e164a02ed85dd0"
+      },
+      {
+        "path": "default/data/ui/nav/default.xml",
+        "hash": "a26dc826dfe6b43afa155807f0d37121e3b41cd3af9a0d8c18f71ccd3b8215d9"
+      },
+      {
+        "path": "default/data/ui/views/data_location.xml",
+        "hash": "5e2079ede894799b846b4dae4c21257c7eea0fa5d13776dd45622f74c6b4d170"
+      },
+      {
+        "path": "default/data/ui/views/explorer.xml",
+        "hash": "40b9a5cf143de5c07a128f2c05db6752e169ff56ad5611db6e11d56e3f709aba"
+      },
+      {
+        "path": "default/data/ui/views/groups.xml",
+        "hash": "6219ff15168c2dae90efd35e2fef963594e50cdeadccf90bb14a07789fdc3e98"
+      },
+      {
+        "path": "default/data/ui/views/licensing.xml",
+        "hash": "53db2583ae7ac6d1ba81fa1b72945348e72db5268fa85a9ae0d7a07b4730b9f6"
+      },
+      {
+        "path": "default/data/ui/views/performance_dns.xml",
+        "hash": "21cdfe962a0f6b770b615a5d4523f4ba0f92c5558b81636981b10dc8c8b2df32"
+      },
+      {
+        "path": "default/data/ui/views/performance_http.xml",
+        "hash": "1ff3a31a2ca09f933fc350ac43d4b6decbcb29035d89059b369a943dcffe90bb"
+      },
+      {
+        "path": "default/data/ui/views/performance_ip.xml",
+        "hash": "51f3a2f31b2bbb8975ee44d81d487a4122e41ca3b68d101e3f821d8a5e21772c"
+      },
+      {
+        "path": "default/data/ui/views/performance_tls.xml",
+        "hash": "9041d80fb27e0408c37434912104aa134e5c9f1bb5c8d041916fec9219e8b082"
+      },
+      {
+        "path": "default/data/ui/views/settings.xml",
+        "hash": "b44881515f31a8990e8a22dc8f31a963862f19d9033129079e142196af035a1a"
+      },
+      {
+        "path": "default/data/ui/views/threats.xml",
+        "hash": "3f337b41541b693bc611d1af11e286d9b429ae62929bbb22ef6fd12243f888c2"
+      },
+      {
+        "path": "default/data/ui/views/violations.xml",
+        "hash": "0b8ea07bf894eb2fe68a99258941519ed15cb5cbe4860560553f31244b69dfd7"
+      },
+      {
+        "path": "default/eventtypes.conf",
+        "hash": "bcaffbd6e59fd264f1cc26b083be5d1a6ae75045b9604b5c9fd0513a30b49237"
+      },
+      {
+        "path": "default/inputs.conf",
+        "hash": "6e62cb8bca22ec9e30468824739621b31f79e0ad8cb8471a72a38eebb36866df"
+      },
+      {
+        "path": "default/macros.conf",
+        "hash": "6393e7e2b069bcb433ad8049e5340a59b323ce712af539a2a5ac5ea9f2f08c43"
+      },
+      {
+        "path": "default/nba.conf",
+        "hash": "47b9f337440ad45dd11c0ab768805218cb374793ad51fcb7fef92e03277082b3"
+      },
+      {
+        "path": "default/props.conf",
+        "hash": "33532f5d2641a5c12cde1af8cadc4890eb731d87f0dab22c013213164d3563aa"
+      },
+      {
+        "path": "default/restmap.conf",
+        "hash": "ab8cd860cf68b2db09563d9a48f6c36aed441d7b48e7edb80b06ba9d742e9e57"
+      },
+      {
+        "path": "default/savedsearches.conf",
+        "hash": "ebd9b9b11359494bf16e250383b732ec0ae64c7a1f8419e88a5e09e09f6d3924"
+      },
+      {
+        "path": "default/tags.conf",
+        "hash": "b553374a193666904819379b2f970887eb3f8843c361fb9afbaa71c821449922"
+      },
+      {
+        "path": "default/transforms.conf",
+        "hash": "74009b2c04a431b63833e52e4cde1510eb7ba8e7c1e2caf266a187c1d81ec818"
+      },
+      {
+        "path": "default/web.conf",
+        "hash": "347d6a4452eec32bf3653d2be97afdc64292e0438bb429b2f3b84487f8c67cf7"
+      },
+      {
+        "path": "metadata/default.meta",
+        "hash": "ea037ca157d15d559589ed7fffed30ebe55c9be86de2c71b65e58ddb34dfc11f"
+      },
+      {
+        "path": "static/appIcon.png",
+        "hash": "8b8f3f8c32b809b7fd72a2bbf433900ec37fd7ecad204d20718103501a1a2b7d"
+      },
+      {
+        "path": "static/appIconAlt.png",
+        "hash": "60f7f81ef1f8fcb5660e8aec9ef1165787bccba114844c5fcf7f440517c10925"
+      },
+      {
+        "path": "static/appIconAlt_2x.png",
+        "hash": "ed1ffbd1fead4629488329cdf1667e907b134aac82382f253b7d667406811118"
+      },
+      {
+        "path": "static/appIcon_2x.png",
+        "hash": "2d5fef2a753a1875ac93f8baed006c3e5cc8cac940d7169b7b26aac4146a1fcc"
+      }
+    ]
+  },
+  "products": [
+    {
+      "platform": "splunk",
+      "product": "enterprise",
+      "versions": [
+        "7.0",
+        "7.1",
+        "7.2",
+        "7.3",
+        "8.0",
+        "8.1",
+        "8.2",
+        "9.0"
+      ],
+      "architectures": [
+        "x86_64"
+      ],
+      "operatingSystems": [
+        "windows",
+        "linux",
+        "macos",
+        "freebsd",
+        "solaris",
+        "aix"
+      ]
+    },
+    {
+      "platform": "splunk",
+      "product": "cloud",
+      "versions": [
+        "7.0",
+        "7.1",
+        "7.2",
+        "7.3",
+        "8.0",
+        "8.1",
+        "8.2",
+        "9.0"
+      ],
+      "architectures": [
+        "x86_64"
+      ],
+      "operatingSystems": [
+        "windows",
+        "linux",
+        "macos",
+        "freebsd",
+        "solaris",
+        "aix"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+|long_name| Documentation
+=================================
+
+.. toctree::
+   :maxdepth:
+   :caption: Contents:
+
+.. include:: variables_compiled.rst
+
+Summary
+-------
+|long_description|
+
+.. list-table::
+   :widths: 15 10
+   :header-rows: 0
+
+   * - Author
+     - Aplura, LLC.
+   * - App Version
+     - |version|
+   * - App Build
+     - |build|
+   * - Platforms
+     - Splunk Enterprise
+   * - Splunk Enterprise versions
+     - |splunk_versions|
+   * - Creates an index
+     - False
+   * - Implements summarization
+     - Currently, the app does not generate summaries
+   * - Summary Indexing
+     - False
+   * - Data Model Acceleration
+     - If Enabled
+   * - Report Acceleration
+     - False
+
+Scripts and binaries
+--------------------
+
+.. include:: ./sections/scripts.rst
+
+About |long_name|
+==================
+
+.. include:: ./sections/about.rst
+
+Support and resources
+=====================
+
+.. include:: ./sections/support.rst
+
+Prerequisites
+=============
+
+.. include:: ./sections/prerequisites.rst
+
+Installation and Configuration
+==============================
+
+.. include:: ./sections/installation.rst
+
+User Guide
+==========
+
+.. include:: ./sections/user_guide.rst
+
+.. include:: ./sections/misc.rst
+
+Third Party Notices
+===================
+
+.. include:: ./sections/third_party.rst
+
+Known Issues
+------------
+
+.. include:: ./sections/known_issues.rst
+
+Release notes
+=============
+
+.. include:: ./sections/release_notes_v1.2.3.rst
+.. include:: ./sections/release_notes_v1.2.2.rst
+.. include:: ./sections/release_notes_v1.2.1.rst
+.. include:: ./sections/release_notes_v1.2.0.rst
+
+

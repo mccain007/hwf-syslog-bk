@@ -1,0 +1,184 @@
+/* Groups layout */
+
+.groups-content {
+    overflow: hidden;
+    margin: 2px 0;
+}
+
+.groups-content h2 {
+    margin: 10px 0 5px;
+}
+
+.groups-panel h3 {
+    font-size: 16px;
+    font-weight: 400;
+    margin: 2px 0 7px 0;
+}
+
+.groups-panel-desc {
+    min-height: 23px;
+}
+
+.groups-left-panel {
+    width: 20%;
+    min-width: 250px;
+    float: left;
+    padding: 0 25px 0 10px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+.groups-right-panel {
+    margin-left: 20%;
+}
+
+.groups-inner-left-panel {
+    width: 50%;
+    float: left;
+    border-left: 1px solid #dcdada;
+    padding: 0 25px 10px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+.groups-inner-right-panel {
+    overflow: hidden;
+    padding: 0 10px 10px 25px;
+    border-left: 1px solid #dcdada;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+.groups-desc {
+    overflow: hidden;
+    margin: 12px 10px 0;
+}
+
+/* Groups tabs */
+
+.groups-tabs {
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.groups-tabs .active {
+    background: #fff;
+    cursor: auto;
+    border-bottom: 1px solid transparent;
+}
+
+.groups-tab {
+    width: 18%;
+    float: left;
+    text-align: center;
+    cursor: pointer;
+    background: #efefef;
+    color: #505050;
+    padding: 6px;
+    margin: 0 10px;
+    border: 1px solid #d0d0d0;
+    border-radius: 5px 5px 0px 0px;
+}
+
+.groups-tab:first-child {
+    margin-left: 20px;
+}
+
+.groups-tab-content {
+    margin-top: -1px;
+}
+
+/* Groups entries */
+
+.groups-panel .group-entries {
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 5px;
+    border: 1px solid #D0D0D0;
+}
+
+.groups-panel .group-entries.disabled {
+    background-color: #f0f0f0;
+}
+
+.groups-left-panel .group-entries {
+    margin: 15px 0 0 0;
+}
+
+.group-entries:not(.disabled) table tr:hover,
+.group-entries:not(.disabled) table tr.selected {
+    background-color: #f0f0f0;
+}
+
+.group-entries table .rm-button {
+    float: right;
+    display: none;
+    padding-right: 5px;
+    color: #ff5c5c;
+}
+
+.group-entries:not(.disabled) table tr:hover .rm-button {
+    display: block;
+    cursor: pointer;
+}
+
+.group-entries:not(.disabled) table tr.selectable {
+    cursor: pointer;
+}
+
+.group-entries table td.entry {
+    width: 40%;
+    padding: 3px 6px;
+}
+
+.group-entries table td.description {
+    color: #a0a0a0;
+    font-style: italic;
+}
+
+/* Groups entries add form */
+
+.groups-panel .options-button a.dropdown-toggle {
+    padding-top: 4px;
+    padding-bottom: 2px
+}
+
+.groups-panel .group-add-entry {
+    margin-top: 5px;
+}
+
+.groups-panel .group-add-entry label {
+    display: inline;
+    margin-right: 10px;
+}
+
+.groups-panel .group-add-entry input {
+    margin-top: 6px;
+    margin-right: 5px;
+    width: 29%;
+}
+
+.groups-panel .group-add-entry button {
+    margin-top: -2px;
+}
+
+.groups-panel .options-button {
+    padding-top: 6px;
+}
+
+/* Anomaly detection */
+
+.anomaly-detection-checkbox {
+    margin-top: 8px;
+}
+
+.anomaly-detection-checkbox .desc {
+    margin: 0 4px;
+}
+
+.anomaly-detection-checkbox .collapse p {
+    margin-top: 4px;
+}

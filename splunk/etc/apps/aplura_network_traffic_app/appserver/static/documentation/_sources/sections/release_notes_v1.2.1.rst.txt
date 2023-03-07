@@ -1,0 +1,13 @@
+Version 1.2.1
+~~~~~~~~~~~~~
+
+
+
+- Bug
+
+    - [ANTAFS-10] - Misspelling
+
+- Task
+
+    - [ANTAFS-6] - Rename app
+

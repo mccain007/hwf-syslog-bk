@@ -1,0 +1,314 @@
+<form theme="dark" version="1.1">
+  <label>Data Transparency Overview</label>
+  <description>Source of Authority for Network Traffic App For Splunk</description>
+  <search id="base_search">
+    <query>
+|datamodel $selected_datamodel$
+| spath output=model_name path=modelName
+| spath output=foo path=objects{}
+| mvexpand foo
+| spath input=foo output=dataset path=objectName
+| spath input=foo output=constraints path=constraints{}.search
+| spath input=foo output=tags path=comment{}.tags{}
+| spath input=foo output=calc_field path=calculations{}.outputFields{}.displayName
+| spath input=foo output=field path=fields{}.displayName
+| spath input=foo output=bar path=calculations{}
+| spath input=foo output=foo path=fields{}
+| spath input=foo output=base_search path=baseSearch
+| fields model_name,dataset,bar,foo,constraints,base_search,tags,calc_field,field</query>
+    <earliest>$field1.earliest$</earliest>
+    <latest>$field1.latest$</latest>
+  </search>
+  <search id="base_stats_search">
+    <query>|makeresults| map [ |datamodel "$selected_datamodel$"
+| spath output=model_name path=modelName
+| spath output=foo path=objects{}
+| mvexpand foo
+| spath input=foo output=object_name path=objectName
+| spath input=foo output=bar path=calculations{}
+| spath input=foo output=foo path=fields{}
+| table model_name,object_name,bar,foo
+| eval foobar = mvappend(foo,bar)
+| table model_name, object_name,foobar
+| mvexpand foobar
+| spath input=foobar output=field_name path=fieldName
+| spath input=foobar output=calc_name path=outputFields{}.fieldName
+| spath input=foobar output=field_recommended path=comment{}.recommended
+| spath input=foobar output=calc_recommended path=outputFields{}.comment{}.recommended
+| eval name=coalesce(field_name,calc_name), recommended=coalesce(field_recommended, calc_recommended)
+| fillnull value="false" recommended
+|fields model_name, object_name, name, recommended
+| search recommended=true
+| eval full_field_name = object_name + "." + name
+| stats list(full_field_name) AS field_names by model_name object_name
+| eval field_names = mvjoin(field_names,", ")
+| eval stats_search = printf("|tstats count from datamodel=%s.%s by sourcetype, %s", model_name, object_name, field_names)]</query>
+    <earliest>$field1.earliest$</earliest>
+    <latest>$field1.latest$</latest>
+    <done>
+      <condition>
+        <set token="search_string">$result.stats_search$</set>
+      </condition>
+    </done>
+  </search>
+  <search id="base_recommended_search">
+    <query>
+| rest /servicesNS/-/-/data/models splunk_server=local
+| search acceleration="1"
+| table title
+| map maxsearches=30 search="
+|datamodel $selected_datamodel$"
+| spath output=model_name path=modelName
+| spath output=foo path=objects{}
+| mvexpand foo
+| spath input=foo output=dataset path=objectName
+| spath input=foo output=constraints path=constraints{}.search
+| spath input=foo output=tags path=comment{}.tags{}
+| spath input=foo output=calc_field path=calculations{}.outputFields{}.displayName
+| spath input=foo output=field path=fields{}.displayName
+| spath input=foo output=bar path=calculations{}
+| spath input=foo output=foo path=fields{}
+| spath input=foo output=base_search path=baseSearch
+| eval foobar = mvappend(foo,bar)
+| table model_name, dataset, foobar
+| mvexpand foobar
+| spath input=foobar output=field_name path=fieldName | spath input=foobar output=field_required path=required
+| spath input=foobar output=calc_name path=outputFields{}.fieldName
+| spath input=foobar output=field_recommended path=comment{}.recommended
+| spath input=foobar output=calc_recommended path=outputFields{}.comment{}.recommended
+| eval name=coalesce(field_name,calc_name), recommended=coalesce(field_recommended, calc_recommended)
+| fillnull value="false" recommended | search (recommended=true OR field_required=true)
+| fields model_name, dataset, name, recommended, field_required
+        </query>
+    <earliest>$field1.earliest$</earliest>
+    <latest>$field1.latest$</latest>
+  </search>
+  <search id="sankey_search">
+    <query>| rest /services/apps/local splunk_server=local | eval reccnt=0
+| search title IN ("sankey*") | stats count as is_installed | fillnull | eval is_installed=case(is_installed==0,"not_installed",is_installed==1,"is_installed")
+        </query>
+    <earliest>$field1.earliest$</earliest>
+    <latest>$field1.latest$</latest>
+    <done>
+      <condition match="match('result.is_installed',&quot;is_installed&quot;)">
+        <set token="show_sankey">show</set>
+      </condition>
+      <condition>
+        <unset token="show_sankey"></unset>
+      </condition>
+    </done>
+  </search>
+  <fieldset submitButton="false">
+      <input type="time" token="field1">
+          <label>Time Range</label>
+          <default>
+              <earliest>-24h@h</earliest>
+              <latest>now</latest>
+          </default>
+      </input>
+      <input type="dropdown" token="selected_datamodel" searchWhenChanged="true">
+          <label>Data Model</label>
+          <choice value="Network_Traffic">Network_Traffic</choice>
+          <choice value="Network_Sessions">Network_Sessions</choice>
+          <initialValue>Network_Traffic</initialValue>
+          <default>Network_Traffic</default>
+          <change>
+              <condition value="Network_Traffic">
+                  <set token="dm_dataset">All_Traffic</set>
+              </condition>
+              <condition value="Network_Sessions">
+                  <set token="dm_dataset">All_Sessions</set>
+              </condition>
+          </change>
+      </input>
+  </fieldset>
+  <row>
+    <panel>
+      <title>Indexes in the $selected_datamodel$ Dataset</title>
+      <table>
+        <search>
+          <query>| tstats count from datamodel="$selected_datamodel$.$dm_dataset$" where index=* by index | fields - count</query>
+          <earliest>$field1.earliest$</earliest>
+          <latest>$field1.latest$</latest>
+        </search>
+      </table>
+    </panel>
+    <panel>
+      <title>Sourcetypes in the $selected_datamodel$ Dataset</title>
+      <table>
+        <search>
+          <query>| tstats count from datamodel="$selected_datamodel$.$dm_dataset$" where index=* by sourcetype | fields - count</query>
+          <earliest>$field1.earliest$</earliest>
+          <latest>$field1.latest$</latest>
+        </search>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Percentage of Events With Unknown in Fields</title>
+      <chart depends="$search_string$">
+        <search>
+          <query>
+            <![CDATA[$search_string$ | eventstats sum(count) AS total_events by sourcetype| eval perc = round((count/total_events)*100,2)
+| foreach $dm_dataset$.* [eval <<MATCHSTR>>_unknown_perc = if(match('$dm_dataset$.<<MATCHSTR>>',"^unknown$"),perc,0)]
+| stats sum(*_unknown_perc) AS *_unknown_perc by sourcetype]]>
+          </query>
+          <earliest>$field1.earliest$</earliest>
+          <latest>$field1.latest$</latest>
+        </search>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">collapsed</option>
+        <option name="charting.axisTitleY.visibility">collapsed</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">1</option>
+        <option name="charting.axisY2.scale">log</option>
+        <option name="charting.chart">column</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.showDataLabels">none</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.chart.overlayFields">none</option>
+        <option name="charting.drilldown">none</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="refresh.display">progressbar</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Breakdown of Sourcetypes in Indexes in Dataset</title>
+      <viz type="sankey_diagram_app.sankey_diagram" depends="$show_sankey$">
+        <search>
+          <query>| tstats count from datamodel="$selected_datamodel$.$dm_dataset$" where index=* by index,sourcetype</query>
+          <earliest>$field1.earliest$</earliest>
+          <latest>$field1.latest$</latest>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="height">422</option>
+        <option name="refresh.display">progressbar</option>
+      </viz>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Constraints in the $selected_datamodel$ Dataset</title>
+      <table>
+        <search base="base_search">
+          <query>| table model_name dataset constraints base_search | dedup dataset</query>
+        </search>
+        <option name="drilldown">none</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Fields in the $selected_datamodel$ Dataset</title>
+      <table>
+        <search base="base_search">
+          <query>| search dataset="$dm_dataset$" | dedup dataset | table dataset,field, calc_field</query>
+        </search>
+        <option name="drilldown">none</option>
+      </table>
+    </panel>
+    <panel>
+      <title>Required and Recommended Fields in $selected_datamodel$ Dataset</title>
+      <table>
+        <search base="base_recommended_search">
+          <query>| dedup name | table name, recommended, field_required</query>
+        </search>
+        <option name="drilldown">none</option>
+      </table>
+    </panel>
+    <panel>
+      <title>Tags in the $selected_datamodel$ Dataset</title>
+      <table>
+        <search base="base_search">
+          <query>| table dataset,tags</query>
+        </search>
+        <option name="drilldown">none</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Last 4 Hours - Recommended Fields Coverage based on Datamodel Constraints</title>
+      <chart>
+        <title>Using the constraints above, these are the percentage of raw events that have the recommended fields</title>
+        <search>
+          <query>[|datamodel $selected_datamodel$
+| spath output=model_name path=modelName
+| spath output=foo path=objects{}
+| mvexpand foo
+| spath input=foo output=dataset path=objectName
+| spath input=foo output=constraints path=constraints{}.search
+| spath input=foo output=tags path=comment{}.tags{}
+| spath input=foo output=calc_field path=calculations{}.outputFields{}.displayName
+| spath input=foo output=field path=fields{}.displayName
+| spath input=foo output=bar path=calculations{}
+| spath input=foo output=foo path=fields{}
+| spath input=foo output=base_search path=baseSearch
+| fields model_name,dataset,bar,foo,constraints,base_search,tags,calc_field,field |  table constraints | format | rex field=search mode=sed "s/constraints=//g" | rex field=search mode=sed "s/\\\\\"//g" | rex field=search mode=sed "s/\"//g"] | eventstats count as datamodel_test_check_total_count | fieldsummary maxvals=1 | append [|datamodel $selected_datamodel$
+| spath output=model_name path=modelName
+| spath output=foo path=objects{}
+| mvexpand foo
+| spath input=foo output=dataset path=objectName
+| spath input=foo output=constraints path=constraints{}.search
+| spath input=foo output=tags path=comment{}.tags{}
+| spath input=foo output=calc_field path=calculations{}.outputFields{}.displayName
+| spath input=foo output=field path=fields{}.displayName
+| spath input=foo output=bar path=calculations{}
+| spath input=foo output=foo path=fields{}
+| spath input=foo output=base_search path=baseSearch
+| eval foobar = mvappend(foo,bar)
+| table model_name, dataset, foobar
+| mvexpand foobar
+| spath input=foobar output=field_name path=fieldName | spath input=foobar output=field_required path=required
+| spath input=foobar output=calc_name path=outputFields{}.fieldName
+| spath input=foobar output=field_recommended path=comment{}.recommended
+| spath input=foobar output=calc_recommended path=outputFields{}.comment{}.recommended
+| eval name=coalesce(field_name,calc_name), recommended=coalesce(field_recommended, calc_recommended)
+| fillnull value="false" recommended | search (recommended=true OR field_required=true) |stats values(name) as recommended_fields] | eventstats values(recommended_fields) as recommended_fields  | where in(field, recommended_fields)  OR field == "datamodel_test_check_total_count" |eval table=field.";;".count| fields table | eval t = split(table,";;"), field = mvindex(t,0), count=mvindex(t,1) | eval {field} = mvindex(t,1) | sort - datamodel_test_check_total_count | filldown datamodel_test_check_total_count | fields field count datamodel_test_check_total_count | where field != "datamodel_test_check_total_count" | eval percentage = count / datamodel_test_check_total_count * 100  | eval max_percentage = 100 | fields - datamodel_test_check_total_count | sort - count</query>
+          <earliest>-4h@m</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">collapsed</option>
+        <option name="charting.axisTitleY.visibility">collapsed</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">1</option>
+        <option name="charting.axisY2.scale">log</option>
+        <option name="charting.chart">column</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.showDataLabels">none</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.chart.overlayFields">percentage,max_percentage</option>
+        <option name="charting.drilldown">none</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="refresh.display">progressbar</option>
+      </chart>
+    </panel>
+  </row>
+</form>

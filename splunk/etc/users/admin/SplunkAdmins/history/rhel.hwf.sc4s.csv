@@ -1,0 +1,193 @@
+sid,search,"splunk_server","_time","is_realtime",provenance,"api_et","api_index_et","api_index_lt","api_lt","event_count","exec_time","result_count","savedsearch_name","scan_count","search_et","search_lt",status,"total_run_time","__mv_sid","__mv_search","__mv_splunk_server","__mv__time","__mv_is_realtime","__mv_provenance","__mv_api_et","__mv_api_index_et","__mv_api_index_lt","__mv_api_lt","__mv_event_count","__mv_exec_time","__mv_result_count","__mv_savedsearch_name","__mv_scan_count","__mv_search_et","__mv_search_lt","__mv_status","__mv_total_run_time"
+"rt_md_1677873733.3","| metadata type=sourcetypes | search totalCount > 0","rhel.hwf.sc4s","1677873733.011265",1,"UI:Search",,,,,0,1677873733,0,,0,,,failed,"88.09100000000001",,,,,,,,,,,,,,,,,,,
+"admin__admin__SplunkAdmins__search3_1677873791.4","search index=_internal  sourcetype=splunkd_ui_access user=$value$ `searchheadhosts` | top referer","rhel.hwf.sc4s","1677873791.796944",0,"UI:Dashboard:troubleshooting_indexer_cpu_drilldown","1677859380.000000000",0,0,"1677873791.000000000",0,1677873791,0,search3,2,"1677859380.000000000","1677873791.000000000",completed,"0.232",,,,,,,,,,,,,,,,,,,
+"admin__admin__SplunkAdmins__search3_1677873811.5","search index=_internal  sourcetype=splunkd_ui_access user=$value$ `searchheadhosts` | top referer","rhel.hwf.sc4s","1677873811.108783",0,"UI:Dashboard:troubleshooting_indexer_cpu_drilldown","1677859380.000000000",0,0,"1677873811.000000000",0,1677873811,0,search3,60,"1677859380.000000000","1677873811.000000000",canceled,"0.202",,,,,,,,,,,,,,,,,,,
+"admin__admin__SplunkAdmins__search3_1677873820.6","search index=_internal  sourcetype=splunkd_ui_access user=$value$ `searchheadhosts` | top referer","rhel.hwf.sc4s","1677873820.873823",0,"UI:Dashboard:troubleshooting_indexer_cpu_drilldown","1677872920.000000000",0,0,"1677873820.000000000",0,1677873820,0,search3,48,"1677872920.000000000","1677873820.000000000",completed,"0.1",,,,,,,,,,,,,,,,,,,
+"admin__admin__SplunkAdmins__search2_1677873830.8","search index=_introspection `indexerhosts` sourcetype=splunk_resource_usage data.search_props.sid::*  data.search_props.app=*
+| eval mem_used = 'data.mem_used' | eval app = 'data.search_props.app' | eval elapsed = 'data.elapsed' | eval label = 'data.search_props.label' 
+| eval type = 'data.search_props.type' | eval mode = 'data.search_props.mode' | eval user = 'data.search_props.user' | eval cpuperc = 'data.pct_cpu'
+| eval read_mb = 'data.read_mb'
+| eval provenance='data.search_props.provenance' | eval label=coalesce(label, provenance)
+| eval search_head = if(isnull('data.search_props.search_head'),""N/A"",'data.search_props.search_head')
+| bin _time span=1m
+| stats max(elapsed) as runtime max(mem_used) as mem_used earliest(_time) as Started, sum(cpuperc) AS totalCPU, max(read_mb) AS read_mb, avg(cpuperc) AS avgCPU by type, mode, app, user, label, data.pid, host
+| stats sum(avgCPU) AS totalAVGCPU, sum(mem_used) AS totalMemUsed, sum(runtime) AS totalRuntime, sum(read_mb) AS totalReadMB, sum(totalCPU) AS totalCPU by Started, type, ""mode"", app, user, label
+| eval totalMemUsed = round(totalMemUsed, 2)
+| eval Started=strftime(Started,""%+"") 
+| eval duration = tostring(totalRuntime, ""duration"")
+| eval avgCPU = round(totalAVGCPU)
+| eval totalCPU=tostring(totalCPU,""commas""), avgCPU=tostring(avgCPU,""commas"")
+| sort - totalAVGCPU, totalMemUsed
+| fields - totalRuntime, totalAVGCPU","rhel.hwf.sc4s","1677873830.724548",0,"UI:Dashboard:troubleshooting_indexer_cpu_drilldown","1677872930.000000000",0,0,"1677873830.000000000",9,1677873830,1,search2,21,"1677872930.000000000","1677873830.000000000",completed,"0.257",,,,,,,,,,,,,,,,,,,
+"admin__admin__SplunkAdmins__search1_1677873858.9","search index=_introspection `indexerhosts` sourcetype=splunk_resource_usage data.search_props.sid::*  data.search_props.app=*
+| eval mem_used = 'data.mem_used' | eval app = 'data.search_props.app' | eval elapsed = 'data.elapsed' | eval label = 'data.search_props.label' 
+| eval type = 'data.search_props.type' | eval mode = 'data.search_props.mode' | eval user = 'data.search_props.user' | eval cpuperc = 'data.pct_cpu'
+| eval read_mb = 'data.read_mb'
+| eval sid='data.search_props.sid'
+| eval provenance='data.search_props.provenance' | eval label=coalesce(label, provenance)
+| eval search_head = if(isnull('data.search_props.search_head'),""N/A"",'data.search_props.search_head')
+| stats max(elapsed) as runtime max(mem_used) as mem_used earliest(_time) as Started, sum(cpuperc) AS totalCPU, max(read_mb) AS read_mb, avg(cpuperc) AS avgCPUPerMinute by type, mode, app, user, label, host, data.pid, sid 
+| stats sum(avgCPUPerMinute) AS totalAVGCPUPerMinute, sum(mem_used) AS totalMemUsed, sum(runtime) AS totalRuntime, sum(read_mb) AS totalReadMB, sum(totalCPU) AS totalCPU by Started, type, ""mode"", app, user, label, host, sid, data.pid
+| eval totalMemUsed = round(totalMemUsed, 2)
+| eval Started=strftime(Started,""%+"") 
+| eval duration = tostring(totalRuntime, ""duration"")
+| eval avgCPU = round(totalAVGCPUPerMinute)
+| eval totalCPU=tostring(totalCPU,""commas""), avgCPU=tostring(avgCPU,""commas"")
+| sort - totalRuntime, totalCPU
+| fields - totalRuntime, totalAVGCPUPerMinute, sid","rhel.hwf.sc4s","1677873858.532332",0,"UI:Dashboard:troubleshooting_indexer_cpu_drilldown","1677872958.000000000",0,0,"1677873858.000000000",9,1677873858,1,search1,19,"1677872958.000000000","1677873858.000000000",completed,"0.192",,,,,,,,,,,,,,,,,,,
+"rt_md_1677877499.28","| metadata type=sourcetypes | search totalCount > 0","rhel.hwf.sc4s","1677877499.195300",1,"UI:Search",,,,,0,1677877499,0,,0,,,failed,"76.092",,,,,,,,,,,,,,,,,,,
+"admin__admin__SplunkAdmins__search1_1677890389.64","search index=_introspection `indexerhosts` sourcetype=splunk_resource_usage data.search_props.sid::*  data.search_props.app=*
+| eval mem_used = 'data.mem_used' | eval app = 'data.search_props.app' | eval elapsed = 'data.elapsed' | eval label = 'data.search_props.label' 
+| eval type = 'data.search_props.type' | eval mode = 'data.search_props.mode' | eval user = 'data.search_props.user' | eval cpuperc = 'data.pct_cpu'
+| eval read_mb = 'data.read_mb'
+| eval sid='data.search_props.sid'
+| eval provenance='data.search_props.provenance' | eval label=coalesce(label, provenance)
+| eval search_head = if(isnull('data.search_props.search_head'),""N/A"",'data.search_props.search_head')
+| stats max(elapsed) as runtime max(mem_used) as mem_used earliest(_time) as Started, sum(cpuperc) AS totalCPU, max(read_mb) AS read_mb, avg(cpuperc) AS avgCPUPerMinute by type, mode, app, user, label, host, data.pid, sid 
+| stats sum(avgCPUPerMinute) AS totalAVGCPUPerMinute, sum(mem_used) AS totalMemUsed, sum(runtime) AS totalRuntime, sum(read_mb) AS totalReadMB, sum(totalCPU) AS totalCPU by Started, type, ""mode"", app, user, label, host, sid, data.pid
+| eval totalMemUsed = round(totalMemUsed, 2)
+| eval Started=strftime(Started,""%+"") 
+| eval duration = tostring(totalRuntime, ""duration"")
+| eval avgCPU = round(totalAVGCPUPerMinute)
+| eval totalCPU=tostring(totalCPU,""commas""), avgCPU=tostring(avgCPU,""commas"")
+| sort - totalRuntime, totalCPU
+| fields - totalRuntime, totalAVGCPUPerMinute, sid","rhel.hwf.sc4s","1677890389.948220",0,"UI:Dashboard:troubleshooting_indexer_cpu_drilldown","1677889489.000000000",0,0,"1677890389.000000000",0,1677890390,0,search1,0,"1677889489.000000000","1677890389.000000000",completed,"0.209",,,,,,,,,,,,,,,,,,,
+"rt_md_1677941840.329","| metadata type=sourcetypes | search totalCount > 0","rhel.hwf.sc4s","1677941840.797374",1,"UI:Search",,,,,0,1677941840,0,,0,,,failed,"97.122",,,,,,,,,,,,,,,,,,,
+"admin__admin__SplunkAdmins__search5_1677941912.330","search index=_internal `indexerhosts` ""replication queue for "" ""full"" OR ""has room now"" sourcetype=splunkd
+| rename peer AS guid
+| join guid
+    [| rest /services/search/distributed/peers
+    | table guid peerName]
+| transaction bid guid endswith=""has room now"" keeporphans=true
+| timechart span=1m count, max(duration) AS duration by peerName","rhel.hwf.sc4s","1677941912.319106",0,"UI:Dashboard:indexer_max_data_queue_sizes_by_name","1677938280.000000000",0,0,"1677941912.000000000",0,1677941912,0,search5,0,"1677938280.000000000","1677941912.000000000",completed,"0.612",,,,,,,,,,,,,,,,,,,
+"admin__admin__SplunkAdmins__search1_1677941912.331","search index=_internal `indexerhosts` `splunkadmins_metrics_source` sourcetype=splunkd group=queue (name=parsingqueue)
+| eval name=case(name==""aggqueue"",""2 - Aggregation Queue"",
+ name==""indexqueue"", ""4 - Indexing Queue"",
+ name==""parsingqueue"", ""1 - Parsing Queue"",
+ name==""typingqueue"", ""3 - Typing Queue"") 
+ | eval ingest_pipe = if(isnotnull(ingest_pipe), ingest_pipe, ""none"") | search ingest_pipe=* 
+| eval max=if(isnotnull(max_size_kb),max_size_kb,max_size) 
+| eval curr=if(isnotnull(current_size_kb),current_size_kb,current_size) 
+| eval fill_perc=round((curr/max)*100,2) 
+| eval combined = host . ""_pipe_"" . ingest_pipe
+| timechart limit=14 useother=false span=1m  Max(fill_perc) by combined","rhel.hwf.sc4s","1677941912.610936",0,"UI:Dashboard:indexer_max_data_queue_sizes_by_name","1677927480.000000000",0,0,"1677941912.000000000",0,1677941912,0,search1,0,"1677927480.000000000","1677941912.000000000",completed,"0.9420000000000001",,,,,,,,,,,,,,,,,,,
+"admin__admin__SplunkAdmins__search2_1677941912.332","search index=_internal `indexerhosts` `splunkadmins_metrics_source` sourcetype=splunkd group=queue (name=aggqueue)
+| eval name=case(name==""aggqueue"",""2 - Aggregation Queue"",
+ name==""indexqueue"", ""4 - Indexing Queue"",
+ name==""parsingqueue"", ""1 - Parsing Queue"",
+ name==""typingqueue"", ""3 - Typing Queue"") 
+ | eval ingest_pipe = if(isnotnull(ingest_pipe), ingest_pipe, ""none"") | search ingest_pipe=* 
+| eval max=if(isnotnull(max_size_kb),max_size_kb,max_size) 
+| eval curr=if(isnotnull(current_size_kb),current_size_kb,current_size) 
+| eval fill_perc=round((curr/max)*100,2) 
+| eval combined = host . ""_pipe_"" . ingest_pipe
+| timechart limit=14 useother=false span=1m  Max(fill_perc) by combined","rhel.hwf.sc4s","1677941912.622139",0,"UI:Dashboard:indexer_max_data_queue_sizes_by_name","1677927480.000000000",0,0,"1677941912.000000000",0,1677941913,0,search2,0,"1677927480.000000000","1677941912.000000000",completed,"0.726",,,,,,,,,,,,,,,,,,,
+"admin__admin__SplunkAdmins__search3_1677941912.333","search index=_internal `indexerhosts` `splunkadmins_metrics_source` sourcetype=splunkd group=queue (name=typingqueue)
+| eval name=case(name==""aggqueue"",""2 - Aggregation Queue"",
+ name==""indexqueue"", ""4 - Indexing Queue"",
+ name==""parsingqueue"", ""1 - Parsing Queue"",
+ name==""typingqueue"", ""3 - Typing Queue"") 
+ | eval ingest_pipe = if(isnotnull(ingest_pipe), ingest_pipe, ""none"") | search ingest_pipe=* 
+| eval max=if(isnotnull(max_size_kb),max_size_kb,max_size) 
+| eval curr=if(isnotnull(current_size_kb),current_size_kb,current_size) 
+| eval fill_perc=round((curr/max)*100,2) 
+| eval combined = host . ""_pipe_"" . ingest_pipe
+| timechart limit=14 useother=false span=1m  Max(fill_perc) by combined","rhel.hwf.sc4s","1677941912.624259",0,"UI:Dashboard:indexer_max_data_queue_sizes_by_name","1677927480.000000000",0,0,"1677941912.000000000",0,1677941912,0,search3,0,"1677927480.000000000","1677941912.000000000",completed,"0.914",,,,,,,,,,,,,,,,,,,
+"admin__admin__SplunkAdmins__search4_1677941912.334","search index=_internal `indexerhosts` `splunkadmins_metrics_source` sourcetype=splunkd group=queue (name=indexqueue)
+| eval name=case(name==""aggqueue"",""2 - Aggregation Queue"",
+ name==""indexqueue"", ""4 - Indexing Queue"",
+ name==""parsingqueue"", ""1 - Parsing Queue"",
+ name==""typingqueue"", ""3 - Typing Queue"") 
+ | eval ingest_pipe = if(isnotnull(ingest_pipe), ingest_pipe, ""none"") | search ingest_pipe=* 
+| eval max=if(isnotnull(max_size_kb),max_size_kb,max_size) 
+| eval curr=if(isnotnull(current_size_kb),current_size_kb,current_size) 
+| eval fill_perc=round((curr/max)*100,2) 
+| eval combined = host . ""_pipe_"" . ingest_pipe
+| timechart limit=14 useother=false span=1m  Max(fill_perc) by combined","rhel.hwf.sc4s","1677941912.626363",0,"UI:Dashboard:indexer_max_data_queue_sizes_by_name","1677927480.000000000",0,0,"1677941912.000000000",0,1677941913,0,search4,0,"1677927480.000000000","1677941912.000000000",completed,"0.7010000000000001",,,,,,,,,,,,,,,,,,,
+"admin__admin__SplunkAdmins__search6_1677941912.335","search index=_internal `indexerhosts` `splunkadmins_metrics_source` sourcetype=splunkd group=queue | stats count(eval(isnotnull(blocked))) AS blockedCount, count by name, host, _time | eval percBlocked=(100/count)*blockedCount | eval hostQueue = host . ""_"" . name | timechart useOther=false span=10m avg(percBlocked) by hostQueue","rhel.hwf.sc4s","1677941912.631935",0,"UI:Dashboard:indexer_max_data_queue_sizes_by_name","1677927480.000000000",0,0,"1677941912.000000000",0,1677941913,0,search6,0,"1677927480.000000000","1677941912.000000000",completed,"0.5700000000000001",,,,,,,,,,,,,,,,,,,
+"admin__admin__SplunkAdmins__search7_1677941912.336","search index=_internal `indexerhosts` `splunkadmins_metrics_source` sourcetype=splunkd group=queue (name=splunktcpin OR name=tcpin_cooked_pqueue)
+| eval ingest_pipe = if(isnotnull(ingest_pipe), ingest_pipe, ""none"") | search ingest_pipe=* 
+| eval max=if(isnotnull(max_size_kb),max_size_kb,max_size) 
+| eval curr=if(isnotnull(current_size_kb),current_size_kb,current_size) 
+| eval fill_perc=round((curr/max)*100,2) 
+| eval combined = host . ""_pipe_"" . ingest_pipe
+| timechart limit=14 useother=false span=1m max(fill_perc) by combined","rhel.hwf.sc4s","1677941912.634118",0,"UI:Dashboard:indexer_max_data_queue_sizes_by_name","1677927480.000000000",0,0,"1677941912.000000000",0,1677941912,0,search7,0,"1677927480.000000000","1677941912.000000000",completed,"0.597",,,,,,,,,,,,,,,,,,,
+"admin__admin__SplunkAdmins__search9_1677941912.337","| tstats count where index=_internal sourcetype=splunkd `indexerhosts` `splunkadmins_splunkd_source` TERM(""Forcing"") groupby _time, host span=1s | timechart sum(count) by host","rhel.hwf.sc4s","1677941912.650654",0,"UI:Dashboard:indexer_max_data_queue_sizes_by_name","1677927480.000000000",0,0,"1677941912.000000000",0,1677941912,0,search9,0,"1677927480.000000000","1677941912.000000000",completed,"0.495",,,,,,,,,,,,,,,,,,,
+"admin__admin__SplunkAdmins__search8_1677941912.338","search index=_internal `indexerhosts` `splunkadmins_metrics_source` sourcetype=splunkd group=thruput name=index_thruput
+    | eval ingest_pipe = if(isnotnull(ingest_pipe), ingest_pipe, ""none"") | search ingest_pipe=*
+                  | eval combined = host . ""_pipe_"" . ingest_pipe
+                  | timechart useother=false span=1m limit=14 per_second(kb) by host","rhel.hwf.sc4s","1677941912.654210",0,"UI:Dashboard:indexer_max_data_queue_sizes_by_name","1677927480.000000000",0,0,"1677941912.000000000",0,1677941913,0,search8,0,"1677927480.000000000","1677941912.000000000",completed,"0.247",,,,,,,,,,,,,,,,,,,
+"rt_admin__admin__SplunkAdmins__search1_rt_1677941924.339","search index=_internal `indexerhosts` `splunkadmins_metrics_source` sourcetype=splunkd group=queue (name=parsingqueue)
+| eval name=case(name==""aggqueue"",""2 - Aggregation Queue"",
+ name==""indexqueue"", ""4 - Indexing Queue"",
+ name==""parsingqueue"", ""1 - Parsing Queue"",
+ name==""typingqueue"", ""3 - Typing Queue"") 
+ | eval ingest_pipe = if(isnotnull(ingest_pipe), ingest_pipe, ""none"") | search ingest_pipe=* 
+| eval max=if(isnotnull(max_size_kb),max_size_kb,max_size) 
+| eval curr=if(isnotnull(current_size_kb),current_size_kb,current_size) 
+| eval fill_perc=round((curr/max)*100,2) 
+| eval combined = host . ""_pipe_"" . ingest_pipe
+| timechart limit=14 useother=false span=1m  Max(fill_perc) by combined","rhel.hwf.sc4s","1677941924.150511",1,"UI:Dashboard:indexer_max_data_queue_sizes_by_name",,0,0,,0,1677941924,0,search1,0,,,canceled,"75.72200000000001",,,,,,,,,,,,,,,,,,,
+"rt_admin__admin__SplunkAdmins__search2_rt_1677941924.340","search index=_internal `indexerhosts` `splunkadmins_metrics_source` sourcetype=splunkd group=queue (name=aggqueue)
+| eval name=case(name==""aggqueue"",""2 - Aggregation Queue"",
+ name==""indexqueue"", ""4 - Indexing Queue"",
+ name==""parsingqueue"", ""1 - Parsing Queue"",
+ name==""typingqueue"", ""3 - Typing Queue"") 
+ | eval ingest_pipe = if(isnotnull(ingest_pipe), ingest_pipe, ""none"") | search ingest_pipe=* 
+| eval max=if(isnotnull(max_size_kb),max_size_kb,max_size) 
+| eval curr=if(isnotnull(current_size_kb),current_size_kb,current_size) 
+| eval fill_perc=round((curr/max)*100,2) 
+| eval combined = host . ""_pipe_"" . ingest_pipe
+| timechart limit=14 useother=false span=1m  Max(fill_perc) by combined","rhel.hwf.sc4s","1677941924.155678",1,"UI:Dashboard:indexer_max_data_queue_sizes_by_name",,0,0,,0,1677941924,0,search2,0,,,canceled,"75.819",,,,,,,,,,,,,,,,,,,
+"rt_admin__admin__SplunkAdmins__search3_rt_1677941924.341","search index=_internal `indexerhosts` `splunkadmins_metrics_source` sourcetype=splunkd group=queue (name=typingqueue)
+| eval name=case(name==""aggqueue"",""2 - Aggregation Queue"",
+ name==""indexqueue"", ""4 - Indexing Queue"",
+ name==""parsingqueue"", ""1 - Parsing Queue"",
+ name==""typingqueue"", ""3 - Typing Queue"") 
+ | eval ingest_pipe = if(isnotnull(ingest_pipe), ingest_pipe, ""none"") | search ingest_pipe=* 
+| eval max=if(isnotnull(max_size_kb),max_size_kb,max_size) 
+| eval curr=if(isnotnull(current_size_kb),current_size_kb,current_size) 
+| eval fill_perc=round((curr/max)*100,2) 
+| eval combined = host . ""_pipe_"" . ingest_pipe
+| timechart limit=14 useother=false span=1m  Max(fill_perc) by combined","rhel.hwf.sc4s","1677941924.167276",1,"UI:Dashboard:indexer_max_data_queue_sizes_by_name",,0,0,,0,1677941924,0,search3,0,,,canceled,"75.537",,,,,,,,,,,,,,,,,,,
+"rt_admin__admin__SplunkAdmins__search4_rt_1677941924.342","search index=_internal `indexerhosts` `splunkadmins_metrics_source` sourcetype=splunkd group=queue (name=indexqueue)
+| eval name=case(name==""aggqueue"",""2 - Aggregation Queue"",
+ name==""indexqueue"", ""4 - Indexing Queue"",
+ name==""parsingqueue"", ""1 - Parsing Queue"",
+ name==""typingqueue"", ""3 - Typing Queue"") 
+ | eval ingest_pipe = if(isnotnull(ingest_pipe), ingest_pipe, ""none"") | search ingest_pipe=* 
+| eval max=if(isnotnull(max_size_kb),max_size_kb,max_size) 
+| eval curr=if(isnotnull(current_size_kb),current_size_kb,current_size) 
+| eval fill_perc=round((curr/max)*100,2) 
+| eval combined = host . ""_pipe_"" . ingest_pipe
+| timechart limit=14 useother=false span=1m  Max(fill_perc) by combined","rhel.hwf.sc4s","1677941924.179441",1,"UI:Dashboard:indexer_max_data_queue_sizes_by_name",,0,0,,0,1677941924,0,search4,0,,,canceled,"75.705",,,,,,,,,,,,,,,,,,,
+"rt_admin__admin__SplunkAdmins__search6_rt_1677941924.343","search index=_internal `indexerhosts` `splunkadmins_metrics_source` sourcetype=splunkd group=queue | stats count(eval(isnotnull(blocked))) AS blockedCount, count by name, host, _time | eval percBlocked=(100/count)*blockedCount | eval hostQueue = host . ""_"" . name | timechart useOther=false span=10m avg(percBlocked) by hostQueue","rhel.hwf.sc4s","1677941924.188036",1,"UI:Dashboard:indexer_max_data_queue_sizes_by_name",,0,0,,0,1677941924,0,search6,0,,,canceled,"75.547",,,,,,,,,,,,,,,,,,,
+"rt_admin__admin__SplunkAdmins__search7_rt_1677941924.344","search index=_internal `indexerhosts` `splunkadmins_metrics_source` sourcetype=splunkd group=queue (name=splunktcpin OR name=tcpin_cooked_pqueue)
+| eval ingest_pipe = if(isnotnull(ingest_pipe), ingest_pipe, ""none"") | search ingest_pipe=* 
+| eval max=if(isnotnull(max_size_kb),max_size_kb,max_size) 
+| eval curr=if(isnotnull(current_size_kb),current_size_kb,current_size) 
+| eval fill_perc=round((curr/max)*100,2) 
+| eval combined = host . ""_pipe_"" . ingest_pipe
+| timechart limit=14 useother=false span=1m max(fill_perc) by combined","rhel.hwf.sc4s","1677941924.202298",1,"UI:Dashboard:indexer_max_data_queue_sizes_by_name",,0,0,,0,1677941924,0,search7,0,,,canceled,"75.508",,,,,,,,,,,,,,,,,,,
+"rt_admin__admin__SplunkAdmins__search8_rt_1677941924.345","search index=_internal `indexerhosts` `splunkadmins_metrics_source` sourcetype=splunkd group=thruput name=index_thruput
+    | eval ingest_pipe = if(isnotnull(ingest_pipe), ingest_pipe, ""none"") | search ingest_pipe=*
+                  | eval combined = host . ""_pipe_"" . ingest_pipe
+                  | timechart useother=false span=1m limit=14 per_second(kb) by host","rhel.hwf.sc4s","1677941924.213438",1,"UI:Dashboard:indexer_max_data_queue_sizes_by_name",,0,0,,0,1677941924,0,search8,0,,,canceled,"75.568",,,,,,,,,,,,,,,,,,,
+"rt_admin__admin__SplunkAdmins__search9_rt_1677941924.346","| tstats count where index=_internal sourcetype=splunkd `indexerhosts` `splunkadmins_splunkd_source` TERM(""Forcing"") groupby _time, host span=1s | timechart sum(count) by host","rhel.hwf.sc4s","1677941924.240456",1,"UI:Dashboard:indexer_max_data_queue_sizes_by_name",,0,0,,0,1677941925,0,search9,0,,,failed,"0.046",,,,,,,,,,,,,,,,,,,
+"admin__admin__SplunkAdmins__search1_1677942067.357","| `apl_net_traffic_dvcs`","rhel.hwf.sc4s","1677942067.271625",0,"UI:Dashboard:apl_net_01_overview",,0,0,,0,1677942067,0,search1,0,,,completed,"0.079",,,,,,,,,,,,,,,,,,,
+"admin__admin__SplunkAdmins__search2_1677942068.358","| `apl_net_traffic_tstats_pre` count from datamodel=Network_Traffic.All_Traffic WHERE All_Traffic.dvc=""*"" by _time, All_Traffic.action span=30m | timechart minspan=30m count by All_Traffic.action | rename All_Traffic.action AS action","rhel.hwf.sc4s","1677942068.014933",0,"UI:Dashboard:apl_net_01_overview","1677855600.000000000",0,0,"1677942068.000000000",0,1677942068,0,search2,0,,,failed,"0.07200000000000001",,,,,,,,,,,,,,,,,,,
+"admin__admin__SplunkAdmins__search3_1677942068.359","| `apl_net_traffic_tstats_pre` count from datamodel=Network_Traffic.All_Traffic WHERE All_Traffic.dvc=""*"" by _time, All_Traffic.transport span=30m | timechart minspan=30m count by All_Traffic.transport | rename All_Traffic.transport AS transport","rhel.hwf.sc4s","1677942068.023463",0,"UI:Dashboard:apl_net_01_overview","1677855600.000000000",0,0,"1677942068.000000000",0,1677942068,0,search3,0,,,failed,"0.048",,,,,,,,,,,,,,,,,,,
+"admin__admin__SplunkAdmins__search4_1677942068.360","| `apl_net_traffic_tstats_pre` count from datamodel=Network_Traffic.All_Traffic WHERE All_Traffic.dvc=""*""  by _time, All_Traffic.dest_port span=30m | timechart minspan=30m useother=false limit=20 count by All_Traffic.dest_port | rename All_Traffic.dest_port AS dest_port","rhel.hwf.sc4s","1677942068.031890",0,"UI:Dashboard:apl_net_01_overview","1677855600.000000000",0,0,"1677942068.000000000",0,1677942068,0,search4,0,,,failed,"0.042",,,,,,,,,,,,,,,,,,,
+"admin__admin__SplunkAdmins__search1_1677942106.361","| `apl_net_traffic_dvcs`","rhel.hwf.sc4s","1677942106.941482",0,"UI:Dashboard:apl_net_01_overview",,0,0,,0,1677942107,0,search1,0,,,completed,"0.063",,,,,,,,,,,,,,,,,,,
+"admin__admin__SplunkAdmins__search2_1677942107.362","| `apl_net_traffic_tstats_pre` count from datamodel=Network_Traffic.All_Traffic WHERE All_Traffic.dvc=""*"" by _time, All_Traffic.action span=30m | timechart minspan=30m count by All_Traffic.action | rename All_Traffic.action AS action","rhel.hwf.sc4s","1677942107.684466",0,"UI:Dashboard:apl_net_01_overview","1677855600.000000000",0,0,"1677942107.000000000",0,1677942107,0,search2,0,,,failed,"0.006",,,,,,,,,,,,,,,,,,,
+"admin__admin__SplunkAdmins__search3_1677942107.363","| `apl_net_traffic_tstats_pre` count from datamodel=Network_Traffic.All_Traffic WHERE All_Traffic.dvc=""*"" by _time, All_Traffic.transport span=30m | timechart minspan=30m count by All_Traffic.transport | rename All_Traffic.transport AS transport","rhel.hwf.sc4s","1677942107.686779",0,"UI:Dashboard:apl_net_01_overview","1677855600.000000000",0,0,"1677942107.000000000",0,1677942107,0,search3,0,,,failed,"0.002",,,,,,,,,,,,,,,,,,,
+"admin__admin__SplunkAdmins__search4_1677942107.364","| `apl_net_traffic_tstats_pre` count from datamodel=Network_Traffic.All_Traffic WHERE All_Traffic.dvc=""*""  by _time, All_Traffic.dest_port span=30m | timechart minspan=30m useother=false limit=20 count by All_Traffic.dest_port | rename All_Traffic.dest_port AS dest_port","rhel.hwf.sc4s","1677942107.690886",0,"UI:Dashboard:apl_net_01_overview","1677855600.000000000",0,0,"1677942107.000000000",0,1677942107,0,search4,0,,,failed,"0.002",,,,,,,,,,,,,,,,,,,
+"admin__admin__SplunkAdmins__search1_1677942870.3","| `apl_net_traffic_dvcs`","rhel.hwf.sc4s","1677942870.882060",0,"UI:Dashboard:apl_net_01_overview",,0,0,,0,1677942870,0,search1,0,,,completed,"0.058",,,,,,,,,,,,,,,,,,,
+"admin__admin__SplunkAdmins__search2_1677942871.4","| `apl_net_traffic_tstats_pre` count from datamodel=Network_Traffic.All_Traffic WHERE All_Traffic.dvc=""*"" by _time, All_Traffic.action span=30m | timechart minspan=30m count by All_Traffic.action | rename All_Traffic.action AS action","rhel.hwf.sc4s","1677942871.620778",0,"UI:Dashboard:apl_net_01_overview","1677855600.000000000",0,0,"1677942871.000000000",0,1677942871,0,search2,0,,,failed,"0.002",,,,,,,,,,,,,,,,,,,
+"admin__admin__SplunkAdmins__search3_1677942871.5","| `apl_net_traffic_tstats_pre` count from datamodel=Network_Traffic.All_Traffic WHERE All_Traffic.dvc=""*"" by _time, All_Traffic.transport span=30m | timechart minspan=30m count by All_Traffic.transport | rename All_Traffic.transport AS transport","rhel.hwf.sc4s","1677942871.623147",0,"UI:Dashboard:apl_net_01_overview","1677855600.000000000",0,0,"1677942871.000000000",0,1677942871,0,search3,0,,,failed,"0.01",,,,,,,,,,,,,,,,,,,
+"admin__admin__SplunkAdmins__search4_1677942871.6","| `apl_net_traffic_tstats_pre` count from datamodel=Network_Traffic.All_Traffic WHERE All_Traffic.dvc=""*""  by _time, All_Traffic.dest_port span=30m | timechart minspan=30m useother=false limit=20 count by All_Traffic.dest_port | rename All_Traffic.dest_port AS dest_port","rhel.hwf.sc4s","1677942871.627954",0,"UI:Dashboard:apl_net_01_overview","1677855600.000000000",0,0,"1677942871.000000000",0,1677942871,0,search4,0,,,failed,"0.003",,,,,,,,,,,,,,,,,,,
+"rt_md_1677943870.71","| metadata type=sourcetypes | search totalCount > 0","rhel.hwf.sc4s","1677943870.722434",1,"UI:Search",,,,,0,1677943870,0,,0,,,failed,"168.185",,,,,,,,,,,,,,,,,,,
+"admin__admin__SplunkAdmins__search2_1677944519.72","| `apl_net_traffic_tstats` count from datamodel=Network_Traffic.All_Traffic WHERE All_Traffic.dvc=""*"" by sourcetype","rhel.hwf.sc4s","1677944519.175074",0,"UI:Dashboard:apl_net_09_sourcetype_information","1677855600.000000000",0,0,"1677944519.000000000",0,1677944519,0,search2,0,,,failed,"0.003",,,,,,,,,,,,,,,,,,,
+"admin__admin__SplunkAdmins__search1_1677944519.73","| `apl_net_traffic_tstats_pre` count from datamodel=Network_Traffic.All_Traffic WHERE All_Traffic.dvc=""*"" by _time, sourcetype span=30m | timechart minspan=30m count by sourcetype","rhel.hwf.sc4s","1677944519.411964",0,"UI:Dashboard:apl_net_09_sourcetype_information","1677855600.000000000",0,0,"1677944519.000000000",0,1677944519,0,search1,0,,,failed,"0.003",,,,,,,,,,,,,,,,,,,
+"admin__admin__SplunkAdmins__search2_1677944576.74","| `apl_net_traffic_tstats` count from datamodel=Network_Traffic.All_Traffic WHERE All_Traffic.dvc=""*"" by sourcetype","rhel.hwf.sc4s","1677944576.612808",0,"UI:Dashboard:apl_net_09_sourcetype_information","1677855600.000000000",0,0,"1677944576.000000000",0,1677944576,0,search2,0,,,failed,"0.004",,,,,,,,,,,,,,,,,,,
+"admin__admin__SplunkAdmins__search1_1677944576.75","| `apl_net_traffic_tstats_pre` count from datamodel=Network_Traffic.All_Traffic WHERE All_Traffic.dvc=""*"" by _time, sourcetype span=30m | timechart minspan=30m count by sourcetype","rhel.hwf.sc4s","1677944576.858536",0,"UI:Dashboard:apl_net_09_sourcetype_information","1677855600.000000000",0,0,"1677944576.000000000",0,1677944576,0,search1,0,,,failed,"0.003",,,,,,,,,,,,,,,,,,,

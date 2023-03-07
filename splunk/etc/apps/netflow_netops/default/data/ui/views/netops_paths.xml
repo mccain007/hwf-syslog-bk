@@ -1,0 +1,53 @@
+<form  version="1.1" onunloadCancelJobs="True" script="netops_paths.js" stylesheet="netops_paths.css">
+    <label>Path Analytics</label>
+    <fieldset autoRun="True">
+        <input type="text" token="filter_name" searchWhenChanged="True">
+            <label>Peer name</label>
+            <default>*</default>
+        </input>
+        <input type="text" token="filter_ip" searchWhenChanged="True">
+            <label>Peer IP address</label>
+            <default>*</default>
+        </input>
+        <input type="text" token="vtep_ip" searchWhenChanged="True">
+            <label>VTEP</label>
+            <default>*</default>
+        </input>
+        <input type="text" token="vxlan_id" searchWhenChanged="True">
+            <label>VXLAN ID</label>
+            <default>*</default>
+        </input>
+        <input type="time" searchWhenChanged="True">
+            <label>Time range</label>
+            <default>Last 60 minutes</default>
+        </input>
+    </fieldset>
+    <search>
+      <query>`netflow_search_rule_20180` | head 1</query>
+      <earliest>$earliest$</earliest>
+      <latest>$latest$</latest>
+      <done>
+        <condition match="'job.resultCount' > 0">
+          <set token="show_content">true</set>
+          <unset token="show_hint"/>
+        </condition>
+        <condition>
+          <unset token="show_content"></unset>
+          <set token="show_hint">true</set>
+        </condition>
+      </done>
+    </search>
+    <row depends="$show_content$">
+        <html>
+            <div class="netops-paths-container"><!-- path charts go here --></div>
+        </html>
+    </row>
+    <row depends="$show_hint$">
+      <panel>
+        <html>
+          <p>You see this message because there is <b>no data</b> for the selected Time Range or the <a href="/app/netflow_netops/setup_dashboard/" target="_blank">App Setup</a> is not completed.</p>
+          <p>This dashboard is populated by NetFlow Optimizer (NFO) Logic Module “10180: V2P Network Visibility”. To learn more, visit <a href="https://docs.netflowlogic.com/solutions/v2p-network-visibility/v2p-network-visibility-module" target="_blank">V2P Network Visibility Module</a>.</p>
+        </html>
+      </panel>
+    </row>
+</form>

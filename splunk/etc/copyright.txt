@@ -1,0 +1,1 @@
+Copyright (C) 2005-2023 Splunk Inc. All Rights Reserved.

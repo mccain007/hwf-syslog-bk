@@ -1,0 +1,14 @@
+[app/install/install_source_checksum]
+version = 9.0.4
+modtime = 1677873728.881592000
+
+[views/troubleshooting_indexer_cpu_drilldown]
+version = 9.0.4
+modtime = 1677873807.469055000
+
+[savedsearches/AllSplunkEnterpriseLevel%20-%20Splunkd%20Log%20Messages%20Admins%20Only]
+access = read : [ * ], write : [ * ]
+export = none
+owner = nobody
+version = 9.0.4
+modtime = 1677944264.705934000

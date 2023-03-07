@@ -1,0 +1,23 @@
+<div class="traffic-abba">
+<table class="table table-bordered table-hover table-condensed">
+
+    <% if (!ab_off) { %>
+    <tr>
+        <td>
+            Traffic A <b>&#8594;</b> B:
+            <strong class="pull-right"><%= ab %></strong>
+        </td>
+    </tr>
+    <% } %>
+
+    <% if (!ba_off) { %>
+    <tr>
+        <td>
+            Traffic A <b>&#8592;</b> B:
+            <strong class="pull-right"><%= ba %></strong>
+        </td>
+    </tr>
+    <% } %>
+
+</table>
+</div>

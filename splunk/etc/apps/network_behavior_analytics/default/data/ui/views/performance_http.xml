@@ -1,0 +1,113 @@
+<form version="1.1" script="performance.js" stylesheet="analytics.css,common.css">
+    <label>HTTP Performance</label>
+    <description>This view describes the HTTP traffic events seen within the environment, along with the destinations and sources used.</description>
+
+    <fieldset autoRun="true" submitButton="false">
+        <input type="time" searchWhenChanged="true" id="timerange">
+            <label>Time range:</label>
+            <default>Last 4 hours</default>
+        </input>
+    </fieldset>
+
+    <row>
+        <panel>
+            <title>Top clients</title>
+            <table>
+                <search><query>
+                    `nbalogsindexhttp` tag="web"
+                    | eval Source=if(isnull(src), src_ip, src)
+                    | stats sparkline AS Activity, sum(bytes_in) AS bin, sum(bytes_out) AS bout by Source
+                    | eval bytes = bin + bout
+                    | sort -bytes
+                    | eval "Bytes in" = `human_bytes(bin)`
+                    | eval "Bytes out" = `human_bytes(bout)`
+                    | eval "Total" = `human_bytes(bytes)`
+                    | fields "Source", "Activity", "Bytes in", "Bytes out", "Total"
+                </query></search>
+                <format type="sparkline" field="Activity">
+                    <option name="lineColor">#5379af</option>
+                    <option name="lineWidth">1</option>
+                    <option name="height">16</option>
+                </format>
+            </table>
+        </panel>
+        <panel>
+            <title>Response codes over time</title>
+            <chart>
+                <search><query>
+                    `nbalogsindexhttp` tag="web"
+                    | timechart count by status
+                </query></search>
+                <option name="height">316</option>
+                <option name="charting.chart">line</option>
+                <option name="charting.axisTitleX.visibility">collapsed</option>
+                <option name="charting.axisY.scale">log</option>
+            </chart>
+        </panel>
+    </row>
+    <row>
+        <panel>
+            <title>Top HTTP methods</title>
+            <chart>
+                <search><query>
+                    `nbalogsindexhttp` tag="web"
+                    | stats count by http_method
+                    | rename http_method AS "HTTP method", count as "Total count"
+                    | sort -"Total count"
+                </query></search>
+                <option name="charting.chart">bar</option>
+                <option name="charting.axisY.scale">log</option>
+                <option name="charting.axisTitleX.visibility">collapsed</option>
+            </chart>
+        </panel>
+        <panel>
+            <title>Bytes over time</title>
+            <chart>
+                <search><query>
+                    `nbalogsindexhttp` tag="web"
+                    | timechart sum(bytes_in) AS "Bytes in", sum(bytes_out) AS "Bytes out"
+                </query></search>
+                <option name="charting.chart">line</option>
+                <option name="charting.axisTitleX.visibility">collapsed</option>
+                <option name="charting.chart.nullValueMode">zero</option>
+                <option name="charting.axisY.scale">log</option>
+            </chart>
+        </panel>
+    </row>
+    <row>
+        <panel>
+            <title>Rare user agents</title>
+            <table>
+                <search><query>
+                `nbalogsindexhttp` tag="web"
+                | rare http_user_agent limit=50
+                | rename http_user_agent AS "User agent", count AS "Count", percent AS "Percent"
+                </query></search>
+            </table>
+        </panel>
+    </row>
+    <row>
+        <panel>
+            <title>Sources</title>
+            <table>
+                <search><query>
+                    `nbalogsindexhttp` tag="web"
+                    | stats sparkline AS Activity, count AS "Total count", sum(bytes_in) AS bin, sum(bytes_out) AS bout by host
+                    | eval bytes = bin + bout
+                    | sort -bytes
+                    | eval "Bytes in" = `human_bytes(bin)`
+                    | eval "Bytes out" = `human_bytes(bout)`
+                    | eval "Total" = `human_bytes(bytes)`
+                    | rename host AS "Host"
+                    | fields "Host", "Activity", "Bytes in", "Bytes out", "Total", "Total count"
+                </query></search>
+                <format type="sparkline" field="Activity">
+                    <option name="lineColor">#5379af</option>
+                    <option name="lineWidth">1</option>
+                    <option name="height">16</option>
+                </format>
+            </table>
+        </panel>
+    </row>
+
+</form>

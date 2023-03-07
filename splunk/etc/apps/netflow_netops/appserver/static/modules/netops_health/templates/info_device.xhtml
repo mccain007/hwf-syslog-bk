@@ -1,0 +1,27 @@
+<table class="table table-bordered table-hover table-condensed">
+    <caption>
+        <h2>
+            <strong>
+                <%= ( device_type_name ? device_type_name + ' ' : '' ) + exp_ip_name %>
+            </strong>
+        </h2>
+    </caption>
+    <tr>
+        <td>Health score: <strong class="pull-right"><%= dev_health_score %></strong></td>
+    </tr>
+    <tr>
+        <td>Failure risk score: <strong class="pull-right"><%= dev_health_risk %></strong></td>
+    </tr>
+    <tr>
+        <td>Worst interface: <strong class="pull-right"><%= worst_if_name %></strong></td>
+    </tr>
+    <tr>
+        <td>Affected interface health score: <strong class="pull-right"><%= worst_if_score %></strong></td>
+    </tr>
+    <tr>
+        <td>Number of interfaces: <strong class="pull-right"><%= ifaces_n %></strong></td>
+    </tr>
+</table>
+<p class="text-center" style="padding:15px;">
+    <a class="link-to-path" href="#">View traffic through device</a>
+</p>

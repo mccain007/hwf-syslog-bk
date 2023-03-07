@@ -1,0 +1,37 @@
+<table class="table table-bordered table-hover table-condensed">
+    <caption>
+        <h2>
+            <strong>
+                <%= (depth === 2 ? (( parent.device_type_name ? parent.device_type_name + ' ' : '' ) + parent.exp_ip_name) + ' / ' : '') + (name ? name : snmp_index) %>
+            </strong>
+            <!--(<%= snmp_index %>)-->
+        </h2>
+    </caption>
+    <tr>
+        <td>Health score: <strong class="pull-right"><%= if_health_score %></strong></td>
+    </tr>
+    <tr>
+        <td>Failure risk score: <strong class="pull-right"><%= if_health_risk %></strong></td>
+    </tr>
+    <tr>
+        <td>
+            Traffic in / out:
+            <strong class="pull-right"><%= traffic_in %> / <%= traffic_out %></strong>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Packets in / out:
+            <strong class="pull-right"><%= packets_in %> / <%= packets_out %></strong>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Relative traffic load / rate:
+            <strong class="pull-right"><%= rel_load %>% / <%= rel_rate %>%</strong>
+        </td>
+    </tr>
+</table>
+<p class="text-center" style="padding:15px;">
+    <a class="link-to-path" href="#">View traffic through interface</a>
+</p>

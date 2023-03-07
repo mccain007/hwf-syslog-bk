@@ -1,0 +1,44 @@
+<div class="graph-koleso-container">
+
+    <div class="static-cont"
+         style="width: <%= graphSettings.width %>px; height: <%= graphSettings.height %>px;">
+        <div class="svg-holder"
+             style="width: <%= graphSettings.width %>px; height: <%= graphSettings.height %>px; position: absolute;">
+        </div>
+    </div>
+
+    <div class="koleso-parameters">
+        <div class="total-results">
+            <i class="icon-check"></i>
+            Displaying
+            <span class="number"><%= displayedResults %></span>
+            <% if (displayedResults != totalResults) { %>
+            of
+            <span class="number"><%= totalResults %></span>
+            <% } %>
+            results
+        </div>
+
+        <form>
+            <label>
+                <input class="highlight-affected-vms-control"
+                       type="checkbox" <% if (highlightAffectedVMs) { %>checked="checked"<% } %>
+                style="margin-top:0px;"/>
+                Highlight network end points affected by devices with health score lower than
+            </label>
+            <label>
+                        <span class="max-device-health-value"
+                              style="width:30px; padding-left:9px; display:inline-block; text-align: center;"
+                                ><%= deviceHealth %></span>
+                <input class="max-device-health-control"
+                       type="range" step="1" min="10" max="100" value="<%= deviceHealth %>"/>
+            </label>
+            <div class="affected-vms-total total-results hide">
+                <i class="icon-check"></i>
+                <span class="number"></span>
+                end points are affected
+            </div>
+        </form>
+    </div>
+
+</div>

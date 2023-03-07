@@ -1,0 +1,21 @@
+<div>
+    <div class="refresh-time-indicator pull-right"><!-- splunk feature --></div>
+    <h2>
+        Network communications (Outer circle - VMs, Inner circle – Hosts)
+        <span class="selected-device-iface <%= (deviceIP ? '' : 'hide') %>">
+            through <strong><%= deviceIP %></strong>
+            <% if (deviceIface) { %> / <strong><%= deviceIface %></strong><% } %>
+            <a href="#" class="clear-selected-device btn btn-mini"
+               title="Clear filter">&#x2715;</a>
+        </span>
+    </h2>
+</div>
+<div class="content"><!-- content --></div>
+<!-- splunk's progressbar -->
+<!-- splunk's refresh/export/etc buttons -->
+<!--
+<div class="panel-footer">
+    <div class="progress-container pull-right splunk-view splunk-progressbar"></div>
+    <div class="view-results pull-left"></div>
+</div>
+-->

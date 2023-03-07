@@ -1,0 +1,88 @@
+<form version="1.1" script="performance.js" stylesheet="analytics.css,common.css">
+    <label>DNS Performance</label>
+    <description>This view describes the DNS query events seen within the environment, along with the name servers and sources used.</description>
+
+    <fieldset autoRun="true" submitButton="false">
+        <input type="time" searchWhenChanged="true" id="timerange">
+            <label>Time range:</label>
+            <default>Last 4 hours</default>
+        </input>
+    </fieldset>
+
+    <row>
+        <panel>
+            <title>Top clients</title>
+            <table>
+                <search><query>
+                    `nbalogsindexdns` tag="dns" tag="network" tag="resolution"
+                    | eval Source=if(isnull(src), src_ip, src)
+                    | chart sparkline AS Activity count AS "Transaction count" by Source
+                    | sort -"Transaction count"
+                </query></search>
+                <format type="sparkline" field="Activity">
+                    <option name="lineColor">#5379af</option>
+                    <option name="lineWidth">1</option>
+                    <option name="height">16</option>
+                </format>
+            </table>
+        </panel>
+        <panel>
+            <title>Top FQDNs</title>
+            <table>
+                <search><query>
+                    `nbalogsindexdns` tag="dns" tag="network" tag="resolution"
+                    | stats count by query
+                    | rename query as "FQDN", count as "Transaction count"
+                    | sort -"Transaction count"
+                </query></search>
+            </table>
+        </panel>
+    </row>
+    <row>
+        <panel>
+            <title>Transaction types over time</title>
+            <chart>
+                <search><query>
+                    `nbalogsindexdns` tag="dns" tag="network" tag="resolution"
+                    | eval record_type = if(isnull(record_type), questiontype, record_type)
+                    | timechart count by record_type
+                </query></search>
+                <option name="charting.chart">line</option>
+                <option name="charting.axisTitleX.visibility">collapsed</option>
+                <option name="charting.axisY.scale">log</option>
+            </chart>
+        </panel>
+        <panel>
+            <title>Top record types</title>
+            <chart>
+                <search><query>
+                    `nbalogsindexdns` tag="dns" tag="network" tag="resolution"
+                    | eval record_type = if(isnull(record_type), questiontype, record_type)
+                    | stats count by record_type
+                    | rename record_type AS "Record type", count as "Total count"
+                    | sort -"Total count"
+                </query></search>
+                <option name="charting.chart">bar</option>
+                <option name="charting.axisY.scale">log</option>
+            </chart>
+        </panel>
+    </row>
+    <row>
+        <panel>
+            <title>Sources</title>
+            <table>
+                <search><query>
+                    `nbalogsindexdns` tag="dns" tag="network" tag="resolution"
+                    | chart sparkline AS Activity count AS "Total count" by host
+                    | sort -"Total count"
+                    | rename host AS "Host"
+                </query></search>
+                <format type="sparkline" field="Activity">
+                    <option name="lineColor">#5379af</option>
+                    <option name="lineWidth">1</option>
+                    <option name="height">16</option>
+                </format>
+            </table>
+        </panel>
+    </row>
+</form>

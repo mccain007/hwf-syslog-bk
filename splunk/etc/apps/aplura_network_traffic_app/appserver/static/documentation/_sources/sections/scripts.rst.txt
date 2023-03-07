@@ -1,0 +1,8 @@
+This App provides the following scripts:
+
+.. list-table::
+   :widths: 10 15
+   :header-rows: 0
+
+   * - Diag.py
+     - For use with the ``diag`` command.

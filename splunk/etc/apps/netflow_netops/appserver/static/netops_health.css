@@ -1,0 +1,83 @@
+.netops-health-graph .graph-splunk-view {
+    position: relative;
+}
+.node circle,
+.node path {
+    cursor: pointer;
+}
+
+.node circle {
+    stroke: orange;
+    stroke-width: 2px;
+    stroke-opacity: 0;
+}
+
+.node.selected circle {
+    stroke: orangered;
+    stroke-opacity: 1;
+}
+
+.node:hover circle {
+    stroke-opacity: 1;
+}
+
+
+.node text {
+    font-size: 11px;
+}
+
+.node.selected text {
+    font-weight: bold;
+}
+
+path.link {
+    fill:none;
+    stroke: #ccc;
+    stroke-width: 1.5px;
+}
+.netops_health_info_panel {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 300px;
+}
+.netops_title_path {
+    position: absolute;
+    width: 150px;
+}
+.tree-title h3 {
+    font-size: 16px;
+    font-weight: normal;
+    width: 100%;
+}
+.showAll {
+    display:none;
+}
+.dot0 {
+    height: 25px;
+    width: 25px;
+    background-color: #cccccc;
+    border-radius: 50%;
+    display: inline-block;
+}
+.dot1 {
+    height: 25px;
+    width: 25px;
+    background-color: #ccdd82;
+    border-radius: 50%;
+    display: inline-block;
+}
+.dot2 {
+    height: 25px;
+    width: 25px;
+    background-color: #fedc81;
+    border-radius: 50%;
+    display: inline-block;
+}
+.dot3 {
+    height: 25px;
+    width: 25px;
+    background-color: #f8696b;
+    border-radius: 50%;
+    display: inline-block;
+}

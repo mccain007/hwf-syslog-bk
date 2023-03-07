@@ -1,0 +1,79 @@
+<form class="form-horizontal form-complex">
+<div class="control-group">
+	<label class="control-label" for="crowdstrike_upload_ioc_indicator_type">IoC Type</label>
+    <div class="controls">
+<select name="action.crowdstrike_upload_ioc.param.indicator_type" id="crowdstrike_upload_ioc_indicator_type">
+        <option value="sha1">sha1</option>
+        <option value="md5">md5</option>
+        <option value="sha256">sha256</option>
+        <option value="ipv6">ipv6</option>
+        <option value="domain">domain</option>
+        <option value="ipv4">ipv4</option>
+</select>
+                <span class="help-block"> 
+                    Please select the indicator of compromise type from the dropdown list.
+                </span>
+    </div>
+</div>
+
+<div class="control-group">
+	<label class="control-label" for="crowdstrike_upload_ioc_indicator_value">Indicator Value</label>
+    <div class="controls">
+	<input type="text" name="action.crowdstrike_upload_ioc.param.indicator_value" id="crowdstrike_upload_ioc_indicator_value"/>
+                <span class="help-block"> 
+                    supports raw text or tokens: ex. $result.src_ip$ or "192.168.1.25"
+                </span>
+    </div>
+</div>
+
+<div class="control-group">
+	<label class="control-label" for="crowdstrike_upload_ioc_policy">Policy</label>
+    <div class="controls">
+	<input type="text" name="action.crowdstrike_upload_ioc.param.policy" id="crowdstrike_upload_ioc_policy" value="detect"/>
+                <span class="help-block">
+                    The policy that should be enacted: detect or none
+                </span>
+    </div>
+</div>
+
+<div class="control-group">
+	<label class="control-label" for="crowdstrike_upload_ioc_share_level">Share Level</label>
+    <div class="controls">
+	<input type="text" name="action.crowdstrike_upload_ioc.param.share_level" id="crowdstrike_upload_ioc_share_level" value="red"/>
+                <span class="help-block">
+                     The level the indicator will be shared.
+                </span>
+    </div>
+</div>
+
+<div class="control-group">
+	<label class="control-label" for="crowdstrike_upload_ioc_expiration_days">Expiration Days</label>
+    <div class="controls">
+	<input type="text" name="action.crowdstrike_upload_ioc.param.expiration_days" id="crowdstrike_upload_ioc_expiration_days" value=30/>
+                <span class="help-block">
+                    Days indicator should be valid for.
+                </span>
+    </div>
+</div>
+
+<div class="control-group">
+	<label class="control-label" for="crowdstrike_upload_ioc_description">Description</label>
+    <div class="controls">
+	<input type="text" name="action.crowdstrike_upload_ioc.param.description" id="crowdstrike_upload_ioc_description" value="IoC uploaded from Splunk"/>
+                <span class="help-block">
+                    Description of indicator within 200 characters.
+                </span>
+    </div>
+</div>
+
+<div class="control-group">
+	<label class="control-label" for="crowdstrike_upload_ioc_source">Source</label>
+    <div class="controls">
+	<input type="text" name="action.crowdstrike_upload_ioc.param.source" id="crowdstrike_upload_ioc_source" value="Splunk events"/>
+                <span class="help-block">
+                    Source where this indicator originated within 200 characters.
+                </span>
+    </div>
+</div>
+
+</form>

@@ -1,0 +1,6 @@
+Version 1.2.2
+-------------
+
+- Bug
+
+    - [ANTAFS-13] - Change Titles and Loyout of "Sourcetype Information" dashboard

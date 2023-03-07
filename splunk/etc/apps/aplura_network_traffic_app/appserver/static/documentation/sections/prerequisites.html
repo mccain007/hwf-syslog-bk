@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Splunk Enterprise system and software requirements &#8212; PAVO Network Traffic App for Splunk 1.2.4 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="splunk-enterprise-system-and-software-requirements">
+<h1>Splunk Enterprise system and software requirements<a class="headerlink" href="#splunk-enterprise-system-and-software-requirements" title="Permalink to this headline">¶</a></h1>
+<p>Because this App runs on Splunk Enterprise, all of the <a class="reference external" href="https://docs.splunk.com/Documentation/Splunk/latest/Installation/Systemrequirements">Splunk Enterprise system requirements</a> apply.</p>
+</div>
+<div class="section" id="splunk-common-information-model-add-on">
+<h1>Splunk Common Information Model Add-on<a class="headerlink" href="#splunk-common-information-model-add-on" title="Permalink to this headline">¶</a></h1>
+<p>This app depends on data models included in the Splunk Common Information Model Add-on, specifically the <a href="#id4"><span class="problematic" id="id5">|data_model|</span></a> data model. Please review the information on <a class="reference external" href="http://docs.splunk.com/Documentation/CIM/latest/User/Install">installing and using the Splunk Common Information Model Add-on</a> and information on <a class="reference external" href="http://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Acceleratedatamodels#Enable_persistent_acceleration_for_a_data_model">configuring the acceleration on the data model</a>.</p>
+<p>The Splunk Common Information Model Add-on can be downloaded from <a class="reference external" href="https://apps.splunk.com/app/1621/">Splunkbase</a>.</p>
+<p>This app has been tested with versions 4.9 of the CIM add-on.</p>
+</div>
+<div class="section" id="data-model-acceleration-on-the-data-model-data-model">
+<h1>Data model Acceleration on the <a href="#id6"><span class="problematic" id="id7">|data_model|</span></a> data model<a class="headerlink" href="#data-model-acceleration-on-the-data-model-data-model" title="Permalink to this headline">¶</a></h1>
+<p>In order to make the app respond and load quickly, accelerated data models are used to provide summary data. For this data to be available, the <a href="#id8"><span class="problematic" id="id9">|data_model|</span></a> data model must be accelerated. Information on how to enable acceleration for the <a href="#id10"><span class="problematic" id="id11">|data_model|</span></a> data model can be found <a class="reference external" href="http://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Managedatamodels#Enable_data_model_acceleration">here</a>. The data model must be accelerated for the length of time for which you would like to see reporting.</p>
+</div>
+<div class="section" id="sankey-diagram-visualization-optional">
+<h1>Sankey Diagram Visualization (optional)<a class="headerlink" href="#sankey-diagram-visualization-optional" title="Permalink to this headline">¶</a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">Breakdown</span> <span class="pre">of</span> <span class="pre">Sourcetypes</span> <span class="pre">in</span> <span class="pre">Indexes</span> <span class="pre">in</span> <span class="pre">Dataset</span></code> panel on the <code class="docutils literal notranslate"><span class="pre">Data</span> <span class="pre">Transparency</span> <span class="pre">Overview</span></code> dashboard will only be seen if the <code class="docutils literal notranslate"><span class="pre">Sankey</span> <span class="pre">Diagram</span></code> visualization is installed.</p>
+<p>The Sankey Diagram Visualization can be downloaded from <a class="reference external" href="https://splunkbase.splunk.com/app/3112/">Sankey Diagram Custom Visualization</a>.</p>
+</div>
+<div class="section" id="app-configuration">
+<h1>App Configuration<a class="headerlink" href="#app-configuration" title="Permalink to this headline">¶</a></h1>
+<p>This app may require some configuration before it will work properly (outside of the configuration of the Data Model Acceleration). In particular, you may need to edit the configuration macros, as well as the lookup which populates the Device dropdown found on many of the dashboards.</p>
+</div>
+<div class="section" id="macros-for-configuration">
+<h1>Macros for Configuration<a class="headerlink" href="#macros-for-configuration" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="network-traffic-dvcs">
+<h2>network_traffic_dvcs<a class="headerlink" href="#network-traffic-dvcs" title="Permalink to this headline">¶</a></h2>
+<p>This macro contains the search which is used to populate the Devices dropdown found on many of the dashboards. By default this is the auto-generated lookup, however, the macro can be edited to point to another lookup as needed.</p>
+</div>
+<div class="section" id="network-traffic-dest-external">
+<h2>network_traffic_dest_external<a class="headerlink" href="#network-traffic-dest-external" title="Permalink to this headline">¶</a></h2>
+<p>This macro contains a partial search which determines when a network traffic event’s destination IP address is external to your network. By default this will exclude private IP addresses, but can be edited to reflect your own network configuration. Note: this search snippet is used in searches using the accelerated data models and the <code class="docutils literal notranslate"><span class="pre">tstats</span></code> command. While the normal SPL does support CIDR, <code class="docutils literal notranslate"><span class="pre">tstats</span></code> does not. Make sure your search syntax will work with the <code class="docutils literal notranslate"><span class="pre">tstats</span></code> command.</p>
+</div>
+<div class="section" id="network-traffic-src-external">
+<h2>network_traffic_src_external<a class="headerlink" href="#network-traffic-src-external" title="Permalink to this headline">¶</a></h2>
+<p>This macro contains a partial search which determines when a network traffic event’s source IP address is external to your network. By default this will exclude private IP addresses, but can be edited to reflect your own network configuration. Note: this search snippet is used in searches using the accelerated data models and the <code class="docutils literal notranslate"><span class="pre">tstats</span></code> command. While the normal SPL does support CIDR, <code class="docutils literal notranslate"><span class="pre">tstats</span></code> does not. Make sure your search syntax will work with the <code class="docutils literal notranslate"><span class="pre">tstats</span></code> command.</p>
+</div>
+<div class="section" id="device-dropdown-lookup">
+<h2>Device Dropdown Lookup<a class="headerlink" href="#device-dropdown-lookup" title="Permalink to this headline">¶</a></h2>
+<p>For the <code class="docutils literal notranslate"><span class="pre">Device</span></code> dropdown, present on many of the dashboards, you can use the auto-generated lookup, which runs every morning at 2 am.
+If your Network_Traffic data model is populated, you can run the saved search <code class="docutils literal notranslate"><span class="pre">network_traffic_dvc_auto_gen</span></code> to populate the dropdown.</p>
+<p>The lookup has two fields: <code class="docutils literal notranslate"><span class="pre">dvc</span></code> and <code class="docutils literal notranslate"><span class="pre">device_name</span></code>. <code class="docutils literal notranslate"><span class="pre">device_name</span></code> can be a description of the device. <code class="docutils literal notranslate"><span class="pre">dvc</span></code> can be wild-carded (not CIDR, as that is not available in <code class="docutils literal notranslate"><span class="pre">tstats</span></code> searches used with the accelerated data models). The search used to populate this dropdown can be configured using the network_traffic_dvcs macro.</p>
+</div>
+</div>
+<div class="section" id="splunk-common-information-model">
+<h1>Splunk Common Information Model<a class="headerlink" href="#splunk-common-information-model" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>References</p></li>
+</ul>
+<hr class="docutils" />
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.splunk.com/Documentation/CIM/latest/User/Overview">Splunk Common Information Model Add-on Docs</a></p></li>
+<li><p>Splunk Common Information Model add-on <a href="#id12"><span class="problematic" id="id13">|data_model|</span></a> data model <a class="reference external" href="https://docs.splunk.com/documentation/CIM/latest/user/NetworkTraffic">https://docs.splunk.com/documentation/CIM/latest/user/NetworkTraffic</a></p></li>
+<li><p>Downloads</p></li>
+</ul>
+<hr class="docutils" />
+<ul class="simple">
+<li><p><a class="reference external" href="https://apps.splunk.com/app/1621/">Splunk Common Information Model Add-on</a></p></li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h1>Sankey Diagram Visualization (optional)<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Downloads</p></li>
+</ul>
+<hr class="docutils" />
+<ul class="simple">
+<li><p><a class="reference external" href="https://splunkbase.splunk.com/app/3112/">Sankey Diagram Custom Visualization</a></p></li>
+</ul>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">PAVO Network Traffic App for Splunk</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Aplura, LLC.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/sections/prerequisites.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

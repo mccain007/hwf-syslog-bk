@@ -1,0 +1,131 @@
+<form  version="1.1" onunloadCancelJobs="True" script="netops_health.js" stylesheet="netops_health.css">
+  <label>Network Health</label>
+  <fieldset autoRun="True">
+    <input type="dropdown" token="health" searchWhenChanged="True">
+      <label>Health score</label>
+      <default>100</default>
+      <choice value="100">All</choice>
+      <choice value="80">80 and below</choice>
+      <choice value="60">60 and below</choice>
+      <choice value="40">40 and below</choice>
+      <choice value="20">20 and below</choice>
+    </input>
+    <input type="time" searchWhenChanged="True">
+      <label>Time Range</label>
+      <default>Last 60 minutes</default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <html>
+            <div class="health-container"/>
+        </html>
+    </panel>
+    <panel>
+      <chart id="chart_2_1">
+        <title>Traffic Details: $default:Exporter/Interface$</title>
+        <search>
+          <query>
+                    `netflow_search_rule_20181`
+                    | eval exp_ip = device
+                    | `get_iface_name(snmp_name, snmp_index)`
+                    | `get_exporter_name(exp_ip_name)`
+                    | eval snmp_name = if(snmp_name==snmp_index, if(isnotnull(snmp_ifName), snmp_ifName, snmp_index), snmp_name)
+                    | strcat exp_ip_name "/" snmp_name exp_snmp
+                    | search exp_snmp="$default:Exporter/Interface$"
+                    | eval bytes_total=bytes_out+bytes_in
+                    | eval bytes_normal = if(bytes_out>bytes_in,bytes_out,bytes_in)
+                    | eval normal=(bytes_normal)*0.65*(100/r_load)
+                    | eval bps_normal = ceil(normal / (t_int/1000))
+                    | eval Mbps_total = bytes_total*8/1000000 
+                    | eval Mbps_in = bytes_in*8/1000000
+                    | eval Mbps_out = bytes_out*8/1000000
+                    | eval Mbps_normal = bps_normal*8/1000000
+                    | fillnull value="" Mbps_total Mbps_in Mbps_out Mbps_normal
+                    | timechart sum(Mbps_total) as Both
+                                sum(Mbps_in) as In
+                                sum(Mbps_out) as Out
+                                max(Mbps_normal) as "65%"
+                    | foreach * fieldstr="#FIELD#"
+						[ eval #FIELD# = case('#FIELD#'=="_time", _time, '#FIELD#'=="_span", _span, '#FIELD#'=='65%', '#FIELD#', 1==1, round('#FIELD#' / _span,3)) ]
+                    | eventstats min("65%") as "65%"
+          </query>
+        </search>
+        <option name="charting.chart">line</option>
+        <option name="charting.chart.nullValueMode">zero</option>
+        <option name="charting.axisTitleX.text">Time</option>
+        <option name="charting.axisTitleY.text">Mbps</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.drilldown">none</option>
+        <option name="height">164</option>
+        <option name="charting.chart.nullValueMode">connect</option>
+      </chart>
+      <chart id="chart_2_2">
+        <title>Packet Details: $default:Exporter/Interface$</title>
+        <search>
+          <query>
+                    `netflow_search_rule_20181`
+                    | eval exp_ip = device
+                    | `get_iface_name(snmp_name, snmp_index)`
+                    | `get_exporter_name(exp_ip_name)`
+                    | eval snmp_name = if(snmp_name==snmp_index, if(isnotnull(snmp_ifName), snmp_ifName, snmp_index), snmp_name)
+                    | strcat exp_ip_name "/" snmp_name exp_snmp
+                    | search exp_snmp="$default:Exporter/Interface$"
+                    | eval packets_total=packets_out+packets_in
+                    | eval packets_normal = if(packets_out>packets_in,packets_out,packets_in)
+                    | eval normal=(packets_normal)*0.65*(100/r_rate) 
+                    | eval pps_normal = ceil(normal / (t_int/1000))
+                    | eval Kpps_total = packets_total/1000 
+                    | eval Kpps_in = packets_in/1000
+                    | eval Kpps_out = packets_out/1000
+                    | eval Kpps_normal = pps_normal/1000
+                    | fillnull value="" Kpps_total Kpps_in Kpps_out Kpps_normal
+                    | timechart avg(Kpps_total) as Both 
+                                avg(Kpps_in) as In 
+                                avg(Kpps_out) as Out 
+                                max(Kpps_normal) as "65%"
+                    | foreach * fieldstr="#FIELD#"
+						[ eval #FIELD# = case('#FIELD#'=="_time", _time, '#FIELD#'=="_span", _span, '#FIELD#'=='65%', '#FIELD#', 1==1, round('#FIELD#' / _span,3)) ]
+                    | eventstats min("65%") as "65%"
+          </query>
+        </search>
+        <option name="charting.chart">line</option>
+        <option name="charting.chart.nullValueMode">zero</option>
+        <option name="charting.axisTitleX.text">Time</option>
+        <option name="charting.axisTitleY.text">Kpps</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.drilldown">none</option>
+        <option name="height">164</option>
+        <option name="charting.chart.nullValueMode">connect</option>
+      </chart>
+      <chart id="chart_2_3">
+        <title>Health score: $default:Exporter/Interface$</title>
+        <search>
+          <query>
+                    `netflow_search_rule_20181` 
+                    | eval exp_ip = device
+                    | `get_iface_name(snmp_name, snmp_index)` 
+                    | `get_exporter_name(exp_ip_name)` 
+                    | eval snmp_name = if(snmp_name==snmp_index, if(isnotnull(snmp_ifName), snmp_ifName, snmp_index), snmp_name)
+                    | strcat exp_ip_name "/" snmp_name exp_snmp 
+                    | search exp_snmp="$default:Exporter/Interface$"
+                    | fillnull value="" if_health_score
+                    | timechart avg(if_health_score) as Health 
+          </query>
+        </search>
+        <option name="charting.axisTitleX.text">Time</option>
+        <option name="charting.axisTitleY.text">Health</option>
+        <option name="charting.axisY.maximumNumber">100</option>
+        <option name="charting.axisY.minimumNumber">0</option>
+        <option name="charting.chart">line</option>
+        <option name="charting.chart.nullValueMode">connect</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.drilldown">none</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="height">164</option>
+      </chart>
+    </panel>
+  </row>
+</form>

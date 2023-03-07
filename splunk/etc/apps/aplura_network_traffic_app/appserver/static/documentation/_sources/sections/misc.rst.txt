@@ -1,0 +1,18 @@
+Lookups
+-------
+
+|long_name| contains the following lookup files.
+
+- None
+
+Event Generator
+---------------
+
+|long_name| does not include an event generator.
+
+Acceleration
+------------
+
+#. Summary Indexing: No
+#. Data Model Acceleration: If Enabled
+#. Report Acceleration: No

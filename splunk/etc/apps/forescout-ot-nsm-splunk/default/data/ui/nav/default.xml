@@ -1,0 +1,11 @@
+<nav search_view="dashboard_administrative">
+<collection label="Settings" >
+<view name="configuration" />
+<divider />
+<view name="inputs" />
+</collection>
+
+<view name="dashboard_administrative" default="true"/>
+<view name="dashboard_asset_inventory"/>
+<view name="dashboard_security"/>
+</nav>

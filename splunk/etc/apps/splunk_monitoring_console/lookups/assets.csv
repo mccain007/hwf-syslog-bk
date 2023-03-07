@@ -1,0 +1,5 @@
+peerURI,serverName,host,machine,"search_group","__mv_peerURI","__mv_serverName","__mv_host","__mv_machine","__mv_search_group"
+localhost,"rhel.hwf.sc4s","rhel.hwf.sc4s","rhel.hwf.sc4s","dmc_group_indexer",,,,,
+localhost,"rhel.hwf.sc4s","rhel.hwf.sc4s","rhel.hwf.sc4s","dmc_group_kv_store",,,,,
+localhost,"rhel.hwf.sc4s","rhel.hwf.sc4s","rhel.hwf.sc4s","dmc_group_license_master",,,,,
+localhost,"rhel.hwf.sc4s","rhel.hwf.sc4s","rhel.hwf.sc4s","dmc_group_search_head",,,,,

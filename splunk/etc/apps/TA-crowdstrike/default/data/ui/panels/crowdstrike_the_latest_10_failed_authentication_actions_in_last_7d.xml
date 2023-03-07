@@ -1,0 +1,11 @@
+<panel>
+    <title>CrowdStrike - the Latest 10 Failed Authentication Actions in Last 7 Days</title>
+      <table>
+        <search>
+          <query>eventtype=crowdstrike_authentication action=failure earliest=-7d| head 10|table app,  user, src |rename
+              app as "Service Name", src as "User IP", user as "User"</query>
+          <earliest>0</earliest>
+          <latest></latest>
+        </search>
+      </table>
+</panel>

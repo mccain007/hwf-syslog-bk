@@ -1,0 +1,11 @@
+Questions and answers
+---------------------
+
+Access questions and answers specific to |long_name| at https://answers.splunk.com/app/questions/4229.html . Be sure to tag your question with the App.
+
+Support
+-------
+
+- Support Email: customersupport@aplura.com
+- Support Offered: Splunk Answers
+

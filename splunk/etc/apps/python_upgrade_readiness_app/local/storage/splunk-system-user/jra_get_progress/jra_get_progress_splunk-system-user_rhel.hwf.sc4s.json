@@ -1,0 +1,1 @@
+[{"_key": "1678179602.6052463_splunk-system-user", "process_id": 1081465, "host": "rhel.hwf.sc4s", "user": "splunk-system-user", "progress": 100, "status": "COMPLETE", "message": "Deployment scanned successfully for user: splunk-system-user"}]

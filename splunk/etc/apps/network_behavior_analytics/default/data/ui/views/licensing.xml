@@ -1,0 +1,59 @@
+<form version="1.1" script="licensing.js" stylesheet="settings.css,common.css">
+    <label>Licensing</label>
+    <description>The number of endpoints being monitored is shown below. Your license is calculated using this data.</description>
+
+    <row>
+        <panel>
+            <html>
+                <h2 class="panel-title">Daily Unique Endpoint Count</h2>
+            </html>
+            <chart id="apiVolume">
+                <search>
+                    <query>
+                        `nbaeventsindex` type=stats_endpoints
+                        | eval _time=`utc_time(_time)`
+                        | timechart span=1d max(unique_endpoints) as "Unique Endpoints",
+                        | fields _time, "Unique Endpoints"
+                    </query>
+                    <earliest>-30d@d</earliest>
+                    <latest>@d</latest>
+                </search>
+                <option name="charting.chart">column</option>
+                <option name="charting.legend.placement">right</option>
+                <option name="charting.axisTitleX.visibility">collapsed</option>
+                <option name="charting.axisTitleY.visibility">collapsed</option>
+                <option name="link.visible">false</option>
+                <option name="charting.drilldown">none</option>
+            </chart>
+        </panel>
+    </row>
+    <row>
+        <panel>
+            <html>
+                <h2 class="panel-title">Analytics Engine Event Volume</h2>
+            </html>
+            <chart id="eventVolume">
+                <search>
+                    <query>
+                        `nbaeventsindex` type=stats_queries
+                        | timechart span=1d
+                          sum(eval(if(section="dns", received, 0))) as DNS,
+                          sum(eval(if(section="ip", received, 0))) as IP,
+                          sum(eval(if(section="http", received, 0))) as HTTP,
+                          sum(eval(if(section="tls", received, 0))) as TLS,
+                        | fields _time, DNS, IP, HTTP, TLS
+                    </query>
+                    <earliest>-30d@d</earliest>
+                    <latest>@d</latest>
+                </search>
+                <option name="charting.chart">column</option>
+                <option name="charting.chart.stackMode">stacked</option>
+                <option name="charting.legend.placement">right</option>
+                <option name="charting.axisTitleX.visibility">collapsed</option>
+                <option name="charting.axisTitleY.visibility">collapsed</option>
+                <option name="link.visible">false</option>
+                <option name="charting.drilldown">none</option>
+            </chart>
+        </panel>
+    </row>
+</form>

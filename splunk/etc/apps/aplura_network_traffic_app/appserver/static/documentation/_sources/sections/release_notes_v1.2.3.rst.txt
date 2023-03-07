@@ -1,0 +1,12 @@
+Version 1.2.3
+-------------
+
+- Bug
+
+    - [APL029-419] - Change traffic over time by action to line chart
+    - [APL029-419] - Fix time being not being passed to drilldown dashboards correctly
+    - [APL029-341] - Configure checklist.conf
+
+- Improvement
+    - [ANTFS-16] - Added VPN dashboard
+    - [ANTFS-16] - ADded data transparency dashboard under advanced menu

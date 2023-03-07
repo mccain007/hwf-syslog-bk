@@ -1,0 +1,29 @@
+<form version="1.1" script="performance.js" stylesheet="analytics.css,common.css">
+    <label>TLS Performance</label>
+    <description>This view describes the certificates seen within the environment. Sort this table to identify rare values requiring investigation, or certificates that are due to expire soon.</description>
+
+    <fieldset autoRun="true" submitButton="false">
+        <input type="time" searchWhenChanged="true" id="timerange">
+            <label>Time range:</label>
+            <default>Last 4 hours</default>
+        </input>
+    </fieldset>
+
+    <row>
+        <panel>
+            <title>X.509 Certificates</title>
+            <table>
+                <search><query>
+                    `nbalogsindextls` tag="certificate"
+                    | eval cert_hash = if(isnull(ssl_hash), ssl_cert_sha1, ssl_hash)
+                    | stats last(ssl_issuer) as Issuer, last(ssl_subject) as Subject, last(ssl_start_time) as start, last(ssl_end_time) as end, count as Count by cert_hash
+                    | eval "Valid from"=strftime(start, "%d-%b-%Y %H:%M:%S")
+                    | eval "Valid to"=strftime(end, "%d-%b-%Y %H:%M:%S")
+                    | sort -Count
+                    | fields Issuer, Subject, "Valid from", "Valid to", Count
+                </query></search>
+            </table>
+        </panel>
+    </row>
+
+</form>

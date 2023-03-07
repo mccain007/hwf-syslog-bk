@@ -1,0 +1,292 @@
+/* Panels layout and forms */
+
+.dashboard-row .dashboard-panel .error-details .error-indicator {
+  display: none;
+}
+
+button.conf-save {
+    margin-top: -3px;
+    margin-left: 5px;
+}
+
+input {
+    width: 82%;
+}
+
+input[type="checkbox"] {
+    margin-top: -2px;
+    padding-bottom: 4px;
+}
+
+input.has-error {
+    border-color: #f04040;
+    background-color: #fffafa;
+}
+
+input.is-valid {
+    border-color: #228B22;
+    background-color: #fafffa;
+}
+
+.splunk-radiogroup-choices {
+    margin-bottom: 2px;
+}
+
+/* Hide dashboard controls */
+
+.splunk-dashboard-controls .edit-btn {
+    display: none;
+}
+
+.splunk-dashboard-controls .more-info-btn {
+    display: none;
+}
+
+/* Modals */
+
+.modal {
+    display: none;
+}
+
+.modal-header {
+    font-size: 16px;
+}
+
+.modal-footer .btn-ok {
+    margin-right: 8px;
+}
+
+.modal-footer-status {
+    padding: 5px;
+    font-style: italic;
+    text-align: left;
+    float: left;
+}
+
+.modal-footer-status.error {
+    color: #d02020;
+    font-style: normal;
+}
+
+/* Post install dialog */
+
+.key-activation-form {
+    padding-top: 10px;
+}
+
+.key-activate {
+    line-height: 18px;
+}
+
+.activation-form form {
+    margin-bottom: 0;
+}
+
+.activation-form .success-status,
+.activation-form .error-save-status {
+    margin-bottom: 8px;
+}
+
+.activation-form .col-sm-10 {
+    margin-bottom: 11px;
+}
+
+form.key-activation input {
+    width: 50%;
+    margin-bottom: 0;
+}
+
+form.key-activation label {
+    padding-right: 10px;
+}
+
+form.key-activation .form-errors {
+    margin-left: 15px;
+    color: #d02020;
+}
+
+.key-reset-div p {
+    margin-top: 5px;
+}
+
+.key-reset-div button {
+    margin-top: -8px;
+}
+
+.details-proxy-settings {
+    margin-top: 10px;
+}
+
+.details-proxy-settings input,
+.details-proxy-settings #proxy-password-form input {
+    margin-bottom: 3px;
+}
+
+.details-proxy-settings .proxy-form-save .config-error {
+    margin: 13px 0 0 16px;
+}
+
+.key-reset-single-modal  button {
+    margin-top: -8px;
+}
+
+.modal-post-install-dialog .details-proxy-settings button {
+    margin-top: 8px;
+}
+
+.proxy-credentials-checkbox {
+    margin: 6px 0 5px;
+}
+
+.proxy-credentials-checkbox input {
+    margin-top: 2px;
+}
+
+#proxy-password-form {
+    display: none;
+}
+
+#proxy-password-form input {
+    width: 25%;
+    margin-bottom: 8px;
+    margin-top: 3px;
+}
+
+.proxy-form-username {
+    margin-right: 15px;
+}
+
+.proxy-form-save {
+    overflow: hidden;
+}
+
+.proxy-save {
+    margin-top: 3px;
+    float: left;
+}
+
+.proxy-form-save .config-error {
+    margin: 7px 0 0 16px;
+    float: left;
+}
+
+/* Errors and warnings */
+
+.config-success,
+.success-status {
+    color: #107810;
+}
+
+.config-error,
+.error-status,
+.error-save-status {
+    color: #d02020;
+}
+
+.form-errors {
+    margin-left: 15px;
+    color: #d02020;
+}
+
+.form-errors p.explanation {
+    color: #333;
+}
+
+.dashboard-warningbox {
+    margin: 0 0 5px 1px;
+    padding: 7px 10px 7px 10px;
+}
+
+.dashboard-warningbox:last-child {
+    margin-bottom: 5px;
+}
+
+.warningbox-error {
+    border: 1px solid rgb(235, 204, 209);
+    background-color: rgb(242, 222, 222);
+    color: rgb(169, 68, 66);
+}
+
+.warningbox-info {
+    border: 1px solid rgb(188, 232, 241);
+    background-color: rgb(217, 237, 247);
+    color: rgb(49, 112, 143);
+}
+
+.warningbox-warning {
+    border: 1px solid rgb(240, 225, 194);
+    background-color: rgb(252, 248, 227);
+    color: rgb(138, 109, 59);
+}
+
+.warningbox-success {
+    border: 1px solid rgb(185, 200, 166);
+    background-color: rgb(216, 231, 196);
+    color: #536f33;
+}
+
+/* Tabs */
+
+.tabs-nav {
+    overflow: hidden;
+}
+
+.tabs-nav .active {
+    background: #fff;
+    cursor: auto;
+    border-bottom: 1px solid transparent;
+}
+
+.tabs-nav-item {
+    width: 14%;
+    min-width: 85px;
+    height: 32px;
+    float: left;
+    text-align: center;
+    cursor: pointer;
+    background: #efefef;
+    color: #505050;
+    margin: 0 8px;
+    border: 1px solid #d0d0d0;
+    border-radius: 5px 5px 0px 0px;
+}
+
+.tabs-nav-item:first-child {
+    margin-left: 21px;
+}
+
+.tabs-nav-title {
+    line-height: 32px;
+}
+
+.tabs-content {
+    margin-top: -1px;
+}
+
+.data-nav-icon {
+    font-size: 18px;
+    display: inline-block;
+    padding: 0 10px 0 0;
+    vertical-align: middle;
+}
+
+/* Tooltips */
+
+#individualevents .results-table, #individualevents .panel-body {
+    overflow: unset;
+}
+
+#individualevents .panel-body > div {
+    overflow: unset !important;
+}
+
+.tooltip-inner {
+    font-size: 12px;
+    max-width: 300px;
+}
+
+/* Dropdowns */
+
+.asoc-dropdown-box {
+    position: relative;
+}

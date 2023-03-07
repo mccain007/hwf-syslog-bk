@@ -1,0 +1,24 @@
+<panel>
+  <title>CrowdStrike - Count of Blocked Risks in Last 30 Days</title>
+    <single>
+    <search>
+      <query>eventtype=crowdstrike_detection action=blocked earliest=-30d|stats count</query>
+      <earliest>0</earliest>
+      <latest></latest>
+    </search>
+    <option name="colorBy">value</option>
+    <option name="colorMode">none</option>
+    <option name="drilldown">all</option>
+    <option name="numberPrecision">0</option>
+    <option name="rangeColors">["0x65a637","0xd93f3c"]</option>
+    <option name="rangeValues">[0]</option>
+    <option name="showSparkline">1</option>
+    <option name="showTrendIndicator">1</option>
+    <option name="trendColorInterpretation">standard</option>
+    <option name="trendDisplayMode">absolute</option>
+    <option name="underLabel">Blocked Risks</option>
+    <option name="unitPosition">after</option>
+    <option name="useColors">1</option>
+    <option name="useThousandSeparators">1</option>
+  </single>
+</panel>

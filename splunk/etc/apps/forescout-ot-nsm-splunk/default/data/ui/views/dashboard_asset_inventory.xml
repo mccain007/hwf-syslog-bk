@@ -1,0 +1,295 @@
+<form version="1.1">
+  <label>Asset Inventory Dashboard</label>
+  <description>Informational awareness for analysts, facilitating rapid acknowledgement of new assets, communication patterns and/or protocol detection within the network.</description>
+  <fieldset submitButton="false">
+    <input type="time" token="timePicker">
+      <label>Interval</label>
+      <default>
+        <earliest>-30d@d</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+    <input type="dropdown" token="command_center" searchWhenChanged="true">
+      <label>Command Center</label>
+      <fieldForLabel>host</fieldForLabel>
+      <fieldForValue>host</fieldForValue>
+      <search>
+        <query>sourcetype="forescout:OTSM:REST:hosts" | dedup host</query>
+        <earliest>0</earliest>
+        <latest></latest>
+      </search>
+      <choice value="*">All</choice>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <table>
+        <title>Assets - Added to Inventory</title>
+        <search>
+          <query>sourcetype="forescout:OTSM:REST:hosts"
+
+| dedup id, host sortby -_time
+
+| search host="$command_center$"
+
+| eval first_seen_epoch = floor(strptime(first_seen, "%Y-%m-%dT%H:%M:%S"))
+| eval diff             = now() - first_seen_epoch
+| eval diff_dur         = tostring(floor(diff/(3600))) + ":" + tostring(floor(diff/(60)) % 60) + ":" + tostring(diff % 60)
+
+| iplocation ip
+
+| rename first_seen as "First Seen" host as CC ip as IP mac_addresses{} as "MAC Address(es)" firmware_version as "Firmware" hardware_version as "Hardware" labels{} as "Labels" os_version as "OS Version" diff_dur as "Time in Past (HH:MM:SS)" serial_number as "Serial" main_vendor_model as "Vendor/Model"
+| replace "" with -
+| fillnull value=- "First Seen" "Time in Past (HH:MM:SS)" IP "MAC Address(es)" "Vendor/Model" "Firmware" "Hardware" "Serial" "Labels" "OS Version"
+| table "Time in Past (HH:MM:SS)" CC IP Country "MAC Address(es)" "Vendor/Model" "Firmware" "Hardware" "Serial" "Labels" "OS Version" "First Seen"</query>
+          <earliest>$timePicker.earliest$</earliest>
+          <latest>$timePicker.latest$</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>Assets (with Modules) - Added to Inventory</title>
+        <search>
+          <query>sourcetype="forescout:OTSM:REST:hosts"
+
+| dedup id host sortby -_time
+
+| search host="$command_center$"
+
+| spath "module_identities{}"
+| search "module_identities{}"!="{}"
+
+| eval first_seen_epoch = floor(strptime(first_seen, "%Y-%m-%dT%H:%M:%S"))
+| eval diff             = now() - first_seen_epoch
+| eval diff_dur         = tostring(floor(diff/(3600))) + ":" + tostring(floor(diff/(60)) % 60) + ":" + tostring(diff % 60)
+
+| iplocation ip
+
+| rename first_seen as "First Seen" host as CC ip as IP mac_addresses{} as "MAC Address(es)" firmware_version as "Firmware" hardware_version as "Hardware" labels{} as "Labels" os_version as "OS Version" diff_dur as "Time in Past (HH:MM:SS)" serial_number as "Serial" main_vendor_model as "Vendor/Model" module_identities{} as "Modules"
+| replace "" with -
+| fillnull value=- "First Seen" "Time in Past (HH:MM)" IP "MAC Address(es)" "Vendor/Model" "Firmware" "Hardware" "Serial" "Labels" "OS Version"
+| table "Time in Past (HH:MM:SS)" CC IP Country "MAC Address(es)" "Vendor/Model" "Firmware" "Hardware" "Serial" "Labels" "OS Version" "First Seen" "Modules"</query>
+          <earliest>$timePicker.earliest$</earliest>
+          <latest>$timePicker.latest$</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>Connections - Failed</title>
+        <search>
+          <query>sourcetype="forescout:OTSM:REST:links"
+| search host="$command_center$"
+| search proto="FailedConnection*"
+| join type=inner dst_host_id host
+[
+    search sourcetype="forescout:OTSM:REST:hosts"
+    | dedup id host sortby -_time
+    | rename id AS dst_host_id ip AS dst_ip mac_addresses AS dst_mac_addresses
+]
+| join type=inner src_host_id host
+[
+    search sourcetype="forescout:OTSM:REST:hosts"
+    | dedup id host sortby -_time
+    | rename id AS src_host_id ip AS src_ip mac_addresses AS src_mac_addresses
+]
+
+| eval _timez=strftime(_time,"%F %T.%3Q%z")
+
+| iplocation dst_ip prefix=dstIp_
+| iplocation src_ip prefix=srcIp_
+
+| rename _timez as Time host as CC src_ip as "Source IP" srcIp_Country as "Source Country" dst_ip as "Destination IP" dstIp_Country as "Destination Country" first_seen as "First Seen" proto as Protocol ports{} as "Ports"
+| table Time CC "Ports" "Source IP" "Source Country" "Destination IP"  "Destination Country" Protocol "First Seen"</query>
+          <earliest>$timePicker.earliest$</earliest>
+          <latest>$timePicker.latest$</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>TELNET Protocol</title>
+        <search>
+          <query>sourcetype="forescout:OTSM:REST:links"
+| dedup id sortby -_time
+| search host="$command_center$"
+| search proto="TELNET*"
+| join type=inner dst_host_id host
+[
+    search sourcetype="forescout:OTSM:REST:hosts"
+    | dedup id host sortby -_time
+    | rename id AS dst_host_id ip AS dst_ip mac_addresses AS dst_mac_addresses
+]
+| join type=inner src_host_id host
+[
+    search sourcetype="forescout:OTSM:REST:hosts"
+    | dedup id host sortby -_time
+    | rename id AS src_host_id ip AS src_ip mac_addresses AS src_mac_addresses
+]
+| eval _timez=strftime(_time,"%F %T.%3Q%z")
+| iplocation dst_ip prefix=dstIp_
+| iplocation src_ip prefix=srcIp_
+| rename _timez as Time host as CC src_ip as "Source IP" srcIp_Country as "Source Country" dst_ip as "Destination IP" dstIp_Country as "Destination Country" first_seen as "First Seen"
+| table Time CC "Source IP" "Source Country" "Destination IP" "Destination Country" "First Seen"</query>
+          <earliest>$timePicker.earliest$</earliest>
+          <latest>$timePicker.latest$</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>DHCP Protocol</title>
+        <search>
+          <query>sourcetype="forescout:OTSM:REST:links"
+| search host="$command_center$"
+| search proto="DHCP*"
+| join type=inner dst_host_id host
+[
+    search sourcetype="forescout:OTSM:REST:hosts"
+    | dedup id host sortby -_time
+    | rename id AS dst_host_id ip AS dst_ip mac_addresses AS dst_mac_addresses
+]
+| join type=inner src_host_id host
+[
+    search sourcetype="forescout:OTSM:REST:hosts"
+    | dedup id host sortby -_time
+    | rename id AS src_host_id ip AS src_ip mac_addresses AS src_mac_addresses
+]
+| eval _timez=strftime(_time,"%F %T.%3Q%z")
+| iplocation dst_ip prefix=dstIp_
+| iplocation src_ip prefix=srcIp_
+| rename _timez as Time host as CC src_ip as "Source IP" srcIp_Country as "Source Country" dst_ip as "Destination IP" dstIp_Country as "Destination Country" first_seen as "First Seen"
+| table Time CC "Source IP" "Source Country" "Destination IP" "Destination Country" "First Seen"</query>
+          <earliest>$timePicker.earliest$</earliest>
+          <latest>$timePicker.latest$</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>Ghost Nodes</title>
+        <search>
+          <query>sourcetype="forescout:OTSM:REST:hosts"
+| dedup id host sortby -_time
+| search host="$command_center$"
+| search main_role=ghost
+| dedup ip
+| iplocation ip
+| rename host as CC ip as "IP Address" first_seen as "First Seen" last_seen as "Last Seen"
+| table CC "IP Address" Country "First Seen" "Last Seen"</query>
+          <earliest>$timePicker.earliest$</earliest>
+          <latest>$timePicker.latest$</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>Links - Last Seen 20</title>
+        <search>
+          <query>sourcetype="forescout:OTSM:REST:links"
+| search host="$command_center$"
+| join type=inner dst_host_id host
+[
+    search sourcetype="forescout:OTSM:REST:hosts"
+    | dedup id host sortby -_time
+    | rename id AS dst_host_id ip AS dst_ip mac_addresses AS dst_mac_addresses
+]
+| join type=inner src_host_id host
+[
+    search sourcetype="forescout:OTSM:REST:hosts"
+    | dedup id host sortby -_time
+    | rename id AS src_host_id ip AS src_ip mac_addresses AS src_mac_addresses
+]
+| iplocation dst_ip prefix=dstIp_
+| iplocation src_ip prefix=srcIp_
+| fillnull value=- src_ip dst_ip proto
+| rename _time as Time host as CC src_ip as "Source IP" srcIp_Country as "Source Country" dst_ip as "Destination IP" dstIp_Country as "Destination Country" first_seen as "First Seen" last_seen as "Last Seen" proto as Protocol
+| table CC "Source IP" "Source Country" "Destination IP" "Destination Country" Protocol "First Seen" "Last Seen"
+| sort 20 - "Last Seen"</query>
+          <earliest>$timePicker.earliest$</earliest>
+          <latest>$timePicker.latest$</latest>
+          <sampleRatio>1</sampleRatio>
+          <refresh>1m</refresh>
+          <refreshType>delay</refreshType>
+        </search>
+        <option name="count">100</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+</form>

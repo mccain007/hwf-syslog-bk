@@ -1,0 +1,281 @@
+{
+  "version": "1.0",
+  "date": "2022-11-14T19:17:50.60033425Z",
+  "hashAlgorithm": "SHA-256",
+  "app": {
+    "id": 2824,
+    "version": "1.2.22",
+    "files": [
+      {
+        "path": "README.txt",
+        "hash": "cde815f42aaab4f09338a3565a38e7fb80f3588e85b5636e2e78845482180fe7"
+      },
+      {
+        "path": "appserver/static/common/drilldown_tree_node.js",
+        "hash": "b28714ba04c98ce2d7e6b0222488409eb43f0e0fc696c2d80838e66d33b137e6"
+      },
+      {
+        "path": "appserver/static/img/connection.png",
+        "hash": "c3c310f37b3447edbb37f487bb63608ad8b46fe3ef90020b68edbc70151c0301"
+      },
+      {
+        "path": "appserver/static/img/device.png",
+        "hash": "c07d3423c3e752f12774fa84e8d5e78dbdbafcfa5630021429fb7aa0e9d3ea33"
+      },
+      {
+        "path": "appserver/static/img/external.png",
+        "hash": "aee1c6e5107311e01a247f13530b5fb2761192f93e8188e44226e76f60579a68"
+      },
+      {
+        "path": "appserver/static/img/host.png",
+        "hash": "97b8829b5f5ac9c2c22cb5cfc681b302bd737d65edb24a8644c1b591d1ccc15f"
+      },
+      {
+        "path": "appserver/static/img/paths.png",
+        "hash": "6b6c58e422ce40cfe91cb191ae703be34bdc2a802e28d4e0c5d8c80e50efdb80"
+      },
+      {
+        "path": "appserver/static/img/port.png",
+        "hash": "2a2c17edb6fa4b7db0857a0fbf9bf5aeac5937ee964178a8a561fdfb1485e5e0"
+      },
+      {
+        "path": "appserver/static/img/tor.png",
+        "hash": "44b9e9e2d4b55ca04d4fb9c845fc77f5957f328e453a5f826ac6e930b633e530"
+      },
+      {
+        "path": "appserver/static/img/unknown.png",
+        "hash": "4bfc3d546b8a009fbc58588050a771c58625f128428041bb75dc395756efdc88"
+      },
+      {
+        "path": "appserver/static/img/vds.png",
+        "hash": "6b6c58e422ce40cfe91cb191ae703be34bdc2a802e28d4e0c5d8c80e50efdb80"
+      },
+      {
+        "path": "appserver/static/img/vm-host.png",
+        "hash": "41815ad59bc97d381f7c69c9666760d6367bbaee6a5fada38d03fec14129c3d8"
+      },
+      {
+        "path": "appserver/static/img/vm.png",
+        "hash": "cb96a74aede6a0d0cd7fc5e5c116a560e8eaf24567d470b347c9f3d915d3bcea"
+      },
+      {
+        "path": "appserver/static/modules/netops_health/models/devices-ifaces.js",
+        "hash": "3a142725d14e8681daf61655c7823c68f7df7a2850405aa34981756d903ad09f"
+      },
+      {
+        "path": "appserver/static/modules/netops_health/templates/info_device.xhtml",
+        "hash": "b1ab3aad89cdf52150f9bb9321ca08de5199c762c77a0119f03893040abc25a9"
+      },
+      {
+        "path": "appserver/static/modules/netops_health/templates/info_iface.xhtml",
+        "hash": "5b4e99485ef0c2a50c792b2023a4f6694ba9cf1833c94e284fc220508b5648a4"
+      },
+      {
+        "path": "appserver/static/modules/netops_health/templates/layout.html",
+        "hash": "7f2e57f0bae9b39b4cb740d404e9318fb3e6385318b1a063f0152fc15656087a"
+      },
+      {
+        "path": "appserver/static/modules/netops_health/views/devices-ifaces.js",
+        "hash": "f9fa968f00bdd0449fc568ac800423846258b42e50e70eff552e1cb9b5de1cf2"
+      },
+      {
+        "path": "appserver/static/modules/netops_health/views/main.js",
+        "hash": "13f553c22f3e226783e3fe14bd3609cc47b14c7dbde658467a020e3d41acea03"
+      },
+      {
+        "path": "appserver/static/modules/netops_paths/models/paths.js",
+        "hash": "c19c10b3ef90e054c98611b7b56876fdf963d18632cb4df3b3c496fb73bdb99d"
+      },
+      {
+        "path": "appserver/static/modules/netops_paths/models/red_wheel.js",
+        "hash": "e202722f50d7e32b917428b85c5b136e47c524061c52ba31eaf9bf9c0fdc72f9"
+      },
+      {
+        "path": "appserver/static/modules/netops_paths/models/vm_pairs.js",
+        "hash": "b9f3801a2e8e7c5c33a0b9d694ad8133fd27e7994a1a490f59e00fb0c73ba9b7"
+      },
+      {
+        "path": "appserver/static/modules/netops_paths/templates/device_info.html",
+        "hash": "52ac59dd67e98d88c1ea86dd9b4f7f8b7a8c394349943dbff681a00a8b0e9ad1"
+      },
+      {
+        "path": "appserver/static/modules/netops_paths/templates/graph_koleso.html",
+        "hash": "5edd558ddd956f9248efc02bc91c0a2af59ff29aa58e3bef3bccbf7a53530fa9"
+      },
+      {
+        "path": "appserver/static/modules/netops_paths/templates/layout.html",
+        "hash": "2eb51fd6a5d74a76480c4529d9c893d292bf5586b844dbca6b7e4aa42188b1a7"
+      },
+      {
+        "path": "appserver/static/modules/netops_paths/templates/traffic-abba.html",
+        "hash": "ea52dc1bf87760cdc2409a3f8103f603ebff661ceccdbf64ae1a9c2487ab0d92"
+      },
+      {
+        "path": "appserver/static/modules/netops_paths/templates/vm_pairs.html",
+        "hash": "a350ad4b1a4c97f55f2627bd59ab858e2bab9b400559ccf188c8d1dcc9edfb9a"
+      },
+      {
+        "path": "appserver/static/modules/netops_paths/views/graph_koleso.js",
+        "hash": "d2cc12573739254a47f89e43422c7c833b79f962758f2077e602b1e2544da7a8"
+      },
+      {
+        "path": "appserver/static/modules/netops_paths/views/graph_path.js",
+        "hash": "8fbef055a13ecf282f2d07647fd07df4775700f8343f5333dd49ab0eafe69a25"
+      },
+      {
+        "path": "appserver/static/modules/netops_paths/views/iface_details.js",
+        "hash": "6f025bc34837872f08ff05c51824ed1c6543eafae2363c8e28c33ed97c5cf5a7"
+      },
+      {
+        "path": "appserver/static/modules/netops_paths/views/main.js",
+        "hash": "55c3957dc1550a7effab9cbfd3c8c20575a76eda7f52204ecefa4f4c24ed433a"
+      },
+      {
+        "path": "appserver/static/modules/netops_paths/views/vm_pairs.js",
+        "hash": "8c17752983b1e362362f66ee5bb8c5ca62cea944e8b77d6233a58c7299529091"
+      },
+      {
+        "path": "appserver/static/netops_health.css",
+        "hash": "7cc1ef59f6834366abbe04fec9f43a84a97e81a3f42290e290a0e5795602b242"
+      },
+      {
+        "path": "appserver/static/netops_health.js",
+        "hash": "4c2787cb32103b6338f0351cb569aa68f13bc5785986d5a3400b3ed93e7d8df1"
+      },
+      {
+        "path": "appserver/static/netops_paths.css",
+        "hash": "04a935b83b0c7ed47ae4205eadd86a0a6ffe4f4b1e412a0aa12c3e4c9b74b099"
+      },
+      {
+        "path": "appserver/static/netops_paths.js",
+        "hash": "6ce14c3e41a5240bcfbf8fd2441f820e9c5bd3f6c4ddd82fbaf7647577841d04"
+      },
+      {
+        "path": "appserver/static/table_formatting.js",
+        "hash": "0166756f4c1ad2ea936d6ba839713733f9eef044c0f55b7bd19b4fce524f30f0"
+      },
+      {
+        "path": "appserver/static/vendor/d3.LICENSE",
+        "hash": "cfbbc38bc63359f41eef41f92314754d6652fd1a17d016de344926d5de34b7d5"
+      },
+      {
+        "path": "appserver/static/vendor/d3.min.js",
+        "hash": "c641285840b6477b0e5da33c8e768a4f8de0ba80b24db92218016b6ad8fdc754"
+      },
+      {
+        "path": "appserver/static/vendor/text.js",
+        "hash": "aaf6c6b03b146d0b6e714a1e50012122bd66afbc15c34dab3ac5265181362fd5"
+      },
+      {
+        "path": "default/app.conf",
+        "hash": "4d97136a438dd5380522200ed051aa7c91bfcb3546ee3353b5840714584c023f"
+      },
+      {
+        "path": "default/data/ui/nav/default.xml",
+        "hash": "d300f1c796dd388a05ef0182c0c4d850da8eda905f978e79d2abae261243159d"
+      },
+      {
+        "path": "default/data/ui/views/netops_health.xml",
+        "hash": "057a3863b9507181f199ebeb3b32b61b0d3ab5d053f6b020b382b09ce4de6658"
+      },
+      {
+        "path": "default/data/ui/views/netops_paths.xml",
+        "hash": "81bce7f6eb65c29a6b6451a61e49ab2aa39424fe6084e62e5ce0a1e790933e87"
+      },
+      {
+        "path": "default/data/ui/views/netops_top_tunnels.xml",
+        "hash": "a8a7dd25f8cb62cc7b8ffb98d85ca40a3ed4932f96b37bba4c6cfc08a791f11b"
+      },
+      {
+        "path": "default/data/ui/views/netops_top_vms.xml",
+        "hash": "b91576dcaecd46ecb2a20d30513d5999fcae79fd0235584d0cd5c7d6715fe0db"
+      },
+      {
+        "path": "default/data/ui/views/setup_dashboard.xml",
+        "hash": "ad8057354c8acc36460740550c0d9344e3d5ce101655b047315115594711c3c9"
+      },
+      {
+        "path": "default/macros.conf",
+        "hash": "42bb07552a544ba0acefd6d23fbaa95fcce9646073c85d46ef742e3706af1c5f"
+      },
+      {
+        "path": "default/props.conf",
+        "hash": "355466ca09e725847787e75b131722de47409527a25b5da1bc99335224f27f8e"
+      },
+      {
+        "path": "default/transforms.conf",
+        "hash": "dc5f020d53aacc13cfff5fb64f681fcd87e079a88deffb517d09942e1114ccf7"
+      },
+      {
+        "path": "static/appIcon.png",
+        "hash": "69b4ea6d9c28a10190f817cfdadc212f38e6fff4e74133f9092c44859d15e92d"
+      },
+      {
+        "path": "static/appIconAlt.png",
+        "hash": "69b4ea6d9c28a10190f817cfdadc212f38e6fff4e74133f9092c44859d15e92d"
+      },
+      {
+        "path": "static/appIconAlt_2x.png",
+        "hash": "73aa00442a80a66b1f24c70911f84c7e11cde02dfdec871a6d644ce47c5b688b"
+      },
+      {
+        "path": "static/appIcon_2x.png",
+        "hash": "73aa00442a80a66b1f24c70911f84c7e11cde02dfdec871a6d644ce47c5b688b"
+      },
+      {
+        "path": "static/appLogo.png",
+        "hash": "3a541257baff113e885e96a297131eb24781be41072c616cfd1ac59b32748ce0"
+      },
+      {
+        "path": "static/appLogo_2x.png",
+        "hash": "38bb4e52c86edbbd6a597872007f172a9bb3ac329f49f6ff45b0f85bf390fcae"
+      }
+    ]
+  },
+  "products": [
+    {
+      "platform": "splunk",
+      "product": "enterprise",
+      "versions": [
+        "7.3",
+        "8.0",
+        "8.1",
+        "8.2",
+        "9.0"
+      ],
+      "architectures": [
+        "x86_64"
+      ],
+      "operatingSystems": [
+        "windows",
+        "linux",
+        "macos",
+        "freebsd",
+        "solaris",
+        "aix"
+      ]
+    },
+    {
+      "platform": "splunk",
+      "product": "cloud",
+      "versions": [
+        "7.3",
+        "8.0",
+        "8.1",
+        "8.2",
+        "9.0"
+      ],
+      "architectures": [
+        "x86_64"
+      ],
+      "operatingSystems": [
+        "windows",
+        "linux",
+        "macos",
+        "freebsd",
+        "solaris",
+        "aix"
+      ]
+    }
+  ]
+}

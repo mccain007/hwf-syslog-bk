@@ -1,0 +1,74 @@
+<dashboard isDashboard="false" version="1.1">
+  <label>App Setup</label>
+  <row>
+    <html>
+      <h1>
+        Welcome to the V2P Network Visibility App for Splunk!
+      </h1>
+      <p>
+        <b>IMPORTANT:</b> This app relies on the <b>NetFlow Optimizer™ (NFO)</b> flow processing engine software by NetFlow Logic and also requires the Technology Add-On for
+ NetFlow. Please see <i>V2P Network Visibility Solution Guide</i> document for additional information:
+        <a target="_blank" href="https://www.netflowlogic.com/resources/documentation/">https://www.netflowlogic.com/resources/documentation/</a>
+      </p>
+      <p>
+        <b>BEFORE YOU BEGIN:</b>
+        <ul>
+            <li>
+                Download and install Technology Add-On for NetFlow: https://splunkbase.splunk.com/app/1838/
+            </li>
+            <li>
+                Visit <a target="_blank" href="https://www.netflowlogic.com/download/">https://www.netflowlogic.com/download/</a> and download:
+                <ul style="list-style-type:disc">
+                    <li>NetFlow Optimizer</li>
+                    <li>External Data Feeder</li>
+                    <li>V2P Network Visibility Module</li>
+                </ul>
+            </li>
+            <li>
+                Request a free 60 day NetFlow Optimizer trial license by completing the <a target="_blank" href="https://www.netflowlogic.com/download/register-form/">simple registration form</a>
+            </li>
+            <li>
+                Install and configure NetFlow Optimizer input to receive NetFlow/sFlow/IPFIX, and output to send NFO syslogs to your Splunk system
+            </li>
+            <li>
+                Install External Data Feeder to connect NFO to VMware vCenter
+            </li>
+            <li>
+                Upload V2P Network Visibility Module to NFO and configure vCenter integration
+            </li>
+        </ul>
+      </p>
+      <p>
+        For NetFlow Optimizer and External Data Feeder for NFO installation and configuration please see <i>NetFlow Optimizer Installation and Administration Guide</i>
+        and <i>External Data Feeder Getting Started Guide</i> at <a target="_blank" href="https://www.netflowlogic.com/resources/documentation/">https://www.netflowlogic.com/resources/documentation/</a>
+      </p>
+      <p>
+        You can setup this app by following the steps below. Once you have reviewed the setup steps, click on the "Enable" button.
+      </p>
+      <br/>
+      <p>
+        <b>CONFIGURATION:</b>
+      </p>
+      <p>
+        Check that the index is properly configured. In case you are not using default index=main to store NetFlow Optimizer events, please follow the following procedure:
+        <p>
+            <ol>
+                <li>Create directory $SPLUNK_ROOT/etc/apps/netflow_netops/local/ if it doesn't exist</li>
+                <li>Create file $SPLUNK_ROOT/etc/apps/netflow_netops/local/macros.conf with following lines:<br/>
+                    <pre>            
+[netflow_index]
+definition = index=&lt;change_me&gt; sourcetype=flowintegrator
+                    </pre>
+                </li>
+                <li>Save $SPLUNK_ROOT/etc/apps/netflow_netops/local/macros.conf</li>
+                <li>Restart Splunk for the changes to take effect</li>
+            </ol>
+        </p>
+      </p>
+      <br/>
+      <p>
+        <a target="_blank" href="https://www.netflowlogic.com/connect/support/">Have questions or need assistance? We are here to help!</a>
+      </p>
+    </html>
+  </row>
+</dashboard>

@@ -1,0 +1,79 @@
+Splunk Enterprise system and software requirements
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Because this App runs on Splunk Enterprise, all of the `Splunk Enterprise system requirements <https://docs.splunk.com/Documentation/Splunk/latest/Installation/Systemrequirements>`_ apply.
+
+Splunk Common Information Model Add-on
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This app depends on data models included in the Splunk Common Information Model Add-on, specifically the |data_model| data model. Please review the information on `installing and using the Splunk Common Information Model Add-on <http://docs.splunk.com/Documentation/CIM/latest/User/Install>`_ and information on `configuring the acceleration on the data model <http://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Acceleratedatamodels#Enable_persistent_acceleration_for_a_data_model>`_.
+
+The Splunk Common Information Model Add-on can be downloaded from `Splunkbase <https://apps.splunk.com/app/1621/>`_.
+
+This app has been tested with versions 4.9 of the CIM add-on.
+
+Data model Acceleration on the |data_model| data model
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In order to make the app respond and load quickly, accelerated data models are used to provide summary data. For this data to be available, the |data_model| data model must be accelerated. Information on how to enable acceleration for the |data_model| data model can be found `here <http://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Managedatamodels#Enable_data_model_acceleration>`_. The data model must be accelerated for the length of time for which you would like to see reporting.
+
+Sankey Diagram Visualization (optional)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The ``Breakdown of Sourcetypes in Indexes in Dataset`` panel on the ``Data Transparency Overview`` dashboard will only be seen if the ``Sankey Diagram`` visualization is installed.
+
+The Sankey Diagram Visualization can be downloaded from `Sankey Diagram Custom Visualization <https://splunkbase.splunk.com/app/3112/>`_.
+
+
+App Configuration
+~~~~~~~~~~~~~~~~~
+
+This app may require some configuration before it will work properly (outside of the configuration of the Data Model Acceleration). In particular, you may need to edit the configuration macros, as well as the lookup which populates the Device dropdown found on many of the dashboards.
+
+Macros for Configuration
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+network_traffic_dvcs
+********************
+
+This macro contains the search which is used to populate the Devices dropdown found on many of the dashboards. By default this is the auto-generated lookup, however, the macro can be edited to point to another lookup as needed.
+
+network_traffic_dest_external
+********************
+
+This macro contains a partial search which determines when a network traffic event's destination IP address is external to your network. By default this will exclude private IP addresses, but can be edited to reflect your own network configuration. Note: this search snippet is used in searches using the accelerated data models and the ``tstats`` command. While the normal SPL does support CIDR, ``tstats`` does not. Make sure your search syntax will work with the ``tstats`` command.
+
+network_traffic_src_external
+********************
+
+This macro contains a partial search which determines when a network traffic event's source IP address is external to your network. By default this will exclude private IP addresses, but can be edited to reflect your own network configuration. Note: this search snippet is used in searches using the accelerated data models and the ``tstats`` command. While the normal SPL does support CIDR, ``tstats`` does not. Make sure your search syntax will work with the ``tstats`` command.
+
+Device Dropdown Lookup
+********************
+
+For the ``Device`` dropdown, present on many of the dashboards, you can use the auto-generated lookup, which runs every morning at 2 am.
+If your Network_Traffic data model is populated, you can run the saved search ``network_traffic_dvc_auto_gen`` to populate the dropdown.
+
+The lookup has two fields: ``dvc`` and ``device_name``. ``device_name`` can be a description of the device. ``dvc`` can be wild-carded (not CIDR, as that is not available in ``tstats`` searches used with the accelerated data models). The search used to populate this dropdown can be configured using the network_traffic_dvcs macro.
+
+Splunk Common Information Model
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- References
+~~~~~~~~~~~~
+
+- `Splunk Common Information Model Add-on Docs <https://docs.splunk.com/Documentation/CIM/latest/User/Overview>`_
+- Splunk Common Information Model add-on |data_model| data model `<https://docs.splunk.com/documentation/CIM/latest/user/NetworkTraffic>`_
+
+- Downloads
+~~~~~~~~~~~
+
+- `Splunk Common Information Model Add-on <https://apps.splunk.com/app/1621/>`_
+
+Sankey Diagram Visualization (optional)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- Downloads
+~~~~~~~~~~~
+
+- `Sankey Diagram Custom Visualization <https://splunkbase.splunk.com/app/3112/>`_

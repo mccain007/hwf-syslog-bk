@@ -1,0 +1,684 @@
+sid,search,"splunk_server","_time","is_realtime",provenance,"api_index_et","api_index_lt","event_count","exec_time","result_count","savedsearch_name","scan_count",status,"total_run_time","api_et","api_lt","search_et","search_lt","__mv_sid","__mv_search","__mv_splunk_server","__mv__time","__mv_is_realtime","__mv_provenance","__mv_api_index_et","__mv_api_index_lt","__mv_event_count","__mv_exec_time","__mv_result_count","__mv_savedsearch_name","__mv_scan_count","__mv_status","__mv_total_run_time","__mv_api_et","__mv_api_lt","__mv_search_et","__mv_search_lt"
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search1_1677940455.215","search sourcetype=""forescout:OTSM:logs:useractivity"" | dedup host","rhel.hwf.sc4s","1677940455.684672",0,"UI:Dashboard:dashboard_administrative",0,0,0,1677940455,0,search1,0,completed,"0.244",,,,,,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search2_1677940456.216","search sourcetype=""forescout:OTSM:logs:useractivity"" action=""Failed login""
+| search host=""*""
+| rex field=time ""(?<time_short>\d.:\d.:\d.)""
+| eval date_long = strftime(_time, ""%A, %B %e, %Y"")
+| streamstats count as sno by date_long
+| eventstats max(sno) as 'max' count as total
+| eval date_long=if(total>max,date_long, if(sno=1,date_long, null()))
+| rename date_long as Date time_short as Time host as ""CC"" clientIP as ""User IP"" user as ""Username"" otherInfo as ""Reason""
+| table Date Time ""CC"" ""User IP"" Username Reason
+| sort -time","rhel.hwf.sc4s","1677940456.091761",0,"UI:Dashboard:dashboard_administrative",0,0,0,1677940456,0,search2,0,completed,"0.275","1675314000.000000000","1677940456.000000000","1675314000.000000000","1677940456.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search3_1677940456.217","search sourcetype=""forescout:OTSM:logs:health"" AND monitoredVariable=""sensor connection""
+| search host=""*""
+| rex field=time ""(?<time_short>\d.:\d.:\d.)""
+| eval date_long = strftime(_time, ""%A, %B %e, %Y"")
+| streamstats count as sno by date_long
+| eventstats max(sno) as 'max' count as total
+| eval date_long=if(total>max,date_long, if(sno=1,date_long, null()))
+| rename date_long as Date time_short as Time device as Sensor host as ""CC"" previousHealthStatus as ""Previous Status"" currentHealthStatus as ""Current Status"" currentValue as ""Value""
+| table Date Time CC Sensor ""Current Status"" ""Previous Status"" ""Value""
+| sort -time","rhel.hwf.sc4s","1677940456.100296",0,"UI:Dashboard:dashboard_administrative",0,0,0,1677940456,0,search3,0,completed,"0.338","1675314000.000000000","1677940456.000000000","1675314000.000000000","1677940456.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search4_1677940456.218","search sourcetype=""forescout:OTSM:logs:useractivity""
+| search host=""*""
+| rex field=time ""(?<time_short>\d.:\d.:\d.)""
+| eval date_long = strftime(_time, ""%A, %B %e, %Y"")
+| streamstats count as sno by date_long
+| eventstats max(sno) as 'max' count as total
+| eval date_long=if(total>max,date_long, if(sno=1,date_long, null()))
+| rename date_long as Date time_short as Time host as ""CC"" clientIP as ""Client IP"" user as User resource as Resource action as Action otherInfo as Details
+| table Date Time ""CC"" ""Client IP"" User Resource Action Details
+| sort -time","rhel.hwf.sc4s","1677940456.104466",0,"UI:Dashboard:dashboard_administrative",0,0,0,1677940456,0,search4,0,completed,"0.323","1675314000.000000000","1677940456.000000000","1675314000.000000000","1677940456.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search5_1677940456.219","search sourcetype=""forescout:OTSM:logs:health""
+| search host=""*""
+| rex field=time ""(?<time_short>\d.:\d.:\d.)""
+| eval date_long = strftime(_time, ""%A, %B %e, %Y"")
+| streamstats count as sno by date_long
+| eventstats max(sno) as 'max' count as total
+| eval date_long=if(total>max,date_long, if(sno=1,date_long, null()))
+| rename date_long as Date time_short as Time host as CC device as Sensor monitoredVariable as ""Health Area"" previousHealthStatus as ""Previous Status"" currentHealthStatus as ""Current Status"" currentValue as Value
+| table Date Time CC Sensor ""Health Area"" ""Current Status"" ""Previous Status"" Value
+| sort -time","rhel.hwf.sc4s","1677940456.109623",0,"UI:Dashboard:dashboard_administrative",0,0,0,1677940456,0,search5,0,completed,"0.333","1675314000.000000000","1677940456.000000000","1675314000.000000000","1677940456.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search4_1677940487.220","search sourcetype=""forescout:OTSM:logs:useractivity""
+| search host=""*""
+| rex field=time ""(?<time_short>\d.:\d.:\d.)""
+| eval date_long = strftime(_time, ""%A, %B %e, %Y"")
+| streamstats count as sno by date_long
+| eventstats max(sno) as 'max' count as total
+| eval date_long=if(total>max,date_long, if(sno=1,date_long, null()))
+| rename date_long as Date time_short as Time host as ""CC"" clientIP as ""Client IP"" user as User resource as Resource action as Action otherInfo as Details
+| table Date Time ""CC"" ""Client IP"" User Resource Action Details
+| sort -time","rhel.hwf.sc4s","1677940487.194319",0,"UI:Dashboard:dashboard_administrative",0,0,0,1677940487,0,search4,0,completed,"0.23500000000000001","1675314000.000000000","1677940487.000000000","1675314000.000000000","1677940487.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search5_1677940487.221","search sourcetype=""forescout:OTSM:logs:health""
+| search host=""*""
+| rex field=time ""(?<time_short>\d.:\d.:\d.)""
+| eval date_long = strftime(_time, ""%A, %B %e, %Y"")
+| streamstats count as sno by date_long
+| eventstats max(sno) as 'max' count as total
+| eval date_long=if(total>max,date_long, if(sno=1,date_long, null()))
+| rename date_long as Date time_short as Time host as CC device as Sensor monitoredVariable as ""Health Area"" previousHealthStatus as ""Previous Status"" currentHealthStatus as ""Current Status"" currentValue as Value
+| table Date Time CC Sensor ""Health Area"" ""Current Status"" ""Previous Status"" Value
+| sort -time","rhel.hwf.sc4s","1677940487.199243",0,"UI:Dashboard:dashboard_administrative",0,0,0,1677940487,0,search5,0,completed,"0.234","1675314000.000000000","1677940487.000000000","1675314000.000000000","1677940487.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search3_1677940517.222","search sourcetype=""forescout:OTSM:logs:health"" AND monitoredVariable=""sensor connection""
+| search host=""*""
+| rex field=time ""(?<time_short>\d.:\d.:\d.)""
+| eval date_long = strftime(_time, ""%A, %B %e, %Y"")
+| streamstats count as sno by date_long
+| eventstats max(sno) as 'max' count as total
+| eval date_long=if(total>max,date_long, if(sno=1,date_long, null()))
+| rename date_long as Date time_short as Time device as Sensor host as ""CC"" previousHealthStatus as ""Previous Status"" currentHealthStatus as ""Current Status"" currentValue as ""Value""
+| table Date Time CC Sensor ""Current Status"" ""Previous Status"" ""Value""
+| sort -time","rhel.hwf.sc4s","1677940517.150352",0,"UI:Dashboard:dashboard_administrative",0,0,0,1677940517,0,search3,0,completed,"0.198","1675314000.000000000","1677940517.000000000","1675314000.000000000","1677940517.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search4_1677940518.223","search sourcetype=""forescout:OTSM:logs:useractivity""
+| search host=""*""
+| rex field=time ""(?<time_short>\d.:\d.:\d.)""
+| eval date_long = strftime(_time, ""%A, %B %e, %Y"")
+| streamstats count as sno by date_long
+| eventstats max(sno) as 'max' count as total
+| eval date_long=if(total>max,date_long, if(sno=1,date_long, null()))
+| rename date_long as Date time_short as Time host as ""CC"" clientIP as ""Client IP"" user as User resource as Resource action as Action otherInfo as Details
+| table Date Time ""CC"" ""Client IP"" User Resource Action Details
+| sort -time","rhel.hwf.sc4s","1677940518.400620",0,"UI:Dashboard:dashboard_administrative",0,0,0,1677940518,0,search4,0,canceled,"0.154","1675314000.000000000","1677940518.000000000","1675314000.000000000","1677940518.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search5_1677940518.224","search sourcetype=""forescout:OTSM:logs:health""
+| search host=""*""
+| rex field=time ""(?<time_short>\d.:\d.:\d.)""
+| eval date_long = strftime(_time, ""%A, %B %e, %Y"")
+| streamstats count as sno by date_long
+| eventstats max(sno) as 'max' count as total
+| eval date_long=if(total>max,date_long, if(sno=1,date_long, null()))
+| rename date_long as Date time_short as Time host as CC device as Sensor monitoredVariable as ""Health Area"" previousHealthStatus as ""Previous Status"" currentHealthStatus as ""Current Status"" currentValue as Value
+| table Date Time CC Sensor ""Health Area"" ""Current Status"" ""Previous Status"" Value
+| sort -time","rhel.hwf.sc4s","1677940518.412213",0,"UI:Dashboard:dashboard_administrative",0,0,0,1677940518,0,search5,0,canceled,"0.197","1675314000.000000000","1677940518.000000000","1675314000.000000000","1677940518.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search1_1677941478.248","search sourcetype=""forescout:OTSM:logs:useractivity"" | dedup host","rhel.hwf.sc4s","1677941478.884052",0,"UI:Dashboard:dashboard_administrative",0,0,0,1677941478,0,search1,0,completed,"0.257",,,,,,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search2_1677941479.249","search sourcetype=""forescout:OTSM:logs:useractivity"" action=""Failed login""
+| search host=""*""
+| rex field=time ""(?<time_short>\d.:\d.:\d.)""
+| eval date_long = strftime(_time, ""%A, %B %e, %Y"")
+| streamstats count as sno by date_long
+| eventstats max(sno) as 'max' count as total
+| eval date_long=if(total>max,date_long, if(sno=1,date_long, null()))
+| rename date_long as Date time_short as Time host as ""CC"" clientIP as ""User IP"" user as ""Username"" otherInfo as ""Reason""
+| table Date Time ""CC"" ""User IP"" Username Reason
+| sort -time","rhel.hwf.sc4s","1677941479.318784",0,"UI:Dashboard:dashboard_administrative",0,0,0,1677941479,0,search2,0,completed,"0.438","1675314000.000000000","1677941479.000000000","1675314000.000000000","1677941479.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search3_1677941479.250","search sourcetype=""forescout:OTSM:logs:health"" AND monitoredVariable=""sensor connection""
+| search host=""*""
+| rex field=time ""(?<time_short>\d.:\d.:\d.)""
+| eval date_long = strftime(_time, ""%A, %B %e, %Y"")
+| streamstats count as sno by date_long
+| eventstats max(sno) as 'max' count as total
+| eval date_long=if(total>max,date_long, if(sno=1,date_long, null()))
+| rename date_long as Date time_short as Time device as Sensor host as ""CC"" previousHealthStatus as ""Previous Status"" currentHealthStatus as ""Current Status"" currentValue as ""Value""
+| table Date Time CC Sensor ""Current Status"" ""Previous Status"" ""Value""
+| sort -time","rhel.hwf.sc4s","1677941479.322467",0,"UI:Dashboard:dashboard_administrative",0,0,0,1677941479,0,search3,0,completed,"0.325","1675314000.000000000","1677941479.000000000","1675314000.000000000","1677941479.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search4_1677941479.251","search sourcetype=""forescout:OTSM:logs:useractivity""
+| search host=""*""
+| rex field=time ""(?<time_short>\d.:\d.:\d.)""
+| eval date_long = strftime(_time, ""%A, %B %e, %Y"")
+| streamstats count as sno by date_long
+| eventstats max(sno) as 'max' count as total
+| eval date_long=if(total>max,date_long, if(sno=1,date_long, null()))
+| rename date_long as Date time_short as Time host as ""CC"" clientIP as ""Client IP"" user as User resource as Resource action as Action otherInfo as Details
+| table Date Time ""CC"" ""Client IP"" User Resource Action Details
+| sort -time","rhel.hwf.sc4s","1677941479.327821",0,"UI:Dashboard:dashboard_administrative",0,0,0,1677941479,0,search4,0,completed,"0.352","1675314000.000000000","1677941479.000000000","1675314000.000000000","1677941479.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search5_1677941479.252","search sourcetype=""forescout:OTSM:logs:health""
+| search host=""*""
+| rex field=time ""(?<time_short>\d.:\d.:\d.)""
+| eval date_long = strftime(_time, ""%A, %B %e, %Y"")
+| streamstats count as sno by date_long
+| eventstats max(sno) as 'max' count as total
+| eval date_long=if(total>max,date_long, if(sno=1,date_long, null()))
+| rename date_long as Date time_short as Time host as CC device as Sensor monitoredVariable as ""Health Area"" previousHealthStatus as ""Previous Status"" currentHealthStatus as ""Current Status"" currentValue as Value
+| table Date Time CC Sensor ""Health Area"" ""Current Status"" ""Previous Status"" Value
+| sort -time","rhel.hwf.sc4s","1677941479.329735",0,"UI:Dashboard:dashboard_administrative",0,0,0,1677941479,0,search5,0,completed,"0.34500000000000003","1675314000.000000000","1677941479.000000000","1675314000.000000000","1677941479.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search1_1677941673.253","search sourcetype=""forescout:OTSM:logs:useractivity"" | dedup host","rhel.hwf.sc4s","1677941673.499676",0,"UI:Dashboard:dashboard_administrative",0,0,0,1677941673,0,search1,0,completed,"0.244",,,,,,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search2_1677941673.254","search sourcetype=""forescout:OTSM:logs:useractivity"" action=""Failed login""
+| search host=""*""
+| rex field=time ""(?<time_short>\d.:\d.:\d.)""
+| eval date_long = strftime(_time, ""%A, %B %e, %Y"")
+| streamstats count as sno by date_long
+| eventstats max(sno) as 'max' count as total
+| eval date_long=if(total>max,date_long, if(sno=1,date_long, null()))
+| rename date_long as Date time_short as Time host as ""CC"" clientIP as ""User IP"" user as ""Username"" otherInfo as ""Reason""
+| table Date Time ""CC"" ""User IP"" Username Reason
+| sort -time","rhel.hwf.sc4s","1677941673.922396",0,"UI:Dashboard:dashboard_administrative",0,0,0,1677941673,0,search2,0,completed,"0.374","1675314000.000000000","1677941673.000000000","1675314000.000000000","1677941673.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search3_1677941673.255","search sourcetype=""forescout:OTSM:logs:health"" AND monitoredVariable=""sensor connection""
+| search host=""*""
+| rex field=time ""(?<time_short>\d.:\d.:\d.)""
+| eval date_long = strftime(_time, ""%A, %B %e, %Y"")
+| streamstats count as sno by date_long
+| eventstats max(sno) as 'max' count as total
+| eval date_long=if(total>max,date_long, if(sno=1,date_long, null()))
+| rename date_long as Date time_short as Time device as Sensor host as ""CC"" previousHealthStatus as ""Previous Status"" currentHealthStatus as ""Current Status"" currentValue as ""Value""
+| table Date Time CC Sensor ""Current Status"" ""Previous Status"" ""Value""
+| sort -time","rhel.hwf.sc4s","1677941673.924714",0,"UI:Dashboard:dashboard_administrative",0,0,0,1677941674,0,search3,0,completed,"0.463","1675314000.000000000","1677941673.000000000","1675314000.000000000","1677941673.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search4_1677941673.256","search sourcetype=""forescout:OTSM:logs:useractivity""
+| search host=""*""
+| rex field=time ""(?<time_short>\d.:\d.:\d.)""
+| eval date_long = strftime(_time, ""%A, %B %e, %Y"")
+| streamstats count as sno by date_long
+| eventstats max(sno) as 'max' count as total
+| eval date_long=if(total>max,date_long, if(sno=1,date_long, null()))
+| rename date_long as Date time_short as Time host as ""CC"" clientIP as ""Client IP"" user as User resource as Resource action as Action otherInfo as Details
+| table Date Time ""CC"" ""Client IP"" User Resource Action Details
+| sort -time","rhel.hwf.sc4s","1677941673.931480",0,"UI:Dashboard:dashboard_administrative",0,0,0,1677941674,0,search4,0,completed,"0.426","1675314000.000000000","1677941673.000000000","1675314000.000000000","1677941673.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search5_1677941673.257","search sourcetype=""forescout:OTSM:logs:health""
+| search host=""*""
+| rex field=time ""(?<time_short>\d.:\d.:\d.)""
+| eval date_long = strftime(_time, ""%A, %B %e, %Y"")
+| streamstats count as sno by date_long
+| eventstats max(sno) as 'max' count as total
+| eval date_long=if(total>max,date_long, if(sno=1,date_long, null()))
+| rename date_long as Date time_short as Time host as CC device as Sensor monitoredVariable as ""Health Area"" previousHealthStatus as ""Previous Status"" currentHealthStatus as ""Current Status"" currentValue as Value
+| table Date Time CC Sensor ""Health Area"" ""Current Status"" ""Previous Status"" Value
+| sort -time","rhel.hwf.sc4s","1677941673.938614",0,"UI:Dashboard:dashboard_administrative",0,0,0,1677941674,0,search5,0,completed,"0.457","1675314000.000000000","1677941673.000000000","1675314000.000000000","1677941673.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search1_1677941687.258","search sourcetype=""forescout:OTSM:logs:alert"" | dedup host","rhel.hwf.sc4s","1677941687.465217",0,"UI:Dashboard:dashboard_security",0,0,0,1677941687,0,search1,0,completed,"0.223",,,,,,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search2_1677941688.259","search sourcetype=""forescout:OTSM:logs:alert""
+| search host=""*""
+| stats count by sensorName","rhel.hwf.sc4s","1677941688.617724",0,"UI:Dashboard:dashboard_security",0,0,0,1677941689,0,search2,0,completed,"1.057","1675314000.000000000","1677941688.000000000","1675314000.000000000","1677941688.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search3_1677941688.260","search sourcetype=""forescout:OTSM:logs:alert"" l7Proto !=""""
+| search host=""*""
+|chart count by l7Proto","rhel.hwf.sc4s","1677941688.620073",0,"UI:Dashboard:dashboard_security",0,0,0,1677941688,0,search3,0,completed,"0.9500000000000001","1675314000.000000000","1677941688.000000000","1675314000.000000000","1677941688.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search4_1677941688.261","search index=""main"" sourcetype=""forescout:OTSM:logs:alert"" engineName=""Threat library"" 
+| search host=""*""
+| stats count(eval(match(typeId, ""^itl_sec""))) AS ""ITL Security Alerts"", count(eval(match(typeId, ""^itl_net""))) AS ""ITL Networking Alerts"", count(eval(match(typeId, ""^itl_ops""))) AS ""ITL Operations Alerts"" | transpose","rhel.hwf.sc4s","1677941688.622676",0,"UI:Dashboard:dashboard_security",0,0,0,1677941689,3,search4,0,completed,"0.864","1675314000.000000000","1677941688.000000000","1675314000.000000000","1677941688.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search5_1677941688.263","search sourcetype=""forescout:OTSM:logs:alert""
+| search host=""*""
+| chart sparkline count by severity
+| rename severity as Severity sparkline as Sparkline count as Count
+| eval sort_field = case(Severity == ""Critical"", 1, Severity == ""High"", 2, Severity == ""Medium"", 3, Severity == ""Low"", 4, Severity == ""Informational"", 5)
+| sort sort_field
+| fields Severity Count Sparkline","rhel.hwf.sc4s","1677941688.626627",0,"UI:Dashboard:dashboard_security",0,0,0,1677941688,0,search5,0,completed,"0.712","1675314000.000000000","1677941688.000000000","1675314000.000000000","1677941688.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search7_1677941688.264","search sourcetype=""forescout:OTSM:logs:alert""
+| search host=""*""
+| dedup sensorName severity name srcIp dstIp dstPort l7Proto
+| rex field=time ""(?<time_short>\d.:\d.:\d.)""
+| eval date_long = strftime(_time, ""%A, %B %e, %Y"")
+| streamstats count as sno by date_long
+| eventstats max(sno) as 'max' count as total
+| eval date_long=if(total>max,date_long, if(sno=1,date_long, null()))
+| iplocation dstIp prefix=dstIp_
+| iplocation srcIp prefix=srcIp_
+| rename date_long as Date time_short as Time alertId as ""Alert ID"" severity as Severity host as CC name as Description srcIp as ""Source IP"" srcIp_Country as ""Source Country"" dstIp as ""Destination IP"" dstIp_Country as ""Destination Country"" dstPort as ""Destination Port"" l7Proto as Protocol sensorName as ""Sensor""
+| table Date Time CC Sensor ""Alert ID"" Severity Description ""Source IP"" ""Source Country"" ""Destination IP"" ""Destination Country"" ""Destination Port"" Protocol
+| sort -time","rhel.hwf.sc4s","1677941688.636136",0,"UI:Dashboard:dashboard_security",0,0,0,1677941689,0,search7,0,completed,"0.491","1675314000.000000000","1677941688.000000000","1675314000.000000000","1677941688.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search9_1677941688.265","search sourcetype=""forescout:OTSM:logs:alert"" srcIp!=""""
+| search host=""*""
+| fields srcIp dstIp name
+| eval IPAddress = srcIp + "";"" + dstIp
+| makemv delim="";"" IPAddress
+| mvexpand IPAddress
+| chart count by IPAddress, name","rhel.hwf.sc4s","1677941688.658386",0,"UI:Dashboard:dashboard_security",0,0,0,1677941689,0,search9,0,completed,"1.127","1675314000.000000000","1677941688.000000000","1675314000.000000000","1677941688.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search10_1677941688.266","search sourcetype=""forescout:OTSM:logs:alert"" NOT l7Proto=""""
+| search host=""*""
+| chart count by sensorName l7Proto
+| rename sensorName as SensorName l7Proto as Protocol","rhel.hwf.sc4s","1677941688.666012",0,"UI:Dashboard:dashboard_security",0,0,0,1677941688,0,search10,0,completed,"1.143","1675314000.000000000","1677941688.000000000","1675314000.000000000","1677941688.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search8_1677941688.267","search sourcetype=""forescout:OTSM:logs:alert"" srcIp!=""""
+| search host=""*""
+| fields srcIp name
+| rename srcIp as ""Source IP""
+| chart count by ""Source IP"", name
+| head 15","rhel.hwf.sc4s","1677941688.678576",0,"UI:Dashboard:dashboard_security",0,0,0,1677941690,0,search8,0,completed,"0.484","1675314000.000000000","1677941688.000000000","1675314000.000000000","1677941688.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search12_1677941688.268","search sourcetype=""forescout:OTSM:logs:network""
+| search host=""*""
+| search typeId=log_name_query
+| rename dstIp as ""Destination IP"" srcIp as ""Source IP"" path as ""DNS Query""
+| chart count by ""DNS Query""
+| sort 20 - count","rhel.hwf.sc4s","1677941688.683724",0,"UI:Dashboard:dashboard_security",0,0,0,1677941689,0,search12,0,completed,"0.452","1675314000.000000000","1677941688.000000000","1675314000.000000000","1677941688.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search13_1677941688.269","search sourcetype=""forescout:OTSM:logs:network""
+| search host=""*""
+| search typeId=log_name_query
+| rename dstIp as ""Destination IP"" srcIp as ""Source IP"" path as ""DNS Query""
+| chart count by ""DNS Query""
+| sort 10 count","rhel.hwf.sc4s","1677941688.684620",0,"UI:Dashboard:dashboard_security",0,0,0,1677941690,0,search13,0,completed,"0.404","1675314000.000000000","1677941688.000000000","1675314000.000000000","1677941688.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search14_1677941688.270","search sourcetype=""forescout:OTSM:logs:network""
+| search host=""*""
+| search typeId=log_name_resolved 
+| eval ""Query and Response"" = path."" --> "".valStr 
+| chart count by ""Query and Response""
+| sort 10 - count","rhel.hwf.sc4s","1677941688.694514",0,"UI:Dashboard:dashboard_security",0,0,0,1677941690,0,search14,0,completed,"0.45","1675314000.000000000","1677941688.000000000","1675314000.000000000","1677941688.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search16_1677941688.271","search sourcetype=""forescout:OTSM:logs:network""
+| search host=""*""
+| search typeId=log_auth_success
+| eval full_count= user + "":"" + l7Proto
+| timechart count(user) by full_count","rhel.hwf.sc4s","1677941688.699153",0,"UI:Dashboard:dashboard_security",0,0,0,1677941690,0,search16,0,completed,"0.558","1675314000.000000000","1677941688.000000000","1675314000.000000000","1677941688.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search15_1677941688.272","search sourcetype=""forescout:OTSM:logs:network""
+| search host=""*""
+| search typeId=log_name_resolved 
+| eval ""Query and Response"" = path."" --> "".valStr 
+| chart count by ""Query and Response""
+| sort 10 count","rhel.hwf.sc4s","1677941688.705443",0,"UI:Dashboard:dashboard_security",0,0,0,1677941689,0,search15,0,completed,"0.297","1675314000.000000000","1677941688.000000000","1675314000.000000000","1677941688.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search17_1677941688.273","search sourcetype=""forescout:OTSM:logs:network""
+| search host=""*""
+| search typeId=log_auth_fail
+| eval full_count= user + "":"" + l7Proto
+| iplocation dstIp prefix=dstIp_
+| iplocation srcIp prefix=srcIp_
+| rename srcIp as ""Source IP"" srcIp_Country as ""Source Country"" dstIp as ""Destination IP"" dstIp_Country as ""Destination Country"" user as User error as ""Authentication Error"" l7Proto as Protocol time as Time
+| table Time Protocol User ""Authentication Error"" ""Source IP"" ""Source Country"" ""Destination IP"" ""Destination Country""","rhel.hwf.sc4s","1677941688.711059",0,"UI:Dashboard:dashboard_security",0,0,0,1677941689,0,search17,0,completed,"0.41200000000000003","1675314000.000000000","1677941688.000000000","1675314000.000000000","1677941688.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search19_1677941688.275","search sourcetype=""forescout:OTSM:logs:network""
+| search host=""*""
+| search typeId=log_ssl_certificate
+| iplocation dstIp prefix=dstIp_
+| iplocation srcIp prefix=srcIp_
+| rename cust1 as ""Cipher Suite"" cust2 as Validity srcIp as ""Source IP"" srcIp_Country as ""Source Country"" dstIp as ""Destination IP"" dstIp_Country as ""Destination Country"" id as Issuer
+| table Issuer Validity ""Cipher Suite"" ""Source IP"" ""Source Country"" ""Destination IP"" ""Destination Country""","rhel.hwf.sc4s","1677941688.769742",0,"UI:Dashboard:dashboard_security",0,0,0,1677941690,0,search19,0,completed,"0.5690000000000001","1675314000.000000000","1677941688.000000000","1675314000.000000000","1677941688.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search1_1677941716.278","search sourcetype=""forescout:OTSM:logs:alert"" | dedup host","rhel.hwf.sc4s","1677941716.923052",0,"UI:Dashboard:dashboard_security",0,0,0,1677941717,0,search1,0,completed,"0.25",,,,,,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search2_1677941718.279","search sourcetype=""forescout:OTSM:logs:alert""
+| search host=""*""
+| stats count by sensorName","rhel.hwf.sc4s","1677941718.222570",0,"UI:Dashboard:dashboard_security",0,0,0,1677941718,0,search2,0,completed,"0.916","1675314000.000000000","1677941718.000000000","1675314000.000000000","1677941718.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search3_1677941718.280","search sourcetype=""forescout:OTSM:logs:alert"" l7Proto !=""""
+| search host=""*""
+|chart count by l7Proto","rhel.hwf.sc4s","1677941718.223644",0,"UI:Dashboard:dashboard_security",0,0,0,1677941718,0,search3,0,completed,"0.451","1675314000.000000000","1677941718.000000000","1675314000.000000000","1677941718.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search4_1677941718.281","search index=""main"" sourcetype=""forescout:OTSM:logs:alert"" engineName=""Threat library"" 
+| search host=""*""
+| stats count(eval(match(typeId, ""^itl_sec""))) AS ""ITL Security Alerts"", count(eval(match(typeId, ""^itl_net""))) AS ""ITL Networking Alerts"", count(eval(match(typeId, ""^itl_ops""))) AS ""ITL Operations Alerts"" | transpose","rhel.hwf.sc4s","1677941718.226980",0,"UI:Dashboard:dashboard_security",0,0,0,1677941718,3,search4,0,completed,"0.932","1675314000.000000000","1677941718.000000000","1675314000.000000000","1677941718.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search6_1677941718.282","search sourcetype=""forescout:OTSM:logs:alert""
+| search host=""*""
+| chart sparkline count by name
+| join name
+[
+    search sourcetype=""forescout:OTSM:logs:alert"" 
+    | rename severity as Severity 
+] 
+| rename name as Description sparkline as Sparkline count as Count
+| fields Description Severity Count Sparkline","rhel.hwf.sc4s","1677941718.236062",0,"UI:Dashboard:dashboard_security",0,0,0,1677941718,0,search6,0,completed,"1.233","1675314000.000000000","1677941718.000000000","1675314000.000000000","1677941718.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search7_1677941718.283","search sourcetype=""forescout:OTSM:logs:alert""
+| search host=""*""
+| dedup sensorName severity name srcIp dstIp dstPort l7Proto
+| rex field=time ""(?<time_short>\d.:\d.:\d.)""
+| eval date_long = strftime(_time, ""%A, %B %e, %Y"")
+| streamstats count as sno by date_long
+| eventstats max(sno) as 'max' count as total
+| eval date_long=if(total>max,date_long, if(sno=1,date_long, null()))
+| iplocation dstIp prefix=dstIp_
+| iplocation srcIp prefix=srcIp_
+| rename date_long as Date time_short as Time alertId as ""Alert ID"" severity as Severity host as CC name as Description srcIp as ""Source IP"" srcIp_Country as ""Source Country"" dstIp as ""Destination IP"" dstIp_Country as ""Destination Country"" dstPort as ""Destination Port"" l7Proto as Protocol sensorName as ""Sensor""
+| table Date Time CC Sensor ""Alert ID"" Severity Description ""Source IP"" ""Source Country"" ""Destination IP"" ""Destination Country"" ""Destination Port"" Protocol
+| sort -time","rhel.hwf.sc4s","1677941718.242731",0,"UI:Dashboard:dashboard_security",0,0,0,1677941718,0,search7,0,completed,"1.089","1675314000.000000000","1677941718.000000000","1675314000.000000000","1677941718.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search5_1677941718.284","search sourcetype=""forescout:OTSM:logs:alert""
+| search host=""*""
+| chart sparkline count by severity
+| rename severity as Severity sparkline as Sparkline count as Count
+| eval sort_field = case(Severity == ""Critical"", 1, Severity == ""High"", 2, Severity == ""Medium"", 3, Severity == ""Low"", 4, Severity == ""Informational"", 5)
+| sort sort_field
+| fields Severity Count Sparkline","rhel.hwf.sc4s","1677941718.244197",0,"UI:Dashboard:dashboard_security",0,0,0,1677941718,0,search5,0,completed,"0.985","1675314000.000000000","1677941718.000000000","1675314000.000000000","1677941718.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search8_1677941718.285","search sourcetype=""forescout:OTSM:logs:alert"" srcIp!=""""
+| search host=""*""
+| fields srcIp name
+| rename srcIp as ""Source IP""
+| chart count by ""Source IP"", name
+| head 15","rhel.hwf.sc4s","1677941718.250135",0,"UI:Dashboard:dashboard_security",0,0,0,1677941718,0,search8,0,completed,"0.47700000000000004","1675314000.000000000","1677941718.000000000","1675314000.000000000","1677941718.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search12_1677941718.286","search sourcetype=""forescout:OTSM:logs:network""
+| search host=""*""
+| search typeId=log_name_query
+| rename dstIp as ""Destination IP"" srcIp as ""Source IP"" path as ""DNS Query""
+| chart count by ""DNS Query""
+| sort 20 - count","rhel.hwf.sc4s","1677941718.275668",0,"UI:Dashboard:dashboard_security",0,0,0,1677941718,0,search12,0,completed,"0.585","1675314000.000000000","1677941718.000000000","1675314000.000000000","1677941718.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search10_1677941718.287","search sourcetype=""forescout:OTSM:logs:alert"" NOT l7Proto=""""
+| search host=""*""
+| chart count by sensorName l7Proto
+| rename sensorName as SensorName l7Proto as Protocol","rhel.hwf.sc4s","1677941718.281933",0,"UI:Dashboard:dashboard_security",0,0,0,1677941719,0,search10,0,completed,"0.40900000000000003","1675314000.000000000","1677941718.000000000","1675314000.000000000","1677941718.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search9_1677941718.288","search sourcetype=""forescout:OTSM:logs:alert"" srcIp!=""""
+| search host=""*""
+| fields srcIp dstIp name
+| eval IPAddress = srcIp + "";"" + dstIp
+| makemv delim="";"" IPAddress
+| mvexpand IPAddress
+| chart count by IPAddress, name","rhel.hwf.sc4s","1677941718.282739",0,"UI:Dashboard:dashboard_security",0,0,0,1677941719,0,search9,0,completed,"0.389","1675314000.000000000","1677941718.000000000","1675314000.000000000","1677941718.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search19_1677941718.293","search sourcetype=""forescout:OTSM:logs:network""
+| search host=""*""
+| search typeId=log_ssl_certificate
+| iplocation dstIp prefix=dstIp_
+| iplocation srcIp prefix=srcIp_
+| rename cust1 as ""Cipher Suite"" cust2 as Validity srcIp as ""Source IP"" srcIp_Country as ""Source Country"" dstIp as ""Destination IP"" dstIp_Country as ""Destination Country"" id as Issuer
+| table Issuer Validity ""Cipher Suite"" ""Source IP"" ""Source Country"" ""Destination IP"" ""Destination Country""","rhel.hwf.sc4s","1677941718.326538",0,"UI:Dashboard:dashboard_security",0,0,0,1677941720,0,search19,0,completed,"0.394","1675314000.000000000","1677941718.000000000","1675314000.000000000","1677941718.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search18_1677941718.294","search sourcetype=""forescout:OTSM:logs:network""
+| search host=""*""
+| search typeId=log_auth*
+| iplocation dstIp prefix=dstIp_
+| iplocation srcIp prefix=srcIp_
+| rename host as CC srcIp as ""Source IP"" srcIp_Country as ""Source Country"" dstIp as ""Destination IP"" dstIp_Country as ""Destination Country"" User as Username name as Event l7Proto as Protocol time as Time
+| table Time CC ""Source IP"" ""Source Country"" ""Destination IP"" ""Destination Country"" Username Protocol Event","rhel.hwf.sc4s","1677941718.337614",0,"UI:Dashboard:dashboard_security",0,0,0,1677941720,0,search18,0,completed,"0.28400000000000003","1675314000.000000000","1677941718.000000000","1675314000.000000000","1677941718.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search20_1677941718.295","search sourcetype=""forescout:OTSM:logs:network""
+| search host=""*""
+| search typeId=log_file*
+| iplocation dstIp prefix=dstIp_
+| iplocation srcIp prefix=srcIp_
+| rename srcIp as ""Source IP"" srcIp_Country as ""Source Country"" dstIp as ""Destination IP"" dstIp_Country as ""Destination Country"" user as Username typeId as ""Event"" path as Filename name as ""File Activity"" time as Time
+| table Time ""Source IP"" ""Source Country"" ""Destination IP"" ""Destination Country"" Username ""File Activity"" Filename","rhel.hwf.sc4s","1677941718.342036",0,"UI:Dashboard:dashboard_security",0,0,0,1677941720,0,search20,0,completed,"0.213","1675314000.000000000","1677941718.000000000","1675314000.000000000","1677941718.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search17_1677941718.296","search sourcetype=""forescout:OTSM:logs:network""
+| search host=""*""
+| search typeId=log_auth_fail
+| eval full_count= user + "":"" + l7Proto
+| iplocation dstIp prefix=dstIp_
+| iplocation srcIp prefix=srcIp_
+| rename srcIp as ""Source IP"" srcIp_Country as ""Source Country"" dstIp as ""Destination IP"" dstIp_Country as ""Destination Country"" user as User error as ""Authentication Error"" l7Proto as Protocol time as Time
+| table Time Protocol User ""Authentication Error"" ""Source IP"" ""Source Country"" ""Destination IP"" ""Destination Country""","rhel.hwf.sc4s","1677941718.349169",0,"UI:Dashboard:dashboard_security",0,0,0,1677941720,0,search17,0,completed,"0.313","1675314000.000000000","1677941718.000000000","1675314000.000000000","1677941718.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search11_1677941718.297","search sourcetype=""forescout:OTSM:logs:alert"" typeId=""itl*""
+| search host=""*""
+| eval Category=case(typeId like ""itl_ops%"", ""Operational"", typeId like ""itl_net%"", ""Network"", typeId like ""itl_sec%"", ""Security"")
+| timechart span=1h count by Category","rhel.hwf.sc4s","1677941718.353014",0,"UI:Dashboard:dashboard_security",0,0,0,1677941720,0,search11,0,completed,"0.28700000000000003","1677852000.000000000","1677941718.000000000","1677852000.000000000","1677941718.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search1_1677941723.298","search sourcetype=""forescout:OTSM:REST:hosts"" | dedup host","rhel.hwf.sc4s","1677941723.546892",0,"UI:Dashboard:dashboard_asset_inventory",0,0,0,1677941723,0,search1,0,completed,"0.152",,,,,,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search2_1677941724.299","search sourcetype=""forescout:OTSM:REST:hosts""
+
+| dedup id, host sortby -_time
+
+| search host=""*""
+
+| eval first_seen_epoch = floor(strptime(first_seen, ""%Y-%m-%dT%H:%M:%S""))
+| eval diff             = now() - first_seen_epoch
+| eval diff_dur         = tostring(floor(diff/(3600))) + "":"" + tostring(floor(diff/(60)) % 60) + "":"" + tostring(diff % 60)
+
+| iplocation ip
+
+| rename first_seen as ""First Seen"" host as CC ip as IP mac_addresses{} as ""MAC Address(es)"" firmware_version as ""Firmware"" hardware_version as ""Hardware"" labels{} as ""Labels"" os_version as ""OS Version"" diff_dur as ""Time in Past (HH:MM:SS)"" serial_number as ""Serial"" main_vendor_model as ""Vendor/Model""
+| replace """" with -
+| fillnull value=- ""First Seen"" ""Time in Past (HH:MM:SS)"" IP ""MAC Address(es)"" ""Vendor/Model"" ""Firmware"" ""Hardware"" ""Serial"" ""Labels"" ""OS Version""
+| table ""Time in Past (HH:MM:SS)"" CC IP Country ""MAC Address(es)"" ""Vendor/Model"" ""Firmware"" ""Hardware"" ""Serial"" ""Labels"" ""OS Version"" ""First Seen""","rhel.hwf.sc4s","1677941724.088641",0,"UI:Dashboard:dashboard_asset_inventory",0,0,0,1677941724,0,search2,0,completed,"0.553","1675314000.000000000","1677941724.000000000","1675314000.000000000","1677941724.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search3_1677941724.300","search sourcetype=""forescout:OTSM:REST:hosts""
+
+| dedup id host sortby -_time
+
+| search host=""*""
+
+| spath ""module_identities{}""
+| search ""module_identities{}""!=""{}""
+
+| eval first_seen_epoch = floor(strptime(first_seen, ""%Y-%m-%dT%H:%M:%S""))
+| eval diff             = now() - first_seen_epoch
+| eval diff_dur         = tostring(floor(diff/(3600))) + "":"" + tostring(floor(diff/(60)) % 60) + "":"" + tostring(diff % 60)
+
+| iplocation ip
+
+| rename first_seen as ""First Seen"" host as CC ip as IP mac_addresses{} as ""MAC Address(es)"" firmware_version as ""Firmware"" hardware_version as ""Hardware"" labels{} as ""Labels"" os_version as ""OS Version"" diff_dur as ""Time in Past (HH:MM:SS)"" serial_number as ""Serial"" main_vendor_model as ""Vendor/Model"" module_identities{} as ""Modules""
+| replace """" with -
+| fillnull value=- ""First Seen"" ""Time in Past (HH:MM)"" IP ""MAC Address(es)"" ""Vendor/Model"" ""Firmware"" ""Hardware"" ""Serial"" ""Labels"" ""OS Version""
+| table ""Time in Past (HH:MM:SS)"" CC IP Country ""MAC Address(es)"" ""Vendor/Model"" ""Firmware"" ""Hardware"" ""Serial"" ""Labels"" ""OS Version"" ""First Seen"" ""Modules""","rhel.hwf.sc4s","1677941724.099334",0,"UI:Dashboard:dashboard_asset_inventory",0,0,0,1677941724,0,search3,0,completed,"0.47300000000000003","1675314000.000000000","1677941724.000000000","1675314000.000000000","1677941724.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search5_1677941724.302","search sourcetype=""forescout:OTSM:REST:links""
+| dedup id sortby -_time
+| search host=""*""
+| search proto=""TELNET*""
+| join type=inner dst_host_id host
+[
+    search sourcetype=""forescout:OTSM:REST:hosts""
+    | dedup id host sortby -_time
+    | rename id AS dst_host_id ip AS dst_ip mac_addresses AS dst_mac_addresses
+]
+| join type=inner src_host_id host
+[
+    search sourcetype=""forescout:OTSM:REST:hosts""
+    | dedup id host sortby -_time
+    | rename id AS src_host_id ip AS src_ip mac_addresses AS src_mac_addresses
+]
+| eval _timez=strftime(_time,""%F %T.%3Q%z"")
+| iplocation dst_ip prefix=dstIp_
+| iplocation src_ip prefix=srcIp_
+| rename _timez as Time host as CC src_ip as ""Source IP"" srcIp_Country as ""Source Country"" dst_ip as ""Destination IP"" dstIp_Country as ""Destination Country"" first_seen as ""First Seen""
+| table Time CC ""Source IP"" ""Source Country"" ""Destination IP"" ""Destination Country"" ""First Seen""","rhel.hwf.sc4s","1677941724.103412",0,"UI:Dashboard:dashboard_asset_inventory",0,0,0,1677941724,0,search5,0,completed,"0.937","1675314000.000000000","1677941724.000000000","1675314000.000000000","1677941724.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search7_1677941724.303","search sourcetype=""forescout:OTSM:REST:hosts""
+| dedup id host sortby -_time
+| search host=""*""
+| search main_role=ghost
+| dedup ip
+| iplocation ip
+| rename host as CC ip as ""IP Address"" first_seen as ""First Seen"" last_seen as ""Last Seen""
+| table CC ""IP Address"" Country ""First Seen"" ""Last Seen""","rhel.hwf.sc4s","1677941724.109580",0,"UI:Dashboard:dashboard_asset_inventory",0,0,0,1677941724,0,search7,0,completed,"0.439","1675314000.000000000","1677941724.000000000","1675314000.000000000","1677941724.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search6_1677941724.304","search sourcetype=""forescout:OTSM:REST:links""
+| search host=""*""
+| search proto=""DHCP*""
+| join type=inner dst_host_id host
+[
+    search sourcetype=""forescout:OTSM:REST:hosts""
+    | dedup id host sortby -_time
+    | rename id AS dst_host_id ip AS dst_ip mac_addresses AS dst_mac_addresses
+]
+| join type=inner src_host_id host
+[
+    search sourcetype=""forescout:OTSM:REST:hosts""
+    | dedup id host sortby -_time
+    | rename id AS src_host_id ip AS src_ip mac_addresses AS src_mac_addresses
+]
+| eval _timez=strftime(_time,""%F %T.%3Q%z"")
+| iplocation dst_ip prefix=dstIp_
+| iplocation src_ip prefix=srcIp_
+| rename _timez as Time host as CC src_ip as ""Source IP"" srcIp_Country as ""Source Country"" dst_ip as ""Destination IP"" dstIp_Country as ""Destination Country"" first_seen as ""First Seen""
+| table Time CC ""Source IP"" ""Source Country"" ""Destination IP"" ""Destination Country"" ""First Seen""","rhel.hwf.sc4s","1677941724.111086",0,"UI:Dashboard:dashboard_asset_inventory",0,0,0,1677941724,0,search6,0,completed,"0.9470000000000001","1675314000.000000000","1677941724.000000000","1675314000.000000000","1677941724.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search8_1677941724.305","search sourcetype=""forescout:OTSM:REST:links""
+| search host=""*""
+| join type=inner dst_host_id host
+[
+    search sourcetype=""forescout:OTSM:REST:hosts""
+    | dedup id host sortby -_time
+    | rename id AS dst_host_id ip AS dst_ip mac_addresses AS dst_mac_addresses
+]
+| join type=inner src_host_id host
+[
+    search sourcetype=""forescout:OTSM:REST:hosts""
+    | dedup id host sortby -_time
+    | rename id AS src_host_id ip AS src_ip mac_addresses AS src_mac_addresses
+]
+| iplocation dst_ip prefix=dstIp_
+| iplocation src_ip prefix=srcIp_
+| fillnull value=- src_ip dst_ip proto
+| rename _time as Time host as CC src_ip as ""Source IP"" srcIp_Country as ""Source Country"" dst_ip as ""Destination IP"" dstIp_Country as ""Destination Country"" first_seen as ""First Seen"" last_seen as ""Last Seen"" proto as Protocol
+| table CC ""Source IP"" ""Source Country"" ""Destination IP"" ""Destination Country"" Protocol ""First Seen"" ""Last Seen""
+| sort 20 - ""Last Seen""","rhel.hwf.sc4s","1677941724.136355",0,"UI:Dashboard:dashboard_asset_inventory",0,0,0,1677941724,0,search8,0,completed,"0.9550000000000001","1675314000.000000000","1677941724.000000000","1675314000.000000000","1677941724.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search1_1677941727.306","search sourcetype=""forescout:OTSM:logs:useractivity"" | dedup host","rhel.hwf.sc4s","1677941727.968383",0,"UI:Dashboard:dashboard_administrative",0,0,0,1677941727,0,search1,0,completed,"0.145",,,,,,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search2_1677941728.307","search sourcetype=""forescout:OTSM:logs:useractivity"" action=""Failed login""
+| search host=""*""
+| rex field=time ""(?<time_short>\d.:\d.:\d.)""
+| eval date_long = strftime(_time, ""%A, %B %e, %Y"")
+| streamstats count as sno by date_long
+| eventstats max(sno) as 'max' count as total
+| eval date_long=if(total>max,date_long, if(sno=1,date_long, null()))
+| rename date_long as Date time_short as Time host as ""CC"" clientIP as ""User IP"" user as ""Username"" otherInfo as ""Reason""
+| table Date Time ""CC"" ""User IP"" Username Reason
+| sort -time","rhel.hwf.sc4s","1677941728.532367",0,"UI:Dashboard:dashboard_administrative",0,0,0,1677941728,0,search2,0,completed,"0.324","1675314000.000000000","1677941728.000000000","1675314000.000000000","1677941728.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search3_1677941728.308","search sourcetype=""forescout:OTSM:logs:health"" AND monitoredVariable=""sensor connection""
+| search host=""*""
+| rex field=time ""(?<time_short>\d.:\d.:\d.)""
+| eval date_long = strftime(_time, ""%A, %B %e, %Y"")
+| streamstats count as sno by date_long
+| eventstats max(sno) as 'max' count as total
+| eval date_long=if(total>max,date_long, if(sno=1,date_long, null()))
+| rename date_long as Date time_short as Time device as Sensor host as ""CC"" previousHealthStatus as ""Previous Status"" currentHealthStatus as ""Current Status"" currentValue as ""Value""
+| table Date Time CC Sensor ""Current Status"" ""Previous Status"" ""Value""
+| sort -time","rhel.hwf.sc4s","1677941728.533890",0,"UI:Dashboard:dashboard_administrative",0,0,0,1677941728,0,search3,0,completed,"0.315","1675314000.000000000","1677941728.000000000","1675314000.000000000","1677941728.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search5_1677941728.310","search sourcetype=""forescout:OTSM:logs:health""
+| search host=""*""
+| rex field=time ""(?<time_short>\d.:\d.:\d.)""
+| eval date_long = strftime(_time, ""%A, %B %e, %Y"")
+| streamstats count as sno by date_long
+| eventstats max(sno) as 'max' count as total
+| eval date_long=if(total>max,date_long, if(sno=1,date_long, null()))
+| rename date_long as Date time_short as Time host as CC device as Sensor monitoredVariable as ""Health Area"" previousHealthStatus as ""Previous Status"" currentHealthStatus as ""Current Status"" currentValue as Value
+| table Date Time CC Sensor ""Health Area"" ""Current Status"" ""Previous Status"" Value
+| sort -time","rhel.hwf.sc4s","1677941728.540025",0,"UI:Dashboard:dashboard_administrative",0,0,0,1677941728,0,search5,0,completed,"0.297","1675314000.000000000","1677941728.000000000","1675314000.000000000","1677941728.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search1_1677941743.311","search sourcetype=""forescout:OTSM:logs:useractivity"" | dedup host","rhel.hwf.sc4s","1677941743.559925",0,"UI:Dashboard:dashboard_administrative",0,0,0,1677941743,0,search1,0,completed,"0.23500000000000001",,,,,,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search2_1677941743.312","search sourcetype=""forescout:OTSM:logs:useractivity"" action=""Failed login""
+| search host=""*""
+| rex field=time ""(?<time_short>\d.:\d.:\d.)""
+| eval date_long = strftime(_time, ""%A, %B %e, %Y"")
+| streamstats count as sno by date_long
+| eventstats max(sno) as 'max' count as total
+| eval date_long=if(total>max,date_long, if(sno=1,date_long, null()))
+| rename date_long as Date time_short as Time host as ""CC"" clientIP as ""User IP"" user as ""Username"" otherInfo as ""Reason""
+| table Date Time ""CC"" ""User IP"" Username Reason
+| sort -time","rhel.hwf.sc4s","1677941743.968704",0,"UI:Dashboard:dashboard_administrative",0,0,0,1677941743,0,search2,0,completed,"0.375","1675314000.000000000","1677941743.000000000","1675314000.000000000","1677941743.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search3_1677941743.313","search sourcetype=""forescout:OTSM:logs:health"" AND monitoredVariable=""sensor connection""
+| search host=""*""
+| rex field=time ""(?<time_short>\d.:\d.:\d.)""
+| eval date_long = strftime(_time, ""%A, %B %e, %Y"")
+| streamstats count as sno by date_long
+| eventstats max(sno) as 'max' count as total
+| eval date_long=if(total>max,date_long, if(sno=1,date_long, null()))
+| rename date_long as Date time_short as Time device as Sensor host as ""CC"" previousHealthStatus as ""Previous Status"" currentHealthStatus as ""Current Status"" currentValue as ""Value""
+| table Date Time CC Sensor ""Current Status"" ""Previous Status"" ""Value""
+| sort -time","rhel.hwf.sc4s","1677941743.970528",0,"UI:Dashboard:dashboard_administrative",0,0,0,1677941744,0,search3,0,completed,"0.366","1675314000.000000000","1677941743.000000000","1675314000.000000000","1677941743.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search4_1677941743.314","search sourcetype=""forescout:OTSM:logs:useractivity""
+| search host=""*""
+| rex field=time ""(?<time_short>\d.:\d.:\d.)""
+| eval date_long = strftime(_time, ""%A, %B %e, %Y"")
+| streamstats count as sno by date_long
+| eventstats max(sno) as 'max' count as total
+| eval date_long=if(total>max,date_long, if(sno=1,date_long, null()))
+| rename date_long as Date time_short as Time host as ""CC"" clientIP as ""Client IP"" user as User resource as Resource action as Action otherInfo as Details
+| table Date Time ""CC"" ""Client IP"" User Resource Action Details
+| sort -time","rhel.hwf.sc4s","1677941743.977845",0,"UI:Dashboard:dashboard_administrative",0,0,0,1677941744,0,search4,0,completed,"0.342","1675314000.000000000","1677941743.000000000","1675314000.000000000","1677941743.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search5_1677941743.315","search sourcetype=""forescout:OTSM:logs:health""
+| search host=""*""
+| rex field=time ""(?<time_short>\d.:\d.:\d.)""
+| eval date_long = strftime(_time, ""%A, %B %e, %Y"")
+| streamstats count as sno by date_long
+| eventstats max(sno) as 'max' count as total
+| eval date_long=if(total>max,date_long, if(sno=1,date_long, null()))
+| rename date_long as Date time_short as Time host as CC device as Sensor monitoredVariable as ""Health Area"" previousHealthStatus as ""Previous Status"" currentHealthStatus as ""Current Status"" currentValue as Value
+| table Date Time CC Sensor ""Health Area"" ""Current Status"" ""Previous Status"" Value
+| sort -time","rhel.hwf.sc4s","1677941743.981845",0,"UI:Dashboard:dashboard_administrative",0,0,0,1677941744,0,search5,0,completed,"0.40800000000000003","1675314000.000000000","1677941743.000000000","1675314000.000000000","1677941743.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search1_1677941769.316","search sourcetype=""forescout:OTSM:REST:hosts"" | dedup host","rhel.hwf.sc4s","1677941769.432113",0,"UI:Dashboard:dashboard_asset_inventory",0,0,0,1677941769,0,search1,0,completed,"0.23600000000000002",,,,,,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search2_1677941769.317","search sourcetype=""forescout:OTSM:REST:hosts""
+
+| dedup id, host sortby -_time
+
+| search host=""*""
+
+| eval first_seen_epoch = floor(strptime(first_seen, ""%Y-%m-%dT%H:%M:%S""))
+| eval diff             = now() - first_seen_epoch
+| eval diff_dur         = tostring(floor(diff/(3600))) + "":"" + tostring(floor(diff/(60)) % 60) + "":"" + tostring(diff % 60)
+
+| iplocation ip
+
+| rename first_seen as ""First Seen"" host as CC ip as IP mac_addresses{} as ""MAC Address(es)"" firmware_version as ""Firmware"" hardware_version as ""Hardware"" labels{} as ""Labels"" os_version as ""OS Version"" diff_dur as ""Time in Past (HH:MM:SS)"" serial_number as ""Serial"" main_vendor_model as ""Vendor/Model""
+| replace """" with -
+| fillnull value=- ""First Seen"" ""Time in Past (HH:MM:SS)"" IP ""MAC Address(es)"" ""Vendor/Model"" ""Firmware"" ""Hardware"" ""Serial"" ""Labels"" ""OS Version""
+| table ""Time in Past (HH:MM:SS)"" CC IP Country ""MAC Address(es)"" ""Vendor/Model"" ""Firmware"" ""Hardware"" ""Serial"" ""Labels"" ""OS Version"" ""First Seen""","rhel.hwf.sc4s","1677941769.887064",0,"UI:Dashboard:dashboard_asset_inventory",0,0,0,1677941770,0,search2,0,completed,"0.641","1675314000.000000000","1677941769.000000000","1675314000.000000000","1677941769.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search3_1677941769.318","search sourcetype=""forescout:OTSM:REST:hosts""
+
+| dedup id host sortby -_time
+
+| search host=""*""
+
+| spath ""module_identities{}""
+| search ""module_identities{}""!=""{}""
+
+| eval first_seen_epoch = floor(strptime(first_seen, ""%Y-%m-%dT%H:%M:%S""))
+| eval diff             = now() - first_seen_epoch
+| eval diff_dur         = tostring(floor(diff/(3600))) + "":"" + tostring(floor(diff/(60)) % 60) + "":"" + tostring(diff % 60)
+
+| iplocation ip
+
+| rename first_seen as ""First Seen"" host as CC ip as IP mac_addresses{} as ""MAC Address(es)"" firmware_version as ""Firmware"" hardware_version as ""Hardware"" labels{} as ""Labels"" os_version as ""OS Version"" diff_dur as ""Time in Past (HH:MM:SS)"" serial_number as ""Serial"" main_vendor_model as ""Vendor/Model"" module_identities{} as ""Modules""
+| replace """" with -
+| fillnull value=- ""First Seen"" ""Time in Past (HH:MM)"" IP ""MAC Address(es)"" ""Vendor/Model"" ""Firmware"" ""Hardware"" ""Serial"" ""Labels"" ""OS Version""
+| table ""Time in Past (HH:MM:SS)"" CC IP Country ""MAC Address(es)"" ""Vendor/Model"" ""Firmware"" ""Hardware"" ""Serial"" ""Labels"" ""OS Version"" ""First Seen"" ""Modules""","rhel.hwf.sc4s","1677941769.890514",0,"UI:Dashboard:dashboard_asset_inventory",0,0,0,1677941770,0,search3,0,completed,"0.6950000000000001","1675314000.000000000","1677941769.000000000","1675314000.000000000","1677941769.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search5_1677941769.320","search sourcetype=""forescout:OTSM:REST:links""
+| dedup id sortby -_time
+| search host=""*""
+| search proto=""TELNET*""
+| join type=inner dst_host_id host
+[
+    search sourcetype=""forescout:OTSM:REST:hosts""
+    | dedup id host sortby -_time
+    | rename id AS dst_host_id ip AS dst_ip mac_addresses AS dst_mac_addresses
+]
+| join type=inner src_host_id host
+[
+    search sourcetype=""forescout:OTSM:REST:hosts""
+    | dedup id host sortby -_time
+    | rename id AS src_host_id ip AS src_ip mac_addresses AS src_mac_addresses
+]
+| eval _timez=strftime(_time,""%F %T.%3Q%z"")
+| iplocation dst_ip prefix=dstIp_
+| iplocation src_ip prefix=srcIp_
+| rename _timez as Time host as CC src_ip as ""Source IP"" srcIp_Country as ""Source Country"" dst_ip as ""Destination IP"" dstIp_Country as ""Destination Country"" first_seen as ""First Seen""
+| table Time CC ""Source IP"" ""Source Country"" ""Destination IP"" ""Destination Country"" ""First Seen""","rhel.hwf.sc4s","1677941769.897854",0,"UI:Dashboard:dashboard_asset_inventory",0,0,0,1677941770,0,search5,0,completed,"1.09","1675314000.000000000","1677941769.000000000","1675314000.000000000","1677941769.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search7_1677941769.321","search sourcetype=""forescout:OTSM:REST:hosts""
+| dedup id host sortby -_time
+| search host=""*""
+| search main_role=ghost
+| dedup ip
+| iplocation ip
+| rename host as CC ip as ""IP Address"" first_seen as ""First Seen"" last_seen as ""Last Seen""
+| table CC ""IP Address"" Country ""First Seen"" ""Last Seen""","rhel.hwf.sc4s","1677941769.923660",0,"UI:Dashboard:dashboard_asset_inventory",0,0,0,1677941770,0,search7,0,completed,"0.8180000000000001","1675314000.000000000","1677941769.000000000","1675314000.000000000","1677941769.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search6_1677941769.322","search sourcetype=""forescout:OTSM:REST:links""
+| search host=""*""
+| search proto=""DHCP*""
+| join type=inner dst_host_id host
+[
+    search sourcetype=""forescout:OTSM:REST:hosts""
+    | dedup id host sortby -_time
+    | rename id AS dst_host_id ip AS dst_ip mac_addresses AS dst_mac_addresses
+]
+| join type=inner src_host_id host
+[
+    search sourcetype=""forescout:OTSM:REST:hosts""
+    | dedup id host sortby -_time
+    | rename id AS src_host_id ip AS src_ip mac_addresses AS src_mac_addresses
+]
+| eval _timez=strftime(_time,""%F %T.%3Q%z"")
+| iplocation dst_ip prefix=dstIp_
+| iplocation src_ip prefix=srcIp_
+| rename _timez as Time host as CC src_ip as ""Source IP"" srcIp_Country as ""Source Country"" dst_ip as ""Destination IP"" dstIp_Country as ""Destination Country"" first_seen as ""First Seen""
+| table Time CC ""Source IP"" ""Source Country"" ""Destination IP"" ""Destination Country"" ""First Seen""","rhel.hwf.sc4s","1677941769.930321",0,"UI:Dashboard:dashboard_asset_inventory",0,0,0,1677941770,0,search6,0,completed,"0.811","1675314000.000000000","1677941769.000000000","1675314000.000000000","1677941769.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search8_1677941769.323","search sourcetype=""forescout:OTSM:REST:links""
+| search host=""*""
+| join type=inner dst_host_id host
+[
+    search sourcetype=""forescout:OTSM:REST:hosts""
+    | dedup id host sortby -_time
+    | rename id AS dst_host_id ip AS dst_ip mac_addresses AS dst_mac_addresses
+]
+| join type=inner src_host_id host
+[
+    search sourcetype=""forescout:OTSM:REST:hosts""
+    | dedup id host sortby -_time
+    | rename id AS src_host_id ip AS src_ip mac_addresses AS src_mac_addresses
+]
+| iplocation dst_ip prefix=dstIp_
+| iplocation src_ip prefix=srcIp_
+| fillnull value=- src_ip dst_ip proto
+| rename _time as Time host as CC src_ip as ""Source IP"" srcIp_Country as ""Source Country"" dst_ip as ""Destination IP"" dstIp_Country as ""Destination Country"" first_seen as ""First Seen"" last_seen as ""Last Seen"" proto as Protocol
+| table CC ""Source IP"" ""Source Country"" ""Destination IP"" ""Destination Country"" Protocol ""First Seen"" ""Last Seen""
+| sort 20 - ""Last Seen""","rhel.hwf.sc4s","1677941769.933369",0,"UI:Dashboard:dashboard_asset_inventory",0,0,0,1677941770,0,search8,0,completed,"1.117","1675314000.000000000","1677941769.000000000","1675314000.000000000","1677941769.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search1_1677941827.324","search sourcetype=""forescout:OTSM:logs:useractivity"" | dedup host","rhel.hwf.sc4s","1677941827.695902",0,"UI:Dashboard:dashboard_administrative",0,0,0,1677941828,0,search1,0,completed,"0.883",,,,,,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search2_1677941829.325","search sourcetype=""forescout:OTSM:logs:useractivity"" action=""Failed login""
+| search host=""*""
+| rex field=time ""(?<time_short>\d.:\d.:\d.)""
+| eval date_long = strftime(_time, ""%A, %B %e, %Y"")
+| streamstats count as sno by date_long
+| eventstats max(sno) as 'max' count as total
+| eval date_long=if(total>max,date_long, if(sno=1,date_long, null()))
+| rename date_long as Date time_short as Time host as ""CC"" clientIP as ""User IP"" user as ""Username"" otherInfo as ""Reason""
+| table Date Time ""CC"" ""User IP"" Username Reason
+| sort -time","rhel.hwf.sc4s","1677941829.263509",0,"UI:Dashboard:dashboard_administrative",0,0,0,1677941829,0,search2,0,completed,"0.453","1675314000.000000000","1677941829.000000000","1675314000.000000000","1677941829.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search3_1677941829.326","search sourcetype=""forescout:OTSM:logs:health"" AND monitoredVariable=""sensor connection""
+| search host=""*""
+| rex field=time ""(?<time_short>\d.:\d.:\d.)""
+| eval date_long = strftime(_time, ""%A, %B %e, %Y"")
+| streamstats count as sno by date_long
+| eventstats max(sno) as 'max' count as total
+| eval date_long=if(total>max,date_long, if(sno=1,date_long, null()))
+| rename date_long as Date time_short as Time device as Sensor host as ""CC"" previousHealthStatus as ""Previous Status"" currentHealthStatus as ""Current Status"" currentValue as ""Value""
+| table Date Time CC Sensor ""Current Status"" ""Previous Status"" ""Value""
+| sort -time","rhel.hwf.sc4s","1677941829.266720",0,"UI:Dashboard:dashboard_administrative",0,0,0,1677941829,0,search3,0,completed,"0.493","1675314000.000000000","1677941829.000000000","1675314000.000000000","1677941829.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search4_1677941829.327","search sourcetype=""forescout:OTSM:logs:useractivity""
+| search host=""*""
+| rex field=time ""(?<time_short>\d.:\d.:\d.)""
+| eval date_long = strftime(_time, ""%A, %B %e, %Y"")
+| streamstats count as sno by date_long
+| eventstats max(sno) as 'max' count as total
+| eval date_long=if(total>max,date_long, if(sno=1,date_long, null()))
+| rename date_long as Date time_short as Time host as ""CC"" clientIP as ""Client IP"" user as User resource as Resource action as Action otherInfo as Details
+| table Date Time ""CC"" ""Client IP"" User Resource Action Details
+| sort -time","rhel.hwf.sc4s","1677941829.272769",0,"UI:Dashboard:dashboard_administrative",0,0,0,1677941829,0,search4,0,completed,"0.303","1675314000.000000000","1677941829.000000000","1675314000.000000000","1677941829.000000000",,,,,,,,,,,,,,,,,,,
+"admin__admin_Zm9yZXNjb3V0LW90LW5zbS1zcGx1bms__search5_1677941829.328","search sourcetype=""forescout:OTSM:logs:health""
+| search host=""*""
+| rex field=time ""(?<time_short>\d.:\d.:\d.)""
+| eval date_long = strftime(_time, ""%A, %B %e, %Y"")
+| streamstats count as sno by date_long
+| eventstats max(sno) as 'max' count as total
+| eval date_long=if(total>max,date_long, if(sno=1,date_long, null()))
+| rename date_long as Date time_short as Time host as CC device as Sensor monitoredVariable as ""Health Area"" previousHealthStatus as ""Previous Status"" currentHealthStatus as ""Current Status"" currentValue as Value
+| table Date Time CC Sensor ""Health Area"" ""Current Status"" ""Previous Status"" Value
+| sort -time","rhel.hwf.sc4s","1677941829.277627",0,"UI:Dashboard:dashboard_administrative",0,0,0,1677941829,0,search5,0,completed,"0.452","1675314000.000000000","1677941829.000000000","1675314000.000000000","1677941829.000000000",,,,,,,,,,,,,,,,,,,

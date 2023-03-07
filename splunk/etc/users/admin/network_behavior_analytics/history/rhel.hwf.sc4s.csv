@@ -1,0 +1,180 @@
+sid,search,"splunk_server","_time","is_realtime",provenance,"api_et","api_index_et","api_index_lt","api_lt","event_count","exec_time","result_count","savedsearch_name","scan_count","search_et","search_lt",status,"total_run_time","__mv_sid","__mv_search","__mv_splunk_server","__mv__time","__mv_is_realtime","__mv_provenance","__mv_api_et","__mv_api_index_et","__mv_api_index_lt","__mv_api_lt","__mv_event_count","__mv_exec_time","__mv_result_count","__mv_savedsearch_name","__mv_scan_count","__mv_search_et","__mv_search_lt","__mv_status","__mv_total_run_time"
+"admin__admin_bmV0d29ya19iZWhhdmlvcl9hbmFseXRpY3M__groupfiltersearch_1677940520.225","search `nbaeventsindex` type=alert | stats count by src_groups","rhel.hwf.sc4s","1677940520.343771",0,"UI:Dashboard:threats",,0,0,,0,1677940520,0,groupfiltersearch,0,,,canceled,"0.302",,,,,,,,,,,,,,,,,,,
+"admin__admin_bmV0d29ya19iZWhhdmlvcl9hbmFseXRpY3M__groupfiltersearch_1677940520.226","search `nbaeventsindex` type=alert | stats count by src_groups","rhel.hwf.sc4s","1677940520.521825",0,"UI:Dashboard:threats","1677852000.000000000",0,0,"1677940520.000000000",0,1677940520,0,groupfiltersearch,0,"1677852000.000000000","1677940520.000000000",completed,"0.28600000000000003",,,,,,,,,,,,,,,,,,,
+"admin__admin_bmV0d29ya19iZWhhdmlvcl9hbmFseXRpY3M__search1_1677940521.227","search `nbaeventsindex` type=alert threats=*
+                        | search section=""*""
+                        | eval action_filter_matched=`match_filter_event_action(""all"")`
+                        | search action_filter_matched=1
+                        | mvexpand threats
+                        | eval groups=if(isnull(src_groups), ""-"", src_groups)
+                        | search groups=""*""
+                        | eval group=mvjoin(mvsort(groups), "", "")
+                        | lookup asocnbathreats name AS threats OUTPUT title, severity, show, policy
+                        | eval show=if(isnull(show), 1, show)
+                        | eval policy=if(isnull(policy), 0, policy)
+                        | search title=* show=1 policy=0 severity>=1
+                        | eval c_time=strftime(strptime(original_event, ""%d-%b-%Y %H:%M:%S%z""), ""%d-%b-%Y %H:%M:%S"")
+                        | eval alert_source = if(isnull(src_disp) or src_disp == """", src_ip, src_disp)
+                        | sort 0 -severity
+                        | streamstats count by alert_source, group
+                        | stats sparkline AS ""Trend"", latest(c_time) AS ""Time"", dc(title) AS ""Total threats"", list(eval(if(count<=1,title,null()))) AS ""Top threat"", max(severity) AS ""Urgency"" by alert_source, group
+                        | rename alert_source AS ""Source"", group AS ""Group""
+                        | sort by -""Urgency"", -""Time""
+                        | fields ""Time"", ""Source"", ""Group"", ""Top threat"", ""Trend"", ""Total threats"", ""Urgency""","rhel.hwf.sc4s","1677940521.823176",0,"UI:Dashboard:threats","1677852000.000000000",0,0,"1677940521.000000000",0,1677940521,0,search1,0,"1677852000.000000000","1677940521.000000000",completed,"0.14400000000000002",,,,,,,,,,,,,,,,,,,
+"admin__admin_bmV0d29ya19iZWhhdmlvcl9hbmFseXRpY3M__search1_1677941286.230","search `nbaeventsindex` type=alert threats=*
+                        | search section=""ip""
+                        | eval action_filter_matched=`match_filter_event_action(""all"")`
+                        | search action_filter_matched=1
+                        | mvexpand threats
+                        | eval groups=if(isnull(src_groups), ""-"", src_groups)
+                        | search groups=""*""
+                        | eval group=mvjoin(mvsort(groups), "", "")
+                        | lookup asocnbathreats name AS threats OUTPUT title, severity, show, policy
+                        | eval show=if(isnull(show), 1, show)
+                        | eval policy=if(isnull(policy), 0, policy)
+                        | search title=* show=1 policy=0 severity>=1
+                        | eval c_time=strftime(strptime(original_event, ""%d-%b-%Y %H:%M:%S%z""), ""%d-%b-%Y %H:%M:%S"")
+                        | eval alert_source = if(isnull(src_disp) or src_disp == """", src_ip, src_disp)
+                        | sort 0 -severity
+                        | streamstats count by alert_source, group
+                        | stats sparkline AS ""Trend"", latest(c_time) AS ""Time"", dc(title) AS ""Total threats"", list(eval(if(count<=1,title,null()))) AS ""Top threat"", max(severity) AS ""Urgency"" by alert_source, group
+                        | rename alert_source AS ""Source"", group AS ""Group""
+                        | sort by -""Urgency"", -""Time""
+                        | fields ""Time"", ""Source"", ""Group"", ""Top threat"", ""Trend"", ""Total threats"", ""Urgency""","rhel.hwf.sc4s","1677941286.401060",0,"UI:Dashboard:threats","1677852000.000000000",0,0,"1677941286.000000000",0,1677941286,0,search1,3,"1677852000.000000000","1677941286.000000000",canceled,"0.278",,,,,,,,,,,,,,,,,,,
+"admin__admin_bmV0d29ya19iZWhhdmlvcl9hbmFseXRpY3M__search1_1677941296.231","search `nbaeventsindex` type=alert threats=*
+                        | search section=""tls""
+                        | eval action_filter_matched=`match_filter_event_action(""all"")`
+                        | search action_filter_matched=1
+                        | mvexpand threats
+                        | eval groups=if(isnull(src_groups), ""-"", src_groups)
+                        | search groups=""*""
+                        | eval group=mvjoin(mvsort(groups), "", "")
+                        | lookup asocnbathreats name AS threats OUTPUT title, severity, show, policy
+                        | eval show=if(isnull(show), 1, show)
+                        | eval policy=if(isnull(policy), 0, policy)
+                        | search title=* show=1 policy=0 severity>=1
+                        | eval c_time=strftime(strptime(original_event, ""%d-%b-%Y %H:%M:%S%z""), ""%d-%b-%Y %H:%M:%S"")
+                        | eval alert_source = if(isnull(src_disp) or src_disp == """", src_ip, src_disp)
+                        | sort 0 -severity
+                        | streamstats count by alert_source, group
+                        | stats sparkline AS ""Trend"", latest(c_time) AS ""Time"", dc(title) AS ""Total threats"", list(eval(if(count<=1,title,null()))) AS ""Top threat"", max(severity) AS ""Urgency"" by alert_source, group
+                        | rename alert_source AS ""Source"", group AS ""Group""
+                        | sort by -""Urgency"", -""Time""
+                        | fields ""Time"", ""Source"", ""Group"", ""Top threat"", ""Trend"", ""Total threats"", ""Urgency""","rhel.hwf.sc4s","1677941296.330212",0,"UI:Dashboard:threats","1677852000.000000000",0,0,"1677941296.000000000",0,1677941296,0,search1,3,"1677852000.000000000","1677941296.000000000",canceled,"0.27",,,,,,,,,,,,,,,,,,,
+"admin__admin_bmV0d29ya19iZWhhdmlvcl9hbmFseXRpY3M__groupfiltersearch_1677941303.232","search `nbaeventsindex` type=alert | stats count by src_groups","rhel.hwf.sc4s","1677941303.848993",0,"UI:Dashboard:threats","1675314000.000000000",0,0,"1677941303.000000000",0,1677941303,0,groupfiltersearch,3,"1675314000.000000000","1677941303.000000000",completed,"0.20700000000000002",,,,,,,,,,,,,,,,,,,
+"admin__admin_bmV0d29ya19iZWhhdmlvcl9hbmFseXRpY3M__search1_1677941303.233","search `nbaeventsindex` type=alert threats=*
+                        | search section=""tls""
+                        | eval action_filter_matched=`match_filter_event_action(""all"")`
+                        | search action_filter_matched=1
+                        | mvexpand threats
+                        | eval groups=if(isnull(src_groups), ""-"", src_groups)
+                        | search groups=""*""
+                        | eval group=mvjoin(mvsort(groups), "", "")
+                        | lookup asocnbathreats name AS threats OUTPUT title, severity, show, policy
+                        | eval show=if(isnull(show), 1, show)
+                        | eval policy=if(isnull(policy), 0, policy)
+                        | search title=* show=1 policy=0 severity>=1
+                        | eval c_time=strftime(strptime(original_event, ""%d-%b-%Y %H:%M:%S%z""), ""%d-%b-%Y %H:%M:%S"")
+                        | eval alert_source = if(isnull(src_disp) or src_disp == """", src_ip, src_disp)
+                        | sort 0 -severity
+                        | streamstats count by alert_source, group
+                        | stats sparkline AS ""Trend"", latest(c_time) AS ""Time"", dc(title) AS ""Total threats"", list(eval(if(count<=1,title,null()))) AS ""Top threat"", max(severity) AS ""Urgency"" by alert_source, group
+                        | rename alert_source AS ""Source"", group AS ""Group""
+                        | sort by -""Urgency"", -""Time""
+                        | fields ""Time"", ""Source"", ""Group"", ""Top threat"", ""Trend"", ""Total threats"", ""Urgency""","rhel.hwf.sc4s","1677941303.860012",0,"UI:Dashboard:threats","1675314000.000000000",0,0,"1677941303.000000000",0,1677941303,0,search1,3,"1675314000.000000000","1677941303.000000000",completed,"0.361",,,,,,,,,,,,,,,,,,,
+"admin__admin_bmV0d29ya19iZWhhdmlvcl9hbmFseXRpY3M__groupfiltersearch_1677941317.234","search `nbaeventsindex` type=alert | stats count by src_groups","rhel.hwf.sc4s","1677941317.157622",0,"UI:Dashboard:threats","1675314000.000000000",0,0,"1677941317.000000000",0,1677941317,0,groupfiltersearch,3,"1675314000.000000000","1677941317.000000000",completed,"0.326",,,,,,,,,,,,,,,,,,,
+"admin__admin_bmV0d29ya19iZWhhdmlvcl9hbmFseXRpY3M__search1_1677941317.235","search `nbaeventsindex` type=alert threats=*
+                        | search section=""tls""
+                        | eval action_filter_matched=`match_filter_event_action(""all"")`
+                        | search action_filter_matched=1
+                        | mvexpand threats
+                        | eval groups=if(isnull(src_groups), ""-"", src_groups)
+                        | search groups=""*""
+                        | eval group=mvjoin(mvsort(groups), "", "")
+                        | lookup asocnbathreats name AS threats OUTPUT title, severity, show, policy
+                        | eval show=if(isnull(show), 1, show)
+                        | eval policy=if(isnull(policy), 0, policy)
+                        | search title=* show=1 policy=0 severity>=1
+                        | eval c_time=strftime(strptime(original_event, ""%d-%b-%Y %H:%M:%S%z""), ""%d-%b-%Y %H:%M:%S"")
+                        | eval alert_source = if(isnull(src_disp) or src_disp == """", src_ip, src_disp)
+                        | sort 0 -severity
+                        | streamstats count by alert_source, group
+                        | stats sparkline AS ""Trend"", latest(c_time) AS ""Time"", dc(title) AS ""Total threats"", list(eval(if(count<=1,title,null()))) AS ""Top threat"", max(severity) AS ""Urgency"" by alert_source, group
+                        | rename alert_source AS ""Source"", group AS ""Group""
+                        | sort by -""Urgency"", -""Time""
+                        | fields ""Time"", ""Source"", ""Group"", ""Top threat"", ""Trend"", ""Total threats"", ""Urgency""","rhel.hwf.sc4s","1677941317.701848",0,"UI:Dashboard:threats","1675314000.000000000",0,0,"1677941317.000000000",0,1677941317,0,search1,3,"1675314000.000000000","1677941317.000000000",completed,"0.983",,,,,,,,,,,,,,,,,,,
+"admin__admin_bmV0d29ya19iZWhhdmlvcl9hbmFseXRpY3M__search1_1677941333.236","search `nbalogsindexip` tag=""network"" tag=""communicate""
+                    | eval Source=if(isnull(src), src_ip, src)
+                    | stats sparkline AS Activity, sum(bytes_in) AS bin, sum(bytes_out) AS bout by Source
+                    | eval bytes = bin + bout
+                    | sort -bytes
+                    | eval ""Bytes in"" = `human_bytes(bin)`
+                    | eval ""Bytes out"" = `human_bytes(bout)`
+                    | eval ""Total"" = `human_bytes(bytes)`
+                    | fields ""Source"", ""Activity"", ""Bytes in"", ""Bytes out"", ""Total""","rhel.hwf.sc4s","1677941333.527790",0,"UI:Dashboard:performance_ip","1677926880.000000000",0,0,"1677941333.000000000",0,1677941334,0,search1,0,"1677926880.000000000","1677941333.000000000",completed,"0.999",,,,,,,,,,,,,,,,,,,
+"admin__admin_bmV0d29ya19iZWhhdmlvcl9hbmFseXRpY3M__search2_1677941333.237","search `nbalogsindexip` tag=""network"" tag=""communicate""
+                    | eval Destination=if(isnull(dest), dest_ip, dest)
+                    | stats sparkline AS Activity, sum(bytes_in) AS bin, sum(bytes_out) AS bout by Destination
+                    | eval bytes = bin + bout
+                    | sort -bytes
+                    | eval ""Bytes in"" = `human_bytes(bin)`
+                    | eval ""Bytes out"" = `human_bytes(bout)`
+                    | eval ""Total"" = `human_bytes(bytes)`
+                    | fields ""Destination"", ""Activity"", ""Bytes in"", ""Bytes out"", ""Total""","rhel.hwf.sc4s","1677941333.530589",0,"UI:Dashboard:performance_ip","1677926880.000000000",0,0,"1677941333.000000000",0,1677941334,0,search2,0,"1677926880.000000000","1677941333.000000000",completed,"0.5670000000000001",,,,,,,,,,,,,,,,,,,
+"admin__admin_bmV0d29ya19iZWhhdmlvcl9hbmFseXRpY3M__search3_1677941333.238","search `nbalogsindexip` tag=""network"" tag=""communicate""
+                    | timechart sum(bytes_in) AS ""Bytes in"", sum(bytes_out) AS ""Bytes out""","rhel.hwf.sc4s","1677941333.532609",0,"UI:Dashboard:performance_ip","1677926880.000000000",0,0,"1677941333.000000000",0,1677941333,0,search3,0,"1677926880.000000000","1677941333.000000000",completed,"1.169",,,,,,,,,,,,,,,,,,,
+"admin__admin_bmV0d29ya19iZWhhdmlvcl9hbmFseXRpY3M__search4_1677941333.239","search `nbalogsindexip` tag=""network"" tag=""communicate""
+                    | stats sum(bytes_in) AS ""Bytes in"", sum(bytes_out) AS ""Bytes out""
+                    | transpose","rhel.hwf.sc4s","1677941333.541701",0,"UI:Dashboard:performance_ip","1677926880.000000000",0,0,"1677941333.000000000",0,1677941334,0,search4,0,"1677926880.000000000","1677941333.000000000",completed,"1.082",,,,,,,,,,,,,,,,,,,
+"admin__admin_bmV0d29ya19iZWhhdmlvcl9hbmFseXRpY3M__search5_1677941333.240","search `nbalogsindexip` tag=""network"" tag=""communicate""
+                    | stats sparkline AS Activity, count AS ""Total count"", sum(bytes_in) AS bin, sum(bytes_out) AS bout by host
+                    | eval bytes = bin + bout
+                    | sort -bytes
+                    | eval ""Bytes in"" = `human_bytes(bin)`
+                    | eval ""Bytes out"" = `human_bytes(bout)`
+                    | eval ""Total"" = `human_bytes(bytes)`
+                    | rename host AS ""Host""
+                    | fields ""Host"", ""Activity"", ""Bytes in"", ""Bytes out"", ""Total"", ""Total count""","rhel.hwf.sc4s","1677941333.554503",0,"UI:Dashboard:performance_ip","1677926880.000000000",0,0,"1677941333.000000000",0,1677941334,0,search5,0,"1677926880.000000000","1677941333.000000000",completed,"0.906",,,,,,,,,,,,,,,,,,,
+"admin__admin_bmV0d29ya19iZWhhdmlvcl9hbmFseXRpY3M__search1_1677941349.241","search `nbalogsindexip` tag=""network"" tag=""communicate""
+                    | eval Source=if(isnull(src), src_ip, src)
+                    | stats sparkline AS Activity, sum(bytes_in) AS bin, sum(bytes_out) AS bout by Source
+                    | eval bytes = bin + bout
+                    | sort -bytes
+                    | eval ""Bytes in"" = `human_bytes(bin)`
+                    | eval ""Bytes out"" = `human_bytes(bout)`
+                    | eval ""Total"" = `human_bytes(bytes)`
+                    | fields ""Source"", ""Activity"", ""Bytes in"", ""Bytes out"", ""Total""","rhel.hwf.sc4s","1677941349.754045",0,"UI:Dashboard:performance_ip","1677926940.000000000",0,0,"1677941349.000000000",0,1677941349,0,search1,0,"1677926940.000000000","1677941349.000000000",completed,"1.056",,,,,,,,,,,,,,,,,,,
+"admin__admin_bmV0d29ya19iZWhhdmlvcl9hbmFseXRpY3M__search2_1677941349.242","search `nbalogsindexip` tag=""network"" tag=""communicate""
+                    | eval Destination=if(isnull(dest), dest_ip, dest)
+                    | stats sparkline AS Activity, sum(bytes_in) AS bin, sum(bytes_out) AS bout by Destination
+                    | eval bytes = bin + bout
+                    | sort -bytes
+                    | eval ""Bytes in"" = `human_bytes(bin)`
+                    | eval ""Bytes out"" = `human_bytes(bout)`
+                    | eval ""Total"" = `human_bytes(bytes)`
+                    | fields ""Destination"", ""Activity"", ""Bytes in"", ""Bytes out"", ""Total""","rhel.hwf.sc4s","1677941349.755400",0,"UI:Dashboard:performance_ip","1677926940.000000000",0,0,"1677941349.000000000",0,1677941350,0,search2,0,"1677926940.000000000","1677941349.000000000",completed,"0.491",,,,,,,,,,,,,,,,,,,
+"admin__admin_bmV0d29ya19iZWhhdmlvcl9hbmFseXRpY3M__search3_1677941349.243","search `nbalogsindexip` tag=""network"" tag=""communicate""
+                    | timechart sum(bytes_in) AS ""Bytes in"", sum(bytes_out) AS ""Bytes out""","rhel.hwf.sc4s","1677941349.757960",0,"UI:Dashboard:performance_ip","1677926940.000000000",0,0,"1677941349.000000000",0,1677941350,0,search3,0,"1677926940.000000000","1677941349.000000000",completed,"0.888",,,,,,,,,,,,,,,,,,,
+"admin__admin_bmV0d29ya19iZWhhdmlvcl9hbmFseXRpY3M__search5_1677941349.244","search `nbalogsindexip` tag=""network"" tag=""communicate""
+                    | stats sparkline AS Activity, count AS ""Total count"", sum(bytes_in) AS bin, sum(bytes_out) AS bout by host
+                    | eval bytes = bin + bout
+                    | sort -bytes
+                    | eval ""Bytes in"" = `human_bytes(bin)`
+                    | eval ""Bytes out"" = `human_bytes(bout)`
+                    | eval ""Total"" = `human_bytes(bytes)`
+                    | rename host AS ""Host""
+                    | fields ""Host"", ""Activity"", ""Bytes in"", ""Bytes out"", ""Total"", ""Total count""","rhel.hwf.sc4s","1677941349.760525",0,"UI:Dashboard:performance_ip","1677926940.000000000",0,0,"1677941349.000000000",0,1677941350,0,search5,0,"1677926940.000000000","1677941349.000000000",completed,"0.812",,,,,,,,,,,,,,,,,,,
+"admin__admin_bmV0d29ya19iZWhhdmlvcl9hbmFseXRpY3M__search4_1677941349.245","search `nbalogsindexip` tag=""network"" tag=""communicate""
+                    | stats sum(bytes_in) AS ""Bytes in"", sum(bytes_out) AS ""Bytes out""
+                    | transpose","rhel.hwf.sc4s","1677941349.762319",0,"UI:Dashboard:performance_ip","1677926940.000000000",0,0,"1677941349.000000000",0,1677941350,0,search4,0,"1677926940.000000000","1677941349.000000000",completed,"0.88",,,,,,,,,,,,,,,,,,,
+"admin__admin_bmV0d29ya19iZWhhdmlvcl9hbmFseXRpY3M__search1_1677941405.246","search `nbaeventsindex` type=stats_endpoints
+                        | eval _time=`utc_time(_time)`
+                        | timechart span=1d max(unique_endpoints) as ""Unique Endpoints"",
+                        | fields _time, ""Unique Endpoints""","rhel.hwf.sc4s","1677941405.464822",0,"UI:Dashboard:licensing","1675314000.000000000",0,0,"1677906000.000000000",3,1677941405,31,search1,3,"1675314000.000000000","1677906000.000000000",completed,"0.355",,,,,,,,,,,,,,,,,,,
+"admin__admin_bmV0d29ya19iZWhhdmlvcl9hbmFseXRpY3M__search2_1677941405.247","search `nbaeventsindex` type=stats_queries
+                        | timechart span=1d
+                          sum(eval(if(section=""dns"", received, 0))) as DNS,
+                          sum(eval(if(section=""ip"", received, 0))) as IP,
+                          sum(eval(if(section=""http"", received, 0))) as HTTP,
+                          sum(eval(if(section=""tls"", received, 0))) as TLS,
+                        | fields _time, DNS, IP, HTTP, TLS","rhel.hwf.sc4s","1677941405.468790",0,"UI:Dashboard:licensing","1675314000.000000000",0,0,"1677906000.000000000",0,1677941405,0,search2,3,"1675314000.000000000","1677906000.000000000",completed,"0.327",,,,,,,,,,,,,,,,,,,

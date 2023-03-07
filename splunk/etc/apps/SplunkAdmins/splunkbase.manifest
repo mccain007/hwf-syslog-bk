@@ -1,0 +1,263 @@
+{
+  "version": "1.0",
+  "date": "2022-11-12T14:22:50.472335702Z",
+  "hashAlgorithm": "SHA-256",
+  "app": {
+    "id": 3796,
+    "version": "3.0.2",
+    "files": [
+      {
+        "path": "app.manifest",
+        "hash": "ce52e26afba95e575fca4dfc8c627d2962d1a01ab9830e555de4ba49a0518f1f"
+      },
+      {
+        "path": "default/app.conf",
+        "hash": "68d32585e01d8159e35d3fe753090c0fcd75c800d95df5b1c0cc43adfe9d16f1"
+      },
+      {
+        "path": "default/data/ui/nav/default.xml",
+        "hash": "df9e4fe91cd084d8cae97a72d2021ce6996a7f07e6fd93df8bf02966c469b732"
+      },
+      {
+        "path": "default/data/ui/views/ClusterMasterJobs.xml",
+        "hash": "ace418e8530449f73e9d7d91f6e6f57002e234c43c5a04e22866bfaa525f7949"
+      },
+      {
+        "path": "default/data/ui/views/data_model_rebuild_monitor.xml",
+        "hash": "38a12c942cd593be68adf5e64e20e295011060e94d216bfa58df577261bd67b8"
+      },
+      {
+        "path": "default/data/ui/views/data_model_status.xml",
+        "hash": "f93feda0cbb8874bc40f7623bc3ae3ef40b68811e59b2d0384f3ae9ba3208e96"
+      },
+      {
+        "path": "default/data/ui/views/detect_excessive_search_use.xml",
+        "hash": "31f50e275f467f0f7546475bc41c81e09c18e83395df2ab1e45483945221b180"
+      },
+      {
+        "path": "default/data/ui/views/heavyforwarders_max_data_queue_sizes_by_name.xml",
+        "hash": "d787e4eb2766616fb6a76fe7944c8510b013005556fe75355b878846bc87d227"
+      },
+      {
+        "path": "default/data/ui/views/heavyforwarders_max_data_queue_sizes_by_name_v8.xml",
+        "hash": "71c203e028bcc17f9d13f52e1f001a68605304a50a6337bcd2daf9a571bddf0e"
+      },
+      {
+        "path": "default/data/ui/views/hec_performance.xml",
+        "hash": "dc166a30a81c9de437b8d2c922ad581b9ad988389df156a3fef66c8b2f4fa134"
+      },
+      {
+        "path": "default/data/ui/views/indexer_data_spread.xml",
+        "hash": "a45ddeebf77d329b45be89be753426404587c896c41b0478b2d4068892d2f071"
+      },
+      {
+        "path": "default/data/ui/views/indexer_max_data_queue_sizes_by_name.xml",
+        "hash": "cd0a9c680c67240f7d91e597f22476bde18c6deb9e4c17095a5641ecd101fe4e"
+      },
+      {
+        "path": "default/data/ui/views/indexer_max_data_queue_sizes_by_name_v8.xml",
+        "hash": "72a422b0bffc9ad65115a3f107d9a63571f904f2ed1604846d7febce5a802d68"
+      },
+      {
+        "path": "default/data/ui/views/issues_per_sourcetype.xml",
+        "hash": "f8af02d57de233daa5c0d0cd22e9af7f358285423ed21b6aa452b55b70129435"
+      },
+      {
+        "path": "default/data/ui/views/knowledge_objects_by_app.xml",
+        "hash": "1dd5ce3b466763d22e3fd9607211b3550dc704428cdb89843fafa2f02996a4d3"
+      },
+      {
+        "path": "default/data/ui/views/knowledge_objects_by_app_drilldown.xml",
+        "hash": "cf74079b09ffe61312c4d00b7c51ed8635a025c79b3727814c8a4425876eaa1c"
+      },
+      {
+        "path": "default/data/ui/views/lookups_in_use_finder.xml",
+        "hash": "c6e43d1b40b08e665553774e21fdf38f5286f550c2be5d5a2e6989052d800986"
+      },
+      {
+        "path": "default/data/ui/views/lookup_audit.xml",
+        "hash": "208681df6d96087207518af6a948834c3211c92bb65de450ded41e0dea6a090a"
+      },
+      {
+        "path": "default/data/ui/views/rolled_buckets_by_index.xml",
+        "hash": "f9b0bc4f1655ca5252fcaab05865f38bffdeb2c61fe3a09fa8212b7334ffbf0b"
+      },
+      {
+        "path": "default/data/ui/views/search_head_scheduledsearches_distribution.xml",
+        "hash": "86997ae930ad8a7e505e86021efd6bc4b83abbf5675295b53213bc85be13766e"
+      },
+      {
+        "path": "default/data/ui/views/smartstore_stats.xml",
+        "hash": "f32530c8ff676806874a847d7fdc9561a44034681ef6013c9ecc41dafc3662b4"
+      },
+      {
+        "path": "default/data/ui/views/splunk_forwarder_data_balance_tuning.xml",
+        "hash": "7b30fd2f4fd19ae94f6b5b6fa0bf87b1810ec4bf2a2085cd143ad31fa5bc9bac"
+      },
+      {
+        "path": "default/data/ui/views/splunk_forwarder_output_tuning.xml",
+        "hash": "037abf5b2a5d375ebb5b0c90f728cf3737c4c1961b22dd753e64be8425daa082"
+      },
+      {
+        "path": "default/data/ui/views/splunk_introspection_io_stats.xml",
+        "hash": "f101b92f4725bcd91ce05a0c35484d8f496251609abc81e5ad89213625e833de"
+      },
+      {
+        "path": "default/data/ui/views/troubleshooting_indexer_cpu.xml",
+        "hash": "5b438d0ec47779a0c9e97b294bda0dd528a52095046c5b16129d87f85a79b4ab"
+      },
+      {
+        "path": "default/data/ui/views/troubleshooting_indexer_cpu_drilldown.xml",
+        "hash": "710a2e4a0f6d088b1ef1cab7db9944ad8aab0a6a3a4eef03e2d4d11c038469e5"
+      },
+      {
+        "path": "default/data/ui/views/troubleshooting_resource_usage_per_user.xml",
+        "hash": "8ea42775ea292e9fd7801ea35d7fabb4874db2c07b9558790df0a5f41aea3f10"
+      },
+      {
+        "path": "default/data/ui/views/troubleshooting_resource_usage_per_user_drilldown.xml",
+        "hash": "3de1321b80e17059ba468dfe076208b28b3d51772537dd037b087f342cca0104"
+      },
+      {
+        "path": "default/macros.conf",
+        "hash": "cd4d7f4482681a7b3829b3476525e5536debf6149f7096ef019bd63c9360e4d9"
+      },
+      {
+        "path": "default/props.conf",
+        "hash": "b422e5d7410919ac19476180e1383520830592fa3da27787fdeed0d5b7262bb5"
+      },
+      {
+        "path": "default/savedsearches.conf",
+        "hash": "928c42a88aa5ff6f62eb5939c23c7f20fbbdad472491d99b33374c429dd0d541"
+      },
+      {
+        "path": "default/transforms.conf",
+        "hash": "3d9140f82d784b7dd90356f170cea5200de00038ac8099fcb9346abc8787cba3"
+      },
+      {
+        "path": "LICENSE",
+        "hash": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1"
+      },
+      {
+        "path": "lookups/splunkadmins_datamodels.csv",
+        "hash": "1d5f73c2170040fd111d3e64f095ffd808978030d9d3817d422b214eb82be636"
+      },
+      {
+        "path": "lookups/splunkadmins_eventtypes.csv",
+        "hash": "4f308f3c824b105eace933f06b5a170fa86dbf98c5ba348e4a05522804b0dbec"
+      },
+      {
+        "path": "lookups/splunkadmins_hec_reply_code_lookup.csv",
+        "hash": "084e2a3b64905e374f4383e289ccb68f0fa0909b28826fe9089a428f3603f5f5"
+      },
+      {
+        "path": "lookups/splunkadmins_indexes_per_role.csv",
+        "hash": "39d43de1ef29a713ad480f668375d56fba195d57d49b77b190aed712f455fd55"
+      },
+      {
+        "path": "lookups/splunkadmins_indexlist.csv",
+        "hash": "f816b480f87144ec4de5862adf028ff66cc6964250325d53fd22bf8922824b6f"
+      },
+      {
+        "path": "lookups/splunkadmins_macros.csv",
+        "hash": "28ecbbdbe1641776141e78ca483e310565f3023f0a2a6a539e2dc0ee752824e2"
+      },
+      {
+        "path": "lookups/splunkadmins_rmd5_to_savedsearchname.csv",
+        "hash": "64d62548bb0741d6f76fad5ab96c168307c68d5c98251139f2c9f6c6c0574024"
+      },
+      {
+        "path": "lookups/splunkadmins_tags.csv",
+        "hash": "d7ea98b9397ddbedb9b6471fb6cdc86a76135388e823204fcd84d91826318dfc"
+      },
+      {
+        "path": "lookups/splunkadmins_userlist_indexinfo.csv",
+        "hash": "d9e8eabd1d316bc60a6e351339b676bd6d7b53b914f01bf3c7858cf7c92716bc"
+      },
+      {
+        "path": "metadata/default.meta",
+        "hash": "0838ba65305ef1ae0367d6bcc5c6fd63d0f59d8e6fdb66b6aed4ff14394c613c"
+      },
+      {
+        "path": "NOTICE",
+        "hash": "11494ae88ef9a7d75cd70b4e2c3152bd83751665a3dde0590527857496ba5440"
+      },
+      {
+        "path": "README.md",
+        "hash": "c6e050c42963d12a9dec6191ddfc0ace52a2a7b189349baa008600f8dcb57375"
+      },
+      {
+        "path": "static/appIcon.png",
+        "hash": "32f1a6833f3a9db2f6d4dcac27404459f91bef4e2898604aa1ddc168455dbc1b"
+      },
+      {
+        "path": "static/appIconAlt.png",
+        "hash": "32f1a6833f3a9db2f6d4dcac27404459f91bef4e2898604aa1ddc168455dbc1b"
+      },
+      {
+        "path": "static/appIconAlt_2x.png",
+        "hash": "8caf40b544afaaa087d232c479560a0a3c2e57b27d0f8cb38f90ba48f53256c6"
+      },
+      {
+        "path": "static/appIcon_2x.png",
+        "hash": "8caf40b544afaaa087d232c479560a0a3c2e57b27d0f8cb38f90ba48f53256c6"
+      },
+      {
+        "path": "static/appLogo.png",
+        "hash": "ee7abc736a4b4cbbd796383f0dce484d4efe4b1be5dc309ff6730a14a92896a0"
+      },
+      {
+        "path": "static/appLogo_2x.png",
+        "hash": "0b483b1aec1a6c70a98bd1a58fa31406b7d946ce9cfac3ac3ae296edc7fdce28"
+      }
+    ]
+  },
+  "products": [
+    {
+      "platform": "splunk",
+      "product": "enterprise",
+      "versions": [
+        "7.2",
+        "7.3",
+        "8.0",
+        "8.1",
+        "8.2",
+        "9.0"
+      ],
+      "architectures": [
+        "x86_64"
+      ],
+      "operatingSystems": [
+        "windows",
+        "linux",
+        "macos",
+        "freebsd",
+        "solaris",
+        "aix"
+      ]
+    },
+    {
+      "platform": "splunk",
+      "product": "cloud",
+      "versions": [
+        "7.2",
+        "7.3",
+        "8.0",
+        "8.1",
+        "8.2",
+        "9.0"
+      ],
+      "architectures": [
+        "x86_64"
+      ],
+      "operatingSystems": [
+        "windows",
+        "linux",
+        "macos",
+        "freebsd",
+        "solaris",
+        "aix"
+      ]
+    }
+  ]
+}

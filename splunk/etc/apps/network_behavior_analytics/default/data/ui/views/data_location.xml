@@ -1,0 +1,68 @@
+<form version="1.1" script="datalocation.js" stylesheet="settings.css,common.css">
+    <label>Data Location</label>
+    <description>Use the panels below to load network telemetry into the Analytics Engine for processing.</description>
+
+    <row>
+        <panel>
+            <html>
+                <div id="data-tabs"></div>
+                <div id="data-tabs-content">
+                    <div id="data-logs-dns"></div>
+                    <div id="data-logs-ip"></div>
+                    <div id="data-logs-http"></div>
+                    <div id="data-logs-tls"></div>
+                    <div id="data-logs-dhcp"></div>
+                    <div id="data-logs-vpn"></div>
+                </div>
+            </html>
+        </panel>
+        <panel>
+            <html>
+                <div id="data-alerts">
+                    <h2 class="panel-title">Alert location</h2>
+                    <p>The application stores alerts within the main index by default. To optimize performance,
+                    you can store alerts within a particular index.</p>
+                    <div id="data-alerts-index" class="data-location-box"></div>
+
+                    <h2 class="panel-title">Alert data health</h2>
+                    <p>The status bar below reports whether alerts are being stored correctly. If you make
+                    changes to your configuration, this may take a few minutes to update.</p>
+                    <div id="data-alerts-status"></div>
+                </div>
+
+                <div id="data-destinations">
+                    <h2 class="panel-title">Summary Indexing</h2>
+                    <p>
+                        AlphaSOC can summarize the destinations within your telemetry on a daily basis, and index
+                        that data within Splunk. This feature enables teams to quickly retrospectively search historic
+                        data for particular IP addresses and FQDNs. Use the settings below to enable and configure this feature.
+                    </p>
+                    <div id="data-destinations-enabled" class="data-location-box"></div>
+                    <h2 class="panel-title">Summary data location</h2>
+                    <p>
+                        Use the text input below to define the destination index for summary data.
+                    </p>
+                    <div id="data-destinations-index" class="data-location-box"></div>
+                    <h2 class="panel-title">Summary data health</h2>
+                    <p>
+                        The status bar below reports whether summary data is being stored correctly. If you make
+                        changes to your configuration, this may take a few minutes to update.
+                    </p>
+                    <div id="data-destinations-status"></div>
+                </div>
+            </html>
+        </panel>
+    </row>
+    <row>
+        <panel>
+            <html>
+                <h2 class="panel-title">Download application logs</h2>
+                <p>The application expects CIM compliant network events and should automatically
+                ingest data. If you experience difficulties during setup and configuration, use the
+                button below to download application logs, and submit the file to
+                <a href="mailto:support@alphasoc.com">support@alphasoc.com</a> for assistance.</p>
+                <div id="data-logs-export"></div>
+            </html>
+        </panel>
+    </row>
+</form>

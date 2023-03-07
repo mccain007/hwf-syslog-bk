@@ -1,0 +1,65 @@
+<form version="1.1" script="settings.js" stylesheet="settings.css,common.css">
+    <label>Settings</label>
+    <description>Use the panes below to define the processing mode and application configuration.</description>
+
+    <row>
+        <panel>
+            <html>
+                <div class="panel-box">
+                    <h2>Analytics Engine</h2>
+                    <div id="api-on-premise"></div>
+                    <div id="api-url-input"></div>
+                </div>
+                <div class="panel-box">
+                    <h2>AlphaSOC API key</h2>
+                    <div id="api-key-input"></div>
+                </div>
+                <div class="panel-section-last">
+                    <h2>Options</h2>
+                    <div id="master-node-checkbox"></div>
+                    <div id="ssl-verify-cloud-checkbox"></div>
+                    <div id="ssl-verify-on-premise-checkbox"></div>
+                </div>
+            </html>
+        </panel>
+        <panel>
+            <html>
+                <div class="panel-section-last">
+                    <h2>HTTP proxy settings</h2>
+                    <div id="config-proxy"></div>
+                </div>
+            </html>
+        </panel>
+    </row>
+    <row>
+        <panel>
+            <html>
+                <div class="panel-section">
+                    <h2>Policy definition for the environment</h2>
+                    <p>Use the checkboxes below to define violations you wish to flag (displayed under Policy Violations).</p>
+                    <div id="policy-checkboxes"></div>
+                </div>
+                <div class="panel-section-last">
+                    <h2>Alert source display</h2>
+                    <p>
+                        Use the selection below to define whether hostnames should be used
+                        within the UI to identify sources.
+                    </p>
+                    <div id="alert-source-display"></div>
+                </div>
+            </html>
+        </panel>
+        <panel>
+            <html>
+                <div class="panel-section">
+                    <h2>Escalate alerts to third-party services</h2>
+                    <div id="incident-escalation"></div>
+                </div>
+                <div class="panel-section-last">
+                    <h2>Display alerts in Splunk ES</h2>
+                    <div id="notable-escalation"></div>
+                </div>
+            </html>
+        </panel>
+    </row>
+</form>

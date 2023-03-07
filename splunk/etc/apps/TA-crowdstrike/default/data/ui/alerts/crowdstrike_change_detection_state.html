@@ -1,0 +1,26 @@
+<form class="form-horizontal form-complex">
+<div class="control-group">
+	<label class="control-label" for="change_detection_state_detection_id">Detection ID</label>
+    <div class="controls">
+<input type="text" name="action.crowdstrike_change_detection_state.param.detection_id" id="change_detection_state_detection_id"/>
+                <span class="help-block"> 
+                    supports raw text or tokens: ex. $result.detection_id$ or "ldt:990fa444d53b45447ce5cf72222f2e22:150475511111111"
+                </span>
+    </div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="change_detection_state_detection_status">Detection Status</label>
+    <div class="controls">
+        <select name="action.crowdstrike_change_detection_state.param.detection_status" id="change_detection_state_detection_status">
+        <option value="new">new</option>
+        <option value="in_progress">in_progress</option>
+        <option value="true_positive">true_positive</option>
+        <option value="false_positive">false_positive</option>
+        <option value="ignored">ignored</option>
+    </select>
+                <span class="help-block">
+                    Please select the status from the dropdown list.
+                </span>
+    </div>
+</div>
+</form>

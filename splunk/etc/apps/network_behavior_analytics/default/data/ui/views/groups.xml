@@ -1,0 +1,49 @@
+<form version="1.1" script="groups.js" stylesheet="groups.css,common.css">
+    <label>Groups</label>
+    <description>
+        Use this page to define the IP ranges of the hosts you would like to monitor, along with details of trusted destinations to whitelist.
+    </description>
+
+    <row>
+        <panel>
+            <html>
+                <div class="groups-content">
+                    <div class="groups-left-panel">
+                        <h2>Group labels</h2>
+                        <p>Add and manage your groups below.</p>
+                        <div class="groups-panel" data-entries-type="groups-list"></div>
+                    </div>
+                    <div class="groups-right-panel">
+                        <div class="groups-inner-left-panel">
+                            <h2>Monitoring scope</h2>
+                            <p class="groups-panel-desc">Use the tabs below to define the IP ranges that are in- and out-of-scope.</p>
+                            <div id="groups-tabs-scope"></div>
+                            <div class="groups-tab-content">
+                                <div class="groups-panel" data-entries-type="inclusions"></div>
+                                <div class="groups-panel" data-entries-type="exclusions"></div>
+                            </div>
+                        </div>
+                        <div class="groups-inner-right-panel">
+                            <h2>Trusted destinations</h2>
+                            <p class="groups-panel-desc">Use the tabs below to define whitelisted destination domains and IP ranges.</p>
+                            <div id="groups-tabs-trusted"></div>
+                            <div class="groups-tab-content">
+                                <div class="groups-panel" data-entries-type="trusted_domains"></div>
+                                <div class="anomaly-detection" data-entries-type="trusted_domains"></div>
+                                <div class="groups-panel" data-entries-type="trusted_ips"></div>
+                                <div class="anomaly-detection" data-entries-type="trusted_ips"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="groups-desc">
+                    <p>
+                        CIDR notation is supported (e.g. 192.168.100.0/24, 10.10.10.192/27, or individual addresses). The
+                        monitoring scope defines the events which are sent to the AlphaSOC Analytics Engine for processing.
+                        Use the cog icon to perform bulk-import and export of the configuration.
+                    </p>
+                </div>
+            </html>
+        </panel>
+    </row>
+</form>

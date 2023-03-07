@@ -1,0 +1,164 @@
+<form version="1.1" theme="dark">
+  <label>Administrative Dashboard</label>
+  <description>Informational awareness for administrators, providing insights on user activity, as well as Sensor and Command Center health status changes.</description>
+  <fieldset submitButton="false" autoRun="true">
+    <input type="time" token="timePicker">
+      <label>Interval</label>
+      <default>
+        <earliest>-30d@d</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+    <input type="dropdown" token="command_center" searchWhenChanged="true">
+      <label>Command Center</label>
+      <choice value="*">All</choice>
+      <default>*</default>
+      <initialValue>*</initialValue>
+      <fieldForLabel>host</fieldForLabel>
+      <fieldForValue>host</fieldForValue>
+      <search>
+        <query>sourcetype="forescout:OTSM:logs:useractivity" | dedup host</query>
+        <earliest>0</earliest>
+        <latest></latest>
+      </search>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <table>
+        <title>Failed Logins</title>
+        <search>
+          <query>sourcetype="forescout:OTSM:logs:useractivity" action="Failed login"
+| search host="$command_center$"
+| rex field=time "(?&lt;time_short&gt;\d.:\d.:\d.)"
+| eval date_long = strftime(_time, "%A, %B %e, %Y")
+| streamstats count as sno by date_long
+| eventstats max(sno) as 'max' count as total
+| eval date_long=if(total&gt;max,date_long, if(sno=1,date_long, null()))
+| rename date_long as Date time_short as Time host as "CC" clientIP as "User IP" user as "Username" otherInfo as "Reason"
+| table Date Time "CC" "User IP" Username Reason
+| sort -time</query>
+          <earliest>$timePicker.earliest$</earliest>
+          <latest>$timePicker.latest$</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+        <format type="color" field="Date">
+          <colorPalette type="minMidMax" maxColor="#53A051" minColor="#FFFFFF"></colorPalette>
+          <scale type="minMidMax"></scale>
+        </format>
+      </table>
+    </panel>
+    <panel>
+      <table>
+        <title>Connect/Disconnect Changes</title>
+        <search>
+          <query>sourcetype="forescout:OTSM:logs:health" AND monitoredVariable="sensor connection"
+| search host="$command_center$"
+| rex field=time "(?&lt;time_short&gt;\d.:\d.:\d.)"
+| eval date_long = strftime(_time, "%A, %B %e, %Y")
+| streamstats count as sno by date_long
+| eventstats max(sno) as 'max' count as total
+| eval date_long=if(total&gt;max,date_long, if(sno=1,date_long, null()))
+| rename date_long as Date time_short as Time device as Sensor host as "CC" previousHealthStatus as "Previous Status" currentHealthStatus as "Current Status" currentValue as "Value"
+| table Date Time CC Sensor "Current Status" "Previous Status" "Value"
+| sort -time</query>
+          <earliest>$timePicker.earliest$</earliest>
+          <latest>$timePicker.latest$</latest>
+          <sampleRatio>1</sampleRatio>
+          <refresh>1m</refresh>
+          <refreshType>delay</refreshType>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+        <format type="color" field="Current Status">
+          <colorPalette type="map">{"CRITICAL":#DC4E41,"WARNING":#F8BE34}</colorPalette>
+        </format>
+        <format type="color" field="Previous Status">
+          <colorPalette type="map">{"CRITICAL":#DC4E41,"WARNING":#F8BE34}</colorPalette>
+        </format>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>User Activity</title>
+        <search>
+          <query>sourcetype="forescout:OTSM:logs:useractivity"
+| search host="$command_center$"
+| rex field=time "(?&lt;time_short&gt;\d.:\d.:\d.)"
+| eval date_long = strftime(_time, "%A, %B %e, %Y")
+| streamstats count as sno by date_long
+| eventstats max(sno) as 'max' count as total
+| eval date_long=if(total&gt;max,date_long, if(sno=1,date_long, null()))
+| rename date_long as Date time_short as Time host as "CC" clientIP as "Client IP" user as User resource as Resource action as Action otherInfo as Details
+| table Date Time "CC" "Client IP" User Resource Action Details
+| sort -time</query>
+          <earliest>$timePicker.earliest$</earliest>
+          <latest>$timePicker.latest$</latest>
+          <sampleRatio>1</sampleRatio>
+          <refresh>30s</refresh>
+          <refreshType>delay</refreshType>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">row</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+    <panel>
+      <table>
+        <title>Health Changes</title>
+        <search>
+          <query>sourcetype="forescout:OTSM:logs:health"
+| search host="$command_center$"
+| rex field=time "(?&lt;time_short&gt;\d.:\d.:\d.)"
+| eval date_long = strftime(_time, "%A, %B %e, %Y")
+| streamstats count as sno by date_long
+| eventstats max(sno) as 'max' count as total
+| eval date_long=if(total&gt;max,date_long, if(sno=1,date_long, null()))
+| rename date_long as Date time_short as Time host as CC device as Sensor monitoredVariable as "Health Area" previousHealthStatus as "Previous Status" currentHealthStatus as "Current Status" currentValue as Value
+| table Date Time CC Sensor "Health Area" "Current Status" "Previous Status" Value
+| sort -time</query>
+          <earliest>$timePicker.earliest$</earliest>
+          <latest>$timePicker.latest$</latest>
+          <sampleRatio>1</sampleRatio>
+          <refresh>30s</refresh>
+          <refreshType>delay</refreshType>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">row</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+        <format type="color" field="Previous Status">
+          <colorPalette type="map">{"CRITICAL":#DC4E41,"WARNING":#F8BE34}</colorPalette>
+        </format>
+        <format type="color" field="Current Status">
+          <colorPalette type="map">{"CRITICAL":#DC4E41,"WARNING":#F8BE34}</colorPalette>
+        </format>
+      </table>
+    </panel>
+  </row>
+</form>

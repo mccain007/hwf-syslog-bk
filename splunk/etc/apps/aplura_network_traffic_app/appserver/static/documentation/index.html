@@ -1,0 +1,424 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>PAVO Network Traffic App for Splunk Documentation &#8212; PAVO Network Traffic App for Splunk 1.2.4 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="long-name-documentation">
+<h1>PAVO Network Traffic App for Splunk Documentation<a class="headerlink" href="#long-name-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>App for exporting and reporting on Network Traffic events.</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 60%" />
+<col style="width: 40%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Author</p></td>
+<td><p>Aplura, LLC.</p></td>
+</tr>
+<tr class="row-even"><td><p>App Version</p></td>
+<td><p>1.2.4</p></td>
+</tr>
+<tr class="row-odd"><td><p>App Build</p></td>
+<td><p>6</p></td>
+</tr>
+<tr class="row-even"><td><p>Platforms</p></td>
+<td><p>Splunk Enterprise</p></td>
+</tr>
+<tr class="row-odd"><td><p>Splunk Enterprise versions</p></td>
+<td><p>8.0, 7.3, 7.2, 7.1, 7.0</p></td>
+</tr>
+<tr class="row-even"><td><p>Creates an index</p></td>
+<td><p>False</p></td>
+</tr>
+<tr class="row-odd"><td><p>Implements summarization</p></td>
+<td><p>Currently, the app does not generate summaries</p></td>
+</tr>
+<tr class="row-even"><td><p>Summary Indexing</p></td>
+<td><p>False</p></td>
+</tr>
+<tr class="row-odd"><td><p>Data Model Acceleration</p></td>
+<td><p>If Enabled</p></td>
+</tr>
+<tr class="row-even"><td><p>Report Acceleration</p></td>
+<td><p>False</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="scripts-and-binaries">
+<h2>Scripts and binaries<a class="headerlink" href="#scripts-and-binaries" title="Permalink to this headline">¶</a></h2>
+<p>This App provides the following scripts:</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 40%" />
+<col style="width: 60%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Diag.py</p></td>
+<td><p>For use with the <code class="docutils literal notranslate"><span class="pre">diag</span></code> command.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="about-long-name">
+<h1>About PAVO Network Traffic App for Splunk<a class="headerlink" href="#about-long-name" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>Very often, network traffic events can provide a lot of information about misconfigurations, potential attacks, and user activity. This app provides searches and dashboards based on the Splunk Common Information Model to help provide insight into your network traffic.</p>
+</div>
+<div class="section" id="a-note-on-splunk-data-model-acceleration-and-disk-space">
+<h2>A note on Splunk Data Model Acceleration and Disk Space<a class="headerlink" href="#a-note-on-splunk-data-model-acceleration-and-disk-space" title="Permalink to this headline">¶</a></h2>
+<p>This app requires data model acceleration, which will use additional disk space. If you are using the Splunk App for Enterprise Security, this is already enabled, and should have been factored into your retention policies. If not, you should review the documentation on <a class="reference external" href="http://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Acceleratedatamodels#Data_model_summary_size_on_disk">data model acceleration, how it uses disk space, and how to plan for it</a>.</p>
+</div>
+<div class="section" id="a-note-on-the-splunk-common-information-model">
+<h2>A note on the Splunk Common Information Model<a class="headerlink" href="#a-note-on-the-splunk-common-information-model" title="Permalink to this headline">¶</a></h2>
+<p>As mentioned above, the app uses the CIM for network traffic events. The CIM allows you to take events from a number of network traffic sources or products, and report on them in one cohesive manner, using a common set of names for fields and event types.</p>
+</div>
+<div class="section" id="a-note-on-the-network-traffic-data-model-src-dest-src-ip-and-dest-ip">
+<h2>A note on the Network Traffic Data Model, src, dest, src_ip, and dest_ip<a class="headerlink" href="#a-note-on-the-network-traffic-data-model-src-dest-src-ip-and-dest-ip" title="Permalink to this headline">¶</a></h2>
+<p>The Network Traffic data model includes both <code class="docutils literal notranslate"><span class="pre">src</span></code>, <code class="docutils literal notranslate"><span class="pre">dest</span></code> fields, and <code class="docutils literal notranslate"><span class="pre">src_ip</span></code>, <code class="docutils literal notranslate"><span class="pre">dest_ip</span></code> fields. For this app, we have opted to use the <code class="docutils literal notranslate"><span class="pre">*_ip</span></code> versions of these fields, in case hostnames are being used for the other fields. Make sure your field extractions are correctly populating these fields.</p>
+</div>
+<div class="section" id="available-dashboards">
+<h2>Available Dashboards<a class="headerlink" href="#available-dashboards" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="network-traffic-overview">
+<h3>Network Traffic Overview<a class="headerlink" href="#network-traffic-overview" title="Permalink to this headline">¶</a></h3>
+<p>Provides a general overview of the network traffic events.</p>
+</div>
+<div class="section" id="ip-profile">
+<h3>IP Profile<a class="headerlink" href="#ip-profile" title="Permalink to this headline">¶</a></h3>
+<p>Provides information around an IP address (both <code class="docutils literal notranslate"><span class="pre">dest_ip</span></code> and <code class="docutils literal notranslate"><span class="pre">src_ip</span></code>), including traffic from, to, and possible open ports.</p>
+</div>
+<div class="section" id="transport-information">
+<h3>Transport Information<a class="headerlink" href="#transport-information" title="Permalink to this headline">¶</a></h3>
+<p>Information around the transport field of events (TCP, UDP, ICMP, etc.).</p>
+</div>
+<div class="section" id="port-information">
+<h3>Port Information<a class="headerlink" href="#port-information" title="Permalink to this headline">¶</a></h3>
+<p>This form provides information based on the destination port (<code class="docutils literal notranslate"><span class="pre">dest_port</span></code>) field of events, such as the traffic over time, conversations, and sources.</p>
+</div>
+<div class="section" id="internal-and-external-traffic">
+<h3>Internal and External Traffic<a class="headerlink" href="#internal-and-external-traffic" title="Permalink to this headline">¶</a></h3>
+<p>Currently just top destinations (external and from external to internal). The determination on internal vs. external is configured by macros. See the App Configuration Macros section of this document.</p>
+</div>
+<div class="section" id="scanning-activity">
+<h3>Scanning Activity<a class="headerlink" href="#scanning-activity" title="Permalink to this headline">¶</a></h3>
+<p>This dashboard provides the top potential scanners (both host and port scanners) based on network traffic.</p>
+</div>
+<div class="section" id="geographic-information">
+<h3>Geographic Information<a class="headerlink" href="#geographic-information" title="Permalink to this headline">¶</a></h3>
+<p>This is based on the geo-ip information provided by the built-in IP location from Splunk. Internal traffic is excluded from this page. Note: The searches on this page may take a while to load.</p>
+</div>
+<div class="section" id="network-traffic-search">
+<h3>Network Traffic Search<a class="headerlink" href="#network-traffic-search" title="Permalink to this headline">¶</a></h3>
+<p>A form which allows for searching network traffic events based on a few different parameters.</p>
+</div>
+<div class="section" id="vpn-traffic-overview">
+<h3>VPN Traffic Overview<a class="headerlink" href="#vpn-traffic-overview" title="Permalink to this headline">¶</a></h3>
+<p>This dashboard provides an overview of VPN traffic that has been observed. This dashboard uses accelerated data models and macros. Please make sure you accelerate the <code class="docutils literal notranslate"><span class="pre">Network</span> <span class="pre">Traffic</span></code> and <code class="docutils literal notranslate"><span class="pre">Network</span> <span class="pre">Sessions</span></code> data models. It is possible that there are different values for <code class="docutils literal notranslate"><span class="pre">action</span></code> and <code class="docutils literal notranslate"><span class="pre">signature</span></code>. This app expects <code class="docutils literal notranslate"><span class="pre">signature=login</span></code>, <code class="docutils literal notranslate"><span class="pre">signature=logout</span></code>, <code class="docutils literal notranslate"><span class="pre">action=success</span></code> or <code class="docutils literal notranslate"><span class="pre">action=failure</span></code>.</p>
+</div>
+<div class="section" id="data-transparency-overview">
+<h3>Data Transparency Overview<a class="headerlink" href="#data-transparency-overview" title="Permalink to this headline">¶</a></h3>
+<p>This dashboard provides field information from the data models used to retrieve data for this application. Included information includes indexes and sourcetypes found in the data model. This dashboard also shows fields and constraints in the data models.</p>
+</div>
+<div class="section" id="sourcetype-information">
+<h3>Sourcetype Information<a class="headerlink" href="#sourcetype-information" title="Permalink to this headline">¶</a></h3>
+<p>Information about the sourcetypes which are present in the accelerated data.
+Note: This dashboard is not shown in the navigation bar. To view this dashboard, go to <code class="docutils literal notranslate"><span class="pre">Settings</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">User</span> <span class="pre">Interface</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">Views</span></code> -&gt; and select the Open option next to the sourcetype_information item in the list.</p>
+</div>
+<div class="section" id="about">
+<h3>About<a class="headerlink" href="#about" title="Permalink to this headline">¶</a></h3>
+<p>A simple HTML version of this document.
+Note: This dashboard is not shown in the navigation bar. To view this dashboard, go to <code class="docutils literal notranslate"><span class="pre">Settings</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">User</span> <span class="pre">Interface</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">Views</span></code> -&gt; and select the Open option next to the About item in the list.</p>
+</div>
+</div>
+</div>
+<div class="section" id="support-and-resources">
+<h1>Support and resources<a class="headerlink" href="#support-and-resources" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="questions-and-answers">
+<h2>Questions and answers<a class="headerlink" href="#questions-and-answers" title="Permalink to this headline">¶</a></h2>
+<p>Access questions and answers specific to PAVO Network Traffic App for Splunk at <a class="reference external" href="https://answers.splunk.com/app/questions/4229.html">https://answers.splunk.com/app/questions/4229.html</a> . Be sure to tag your question with the App.</p>
+</div>
+<div class="section" id="support">
+<h2>Support<a class="headerlink" href="#support" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Support Email: <a class="reference external" href="mailto:customersupport&#37;&#52;&#48;aplura&#46;com">customersupport<span>&#64;</span>aplura<span>&#46;</span>com</a></p></li>
+<li><p>Support Offered: Splunk Answers</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="prerequisites">
+<h1>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h1>
+<p>Because this App runs on Splunk Enterprise, all of the <a class="reference external" href="https://docs.splunk.com/Documentation/Splunk/latest/Installation/Systemrequirements">Splunk Enterprise system requirements</a> apply.</p>
+<p>This app depends on data models included in the Splunk Common Information Model Add-on, specifically the Network Traffic data model. Please review the information on <a class="reference external" href="http://docs.splunk.com/Documentation/CIM/latest/User/Install">installing and using the Splunk Common Information Model Add-on</a> and information on <a class="reference external" href="http://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Acceleratedatamodels#Enable_persistent_acceleration_for_a_data_model">configuring the acceleration on the data model</a>.</p>
+<p>The Splunk Common Information Model Add-on can be downloaded from <a class="reference external" href="https://apps.splunk.com/app/1621/">Splunkbase</a>.</p>
+<p>This app has been tested with versions 4.9 of the CIM add-on.</p>
+<p>In order to make the app respond and load quickly, accelerated data models are used to provide summary data. For this data to be available, the Network Traffic data model must be accelerated. Information on how to enable acceleration for the Network Traffic data model can be found <a class="reference external" href="http://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Managedatamodels#Enable_data_model_acceleration">here</a>. The data model must be accelerated for the length of time for which you would like to see reporting.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Breakdown</span> <span class="pre">of</span> <span class="pre">Sourcetypes</span> <span class="pre">in</span> <span class="pre">Indexes</span> <span class="pre">in</span> <span class="pre">Dataset</span></code> panel on the <code class="docutils literal notranslate"><span class="pre">Data</span> <span class="pre">Transparency</span> <span class="pre">Overview</span></code> dashboard will only be seen if the <code class="docutils literal notranslate"><span class="pre">Sankey</span> <span class="pre">Diagram</span></code> visualization is installed.</p>
+<p>The Sankey Diagram Visualization can be downloaded from <a class="reference external" href="https://splunkbase.splunk.com/app/3112/">Sankey Diagram Custom Visualization</a>.</p>
+<p>This app may require some configuration before it will work properly (outside of the configuration of the Data Model Acceleration). In particular, you may need to edit the configuration macros, as well as the lookup which populates the Device dropdown found on many of the dashboards.</p>
+<p>This macro contains the search which is used to populate the Devices dropdown found on many of the dashboards. By default this is the auto-generated lookup, however, the macro can be edited to point to another lookup as needed.</p>
+<p>This macro contains a partial search which determines when a network traffic event’s destination IP address is external to your network. By default this will exclude private IP addresses, but can be edited to reflect your own network configuration. Note: this search snippet is used in searches using the accelerated data models and the <code class="docutils literal notranslate"><span class="pre">tstats</span></code> command. While the normal SPL does support CIDR, <code class="docutils literal notranslate"><span class="pre">tstats</span></code> does not. Make sure your search syntax will work with the <code class="docutils literal notranslate"><span class="pre">tstats</span></code> command.</p>
+<p>This macro contains a partial search which determines when a network traffic event’s source IP address is external to your network. By default this will exclude private IP addresses, but can be edited to reflect your own network configuration. Note: this search snippet is used in searches using the accelerated data models and the <code class="docutils literal notranslate"><span class="pre">tstats</span></code> command. While the normal SPL does support CIDR, <code class="docutils literal notranslate"><span class="pre">tstats</span></code> does not. Make sure your search syntax will work with the <code class="docutils literal notranslate"><span class="pre">tstats</span></code> command.</p>
+<p>For the <code class="docutils literal notranslate"><span class="pre">Device</span></code> dropdown, present on many of the dashboards, you can use the auto-generated lookup, which runs every morning at 2 am.
+If your Network_Traffic data model is populated, you can run the saved search <code class="docutils literal notranslate"><span class="pre">network_traffic_dvc_auto_gen</span></code> to populate the dropdown.</p>
+<p>The lookup has two fields: <code class="docutils literal notranslate"><span class="pre">dvc</span></code> and <code class="docutils literal notranslate"><span class="pre">device_name</span></code>. <code class="docutils literal notranslate"><span class="pre">device_name</span></code> can be a description of the device. <code class="docutils literal notranslate"><span class="pre">dvc</span></code> can be wild-carded (not CIDR, as that is not available in <code class="docutils literal notranslate"><span class="pre">tstats</span></code> searches used with the accelerated data models). The search used to populate this dropdown can be configured using the network_traffic_dvcs macro.</p>
+<ul class="simple">
+<li><p>References</p></li>
+</ul>
+<hr class="docutils" />
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.splunk.com/Documentation/CIM/latest/User/Overview">Splunk Common Information Model Add-on Docs</a></p></li>
+<li><p>Splunk Common Information Model add-on Network Traffic data model <a class="reference external" href="https://docs.splunk.com/documentation/CIM/latest/user/NetworkTraffic">https://docs.splunk.com/documentation/CIM/latest/user/NetworkTraffic</a></p></li>
+<li><p>Downloads</p></li>
+</ul>
+<hr class="docutils" />
+<ul class="simple">
+<li><p><a class="reference external" href="https://apps.splunk.com/app/1621/">Splunk Common Information Model Add-on</a></p></li>
+</ul>
+<ul class="simple">
+<li><p>Downloads</p></li>
+</ul>
+<hr class="docutils" />
+<ul class="simple">
+<li><p><a class="reference external" href="https://splunkbase.splunk.com/app/3112/">Sankey Diagram Custom Visualization</a></p></li>
+</ul>
+</div>
+<div class="section" id="installation-and-configuration">
+<h1>Installation and Configuration<a class="headerlink" href="#installation-and-configuration" title="Permalink to this headline">¶</a></h1>
+<p>Reminder: This app should be installed on a search head where the Network Traffic data model has been accelerated. More information on installing or upgrading Splunk apps can be found <a class="reference external" href="http://docs.splunk.com/Documentation/Splunk/latest/Admin/Wheretogetmoreapps">here</a>.</p>
+<div class="section" id="download">
+<h2>Download<a class="headerlink" href="#download" title="Permalink to this headline">¶</a></h2>
+<p>Download PAVO Network Traffic App for Splunk at <a class="reference external" href="https://splunkbase.splunk.com/app/4229">https://splunkbase.splunk.com/app/4229</a>.</p>
+<div class="section" id="installation-process-overview">
+<h3>Installation Process Overview<a class="headerlink" href="#installation-process-overview" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Make sure the field extractions and tags on your network traffic events are correct.</p></li>
+<li><p>Install the Splunk Common Information Model Add-on (skip if you are installing on an ES search head).</p></li>
+<li><p>Install the PAVO Network Traffic App for Splunk for Splunk.</p></li>
+<li><p>Enable accelerations on the Network Traffic data model (skip if you are installing on an ES search head).</p></li>
+<li><p>Wait for the accelerations to start. After the acceleration searches have run, you should start seeing the dashboards populate.</p></li>
+<li><p>Restart Splunk.</p></li>
+<li><p>Continue with App Configuration.</p></li>
+</ul>
+</div>
+<div class="section" id="deploy-to-single-server-instance">
+<h3>Deploy to single server instance<a class="headerlink" href="#deploy-to-single-server-instance" title="Permalink to this headline">¶</a></h3>
+<p>Follow these steps to install the app in a single server instance of Splunk Enterprise:</p>
+<ol class="arabic simple">
+<li><p>Deploy as you would any App, and restart Splunk.</p></li>
+<li><p>Configure.</p></li>
+</ol>
+</div>
+<div class="section" id="deploy-to-splunk-cloud">
+<h3>Deploy to Splunk Cloud<a class="headerlink" href="#deploy-to-splunk-cloud" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Have your Splunk Cloud Support handle this installation.</p></li>
+</ol>
+</div>
+<div class="section" id="deploy-to-a-distributed-environment">
+<h3>Deploy to a Distributed Environment<a class="headerlink" href="#deploy-to-a-distributed-environment" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><p>For each Search Head in the environment, deploy a copy of the App.</p></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="section" id="user-guide">
+<h1>User Guide<a class="headerlink" href="#user-guide" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="configure-long-name">
+<h2>Configure PAVO Network Traffic App for Splunk<a class="headerlink" href="#configure-long-name" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Install the App according to your environment (see steps above)</p></li>
+</ul>
+</div>
+<div class="section" id="lookups">
+<h2>Lookups<a class="headerlink" href="#lookups" title="Permalink to this headline">¶</a></h2>
+<p>PAVO Network Traffic App for Splunk contains the following lookup files.</p>
+<ul class="simple">
+<li><p>None</p></li>
+</ul>
+</div>
+<div class="section" id="event-generator">
+<h2>Event Generator<a class="headerlink" href="#event-generator" title="Permalink to this headline">¶</a></h2>
+<p>PAVO Network Traffic App for Splunk does not include an event generator.</p>
+</div>
+<div class="section" id="acceleration">
+<h2>Acceleration<a class="headerlink" href="#acceleration" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Summary Indexing: No</p></li>
+<li><p>Data Model Acceleration: If Enabled</p></li>
+<li><p>Report Acceleration: No</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="third-party-notices">
+<h1>Third Party Notices<a class="headerlink" href="#third-party-notices" title="Permalink to this headline">¶</a></h1>
+<p>Version 1.2.4 of PAVO Network Traffic App for Splunk incorporates the following Third-party software or third-party services.</p>
+<ul class="simple">
+<li><p>None</p></li>
+</ul>
+<div class="section" id="known-issues">
+<h2>Known Issues<a class="headerlink" href="#known-issues" title="Permalink to this headline">¶</a></h2>
+<p>Version 1.2.4 of PAVO Network Traffic App for Splunk has the following known issues:</p>
+<ul class="simple">
+<li><p>None</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="release-notes">
+<h1>Release notes<a class="headerlink" href="#release-notes" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="version-1-2-3">
+<h2>Version 1.2.3<a class="headerlink" href="#version-1-2-3" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>Bug</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>[APL029-419] - Change traffic over time by action to line chart</p></li>
+<li><p>[APL029-419] - Fix time being not being passed to drilldown dashboards correctly</p></li>
+<li><p>[APL029-341] - Configure checklist.conf</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><dl class="simple">
+<dt>Improvement</dt><dd><ul class="simple">
+<li><p>[ANTFS-16] - Added VPN dashboard</p></li>
+<li><p>[ANTFS-16] - ADded data transparency dashboard under advanced menu</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="version-1-2-2">
+<h2>Version 1.2.2<a class="headerlink" href="#version-1-2-2" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>Bug</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>[ANTAFS-13] - Change Titles and Loyout of “Sourcetype Information” dashboard</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<div class="section" id="version-1-2-1">
+<h3>Version 1.2.1<a class="headerlink" href="#version-1-2-1" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Bug</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>[ANTAFS-10] - Misspelling</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Task</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>[ANTAFS-6] - Rename app</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="version-1-2-0">
+<h2>Version 1.2.0<a class="headerlink" href="#version-1-2-0" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Initial Release</p></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">PAVO Network Traffic App for Splunk</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Aplura, LLC.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
